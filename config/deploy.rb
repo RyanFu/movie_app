@@ -23,7 +23,7 @@ role :db,  "106.187.101.252", :primary => true
 namespace :deploy do
   
 
-  task :copy_config_files, :roles => [:app] do
+  task :copy_config_files  do
     db_config = "#{shared_path}/config/database.yml.production"
     run "cp #{db_config} #{release_path}/config/database.yml"
   end
