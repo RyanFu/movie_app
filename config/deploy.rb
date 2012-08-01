@@ -11,10 +11,6 @@ set :user, "apps" # 一個伺服器上的帳戶用來放你的應用程式，不
 set :port, "22"
 
 
-set :default_environment, {
-      'PATH' => "/opt/ruby/bin/ruby:$PATH"
-}
-
 set :deploy_to, "/home/apps/movie_app"
 set :deploy_via, :remote_cache
 set :use_sudo, false
@@ -22,6 +18,9 @@ set :use_sudo, false
 role :web, "106.187.102.146"
 role :app, "106.187.102.146"
 role :db,  "106.187.102.146", :primary => true
+
+set :assets_dependencies, %w(app/assets lib/assets vendor/assets Gemfile.lock config/routes.rb)
+
 
 namespace :deploy do
   
