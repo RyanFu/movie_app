@@ -5,7 +5,7 @@ set :application, "movie_app"
 set :rails_env, "production"
 
 set :branch, "master"
-set :repository,  "git@github.com:StevenKo/outdoor.git"
+set :repository,  "git://github.com/StevenKo/movie_app.git"
 set :scm, "git"
 set :user, "apps" # 一個伺服器上的帳戶用來放你的應用程式，不需要有sudo權限，但是需要有權限可以讀取Git repository拿到原始碼
 set :port, "22"
@@ -19,8 +19,10 @@ role :app, "106.187.102.146"
 role :db,  "106.187.102.146", :primary => true
 
 namespace :deploy do
+  
+  namespace :assets do
 
-  desc <<-DESC
+    desc <<-DESC
       Run the asset precompilation rake task. You can specify the full path \
       to the rake executable by setting the rake variable. You can also \
       specify additional environment variables to pass to rake via the \
