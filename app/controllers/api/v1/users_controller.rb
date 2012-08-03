@@ -1,6 +1,9 @@
 class Api::V1::UsersController < Api::ApiController
   
   def create
+    
+    logger.info("create user params: #{params}")
+
     u = User.new(params[:user])
     u.password = "111111"
     u.email = u.fb_id + "@gmail.com"

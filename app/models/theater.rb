@@ -1,5 +1,6 @@
 class Theater < ActiveRecord::Base
-  has_many :movies
+  belongs_to :area
+
   attr_accessible :name,:location
 
   has_many :movie_theater_ships

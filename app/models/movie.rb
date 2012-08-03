@@ -1,5 +1,5 @@
 class Movie < ActiveRecord::Base
-  belongs_to :theater
+  
   has_many :records
 
   has_many :movie_theater_ships
@@ -12,8 +12,27 @@ class Movie < ActiveRecord::Base
 
   scope :first_round, where(["is_first_round = ? ", true ])
   scope :second_round, where(["is_second_round = ? ", true ])
+  scope :hot, where(["is_hot = ? ", true ])
 
   def find_friends_records friends
+    r = []
+    records.each do |item|
+      r << item if friends.include? item.user
+    end
+    return_record = []
+    r.each do |record|
+      s = {}
+      s["id"] = record.id
+      s["comment"] = record.comment
+      s["score"] = record.score
+      s["user_id"] = record.user_id
+      s["user_name"] = record.user.name
+      return_record << s
+    end
+    return_record
+  end
+
+  def find_friends_origin_records friends
     r = []
     records.each do |item|
       r << item if friends.include? item.user

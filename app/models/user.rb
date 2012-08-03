@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable,:validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible  :email, :password, :password_confirmation, :remember_me, :fb_id
+  attr_accessible  :email, :password, :password_confirmation, :remember_me, :fb_id, :fb_token
   # attr_accessible :title, :body
 
   def self.find_for_database_authentication(conditions={})
@@ -26,14 +26,17 @@ class User < ActiveRecord::Base
   def facebook
     @facebook ||= Koala::Facebook::API.new(fb_token)
     block_given? ? yield(@facebook) : @facebook
-  rescue Koala::Facebook::APIError
-    logger.info e.to_s
-    nil
+    rescue Koala::Facebook::APIError => e
+      logger.info e.to_s
+      nil
+
   end
 
   def facebook_friends_use_app
+    return @friends if @friends
     users = []
     facebook { |fb| @friends = fb.fql_query("SELECT uid2 FROM friend WHERE uid1=me()")}
+    return [] unless @friends
     uid2s = @friends.map{|item| item["uid2"]}
     @friends = User.where('fb_id in (?) ', uid2s)
   end
