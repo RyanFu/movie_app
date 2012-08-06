@@ -64,4 +64,15 @@ namespace :crawl do
        t.parse_first_round_movie
      end
   end
+
+  task :reset_running_time => :environment do
+    m = Movie.first
+    puts m.running_time
+    puts m.running_time.index('分')
+    puts m.running_time[3..m.running_time.index('分')-1]
+    Movie.all.each do |m|
+      m.running_time = m.running_time[3..m.running_time.index('分')-1]
+      m.save
+    end
+  end
 end
