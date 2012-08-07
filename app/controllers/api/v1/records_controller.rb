@@ -4,10 +4,12 @@ class Api::V1::RecordsController < Api::ApiController
     record.user = User.find_by_fb_id(params[:fb_id])
 
     if record.save
+      logger.info("params message: #{params.to_json}")
       render :status=>200, :json=>{:message => "success"}
     else
+      logger.info("params message: #{params.to_json}")
       logger.info("error message: #{record.errors.messages}")
-      render :status=>401, :json=>{:message=> "register fail" }
+      render :status=>401, :json=>{:message=> "record create fail" }
     end
   end
 
