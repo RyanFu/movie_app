@@ -25,7 +25,7 @@ class Movie < ActiveRecord::Base
       s["id"] = record.id
       s["comment"] = record.comment
       s["score"] = record.score
-      s["user_id"] = record.user_id
+      s["user_fb_id"] = record.user.fb_id
       s["user_name"] = record.user.name
       return_record << s
     end
