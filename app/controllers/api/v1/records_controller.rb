@@ -1,6 +1,7 @@
 class Api::V1::RecordsController < Api::ApiController
   def create
     record = Record.new(params[:record])
+    record.user = User.find_by_fb_id(params[:fb_id])
 
     if record.save
       render :status=>200, :json=>{:message => "success"}
@@ -13,7 +14,7 @@ class Api::V1::RecordsController < Api::ApiController
   def update
     @record = Record.find(params[:id])
 
-    if @record.update_attributes(params[:user])
+    if @record.update_attributes(params[:record])
       render :status=>200, :json=>{:message => "success"}
     else
       logger.info("error message: #{@record.errors.messages}")
