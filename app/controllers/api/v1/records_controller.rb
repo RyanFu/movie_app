@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class Api::V1::RecordsController < Api::ApiController
   def create
     recordJson = JSON.parse(params[:record])
