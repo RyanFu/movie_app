@@ -3,7 +3,7 @@ class Api::V1::RecordsController < Api::ApiController
   protect_from_forgery :except => :create
   
   def create
-    recordJson = JSON.parse(params[:record].gsub('\"', '"'))
+    recordJson = JSON.parse(params[:record].force_encoding('UTF-8'))
     record = Record.new(recordJson)
     record.user = User.find_by_fb_id(params[:fb_id])
 
