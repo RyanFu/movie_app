@@ -1,10 +1,12 @@
 class Api::V1::RecordsController < Api::ApiController
   def create
-    record = Record.new(params[:record])
+    recordJson = JSON.parse(params[:record])
+    record = Record.new(recordJson)
     record.user = User.find_by_fb_id(params[:fb_id])
 
     if record.save
       logger.info("params message: #{params.to_json}")
+      logger.info("recordJson message: #{recordJson.to_json}")
       render :status=>200, :json=>{:message => "success"}
     else
       logger.info("params message: #{params.to_json}")
