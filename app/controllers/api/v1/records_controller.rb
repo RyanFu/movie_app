@@ -1,5 +1,7 @@
 # encoding: UTF-8
 class Api::V1::RecordsController < Api::ApiController
+  protect_from_forgery :except => :create
+  
   def create
     recordJson = JSON.parse(params[:record])
     record = Record.new(recordJson)
