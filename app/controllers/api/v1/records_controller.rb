@@ -3,7 +3,6 @@ class Api::V1::RecordsController < Api::ApiController
   protect_from_forgery :except => :create
 
   def create
-    # recordJson = JSON.parse(params[:record].force_encoding('UTF-8'))
     record = Record.new
     record.score = params[:score]
     record.comment = params[:comment]
@@ -12,7 +11,6 @@ class Api::V1::RecordsController < Api::ApiController
 
     if record.save
       logger.info("params message: #{params.to_json}")
-      # logger.info("recordJson message: #{recordJson.to_json}")
       render :status=>200, :json=>{:message => "success"}
     else
       logger.info("params message: #{params.to_json}")
@@ -24,7 +22,11 @@ class Api::V1::RecordsController < Api::ApiController
   def update
     @record = Record.find(params[:id])
 
-    if @record.update_attributes(params[:record])
+    @record.score = params[:score]
+    @record.comment = params[:comment]
+    @record.movie_id = params[:movie_id]
+
+    if @record.save
       render :status=>200, :json=>{:message => "success"}
     else
       logger.info("error message: #{@record.errors.messages}")

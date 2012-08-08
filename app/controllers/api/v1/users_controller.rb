@@ -4,7 +4,12 @@ class Api::V1::UsersController < Api::ApiController
     
     logger.info("create user params: #{params}")
 
-    u = User.new(params[:user])
+    u = User.new
+    u.fb_id = params[:fb_id]
+    u.fb_token = params[:fb_token]
+    u.name = params[:name]
+    u.sex = params[:sex]
+    u.birthday = params[:birthday]
     u.password = "111111"
     u.email = u.fb_id + "@gmail.com"
 
