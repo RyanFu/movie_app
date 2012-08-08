@@ -1,15 +1,18 @@
 # encoding: UTF-8
 class Api::V1::RecordsController < Api::ApiController
   protect_from_forgery :except => :create
-  
+
   def create
-    recordJson = JSON.parse(params[:record].force_encoding('UTF-8'))
-    record = Record.new(recordJson)
+    # recordJson = JSON.parse(params[:record].force_encoding('UTF-8'))
+    record = Record.new
+    record.score = params[:score]
+    record.comment = params[:comment]
+    record.movie_id = params[:movie_id]
     record.user = User.find_by_fb_id(params[:fb_id])
 
     if record.save
       logger.info("params message: #{params.to_json}")
-      logger.info("recordJson message: #{recordJson.to_json}")
+      # logger.info("recordJson message: #{recordJson.to_json}")
       render :status=>200, :json=>{:message => "success"}
     else
       logger.info("params message: #{params.to_json}")
