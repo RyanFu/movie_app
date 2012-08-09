@@ -4,6 +4,9 @@ class Api::V1::UsersController < Api::ApiController
     
     logger.info("create user params: #{params}")
 
+    user = User.find_by_fb_id(params[:fb_id])
+
+
     u = User.new
     u.fb_id = params[:fb_id]
     u.fb_token = params[:fb_token]
@@ -12,8 +15,10 @@ class Api::V1::UsersController < Api::ApiController
     u.birthday = params[:birthday]
     u.password = "111111"
     u.email = u.fb_id + "@gmail.com"
-
-    if u.save
+     
+    if user
+      render :status=>200, :json=>{:message => "already registered"}
+    elsif u.save
       render :status=>200, :json=>{:message => "success"}
     else
       logger.info("error message: #{u.errors.messages}")
