@@ -24,7 +24,14 @@ class MovieTheaterShipCrawl
     nodes = @page_html.css('.row-1_2 a')
     
     nodes.each do |item|
+      puts "parse theater :"+item.text.strip
       t = Theater.find_by_name(item.text.strip)
+      if t==nil
+        puts item.text.strip[2..item.text.strip.length] + "影城"
+        t = Theater.find_by_name(item.text.strip[2..item.text.strip.length] + "影城")
+      end
+
+      # puts "    Theater name : " + t.name
       t.on_view_movies << movie unless t.on_view_movies.include? movie
       puts "movie name: " + movie.name + "    Theater name : " + t.name
     end

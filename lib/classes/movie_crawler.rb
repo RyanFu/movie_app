@@ -37,6 +37,7 @@ class MovieCrawler
     str_split = str.split(" ")
     @movie_release_date = str_split[1]
     @movie_running_time = str_split[0]
+    @movie_running_time = @movie_running_time[3..@movie_running_time.index('分')-1]
 
     puts @movie_release_date
     puts @movie_running_time
@@ -66,6 +67,9 @@ class MovieCrawler
   end
 
   def save_to_movie(option={})
+     
+
+
     movie = Movie.new(
       :name => @movie_name,
       :name_en => @movie_name_en,
@@ -77,6 +81,7 @@ class MovieCrawler
       :actors => @movie_actors,
       :directors => @movie_directors
     )
+    movie = Movie.find_by_name(@movie_name) if Movie.find_by_name(@movie_name)
     option.each do |key, value|
       movie[key] = value
     end
