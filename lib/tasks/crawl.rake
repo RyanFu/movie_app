@@ -67,6 +67,7 @@ namespace :crawl do
      urls.each do |local, url|
        t.fetch url
        t.parse_first_round_movie
+       t.parse_second_round_movie
      end
   end
 

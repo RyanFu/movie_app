@@ -13,8 +13,19 @@ class MovieTheaterShipCrawl
         crawler.parse_relation_ship
       end
     end
+  end
 
+  def parse_second_round_movie
+    crawler = MovieTheaterShipCrawl.new
 
+    nodes = @page_html.css(".only_text .row-1 .col-3 a")
+    nodes.each do |item|
+      if (item.text.strip == "戲院時刻")
+        url = "http://www.atmovies.com.tw/" +item[:href]
+        crawler.fetch url
+        crawler.parse_relation_ship
+      end
+    end
   end
 
   def parse_relation_ship
