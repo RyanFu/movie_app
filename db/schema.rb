@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120803053113) do
+ActiveRecord::Schema.define(:version => 20120814144221) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -64,11 +64,20 @@ ActiveRecord::Schema.define(:version => 20120803053113) do
     t.string   "location"
     t.datetime "created_at",                         :null => false
     t.datetime "updated_at",                         :null => false
-    t.integer  "location_id"
     t.integer  "area_id"
   end
 
   add_index "theaters", ["area_id"], :name => "index_theaters_on_area_id"
+
+  create_table "user_friend_ships", :force => true do |t|
+    t.integer  "direct_friend_id"
+    t.integer  "inverse_friend_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "user_friend_ships", ["direct_friend_id"], :name => "index_user_friend_ships_on_direct_friend_id"
+  add_index "user_friend_ships", ["inverse_friend_id"], :name => "index_user_friend_ships_on_inverse_friend_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

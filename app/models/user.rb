@@ -12,6 +12,11 @@ class User < ActiveRecord::Base
   attr_accessible  :email, :password, :password_confirmation, :remember_me, :fb_id, :fb_token
   # attr_accessible :title, :body
 
+  has_many :direct_friends_ship, :foreign_key => 'inverse_friend_id', :class_name => 'UserFriendShip'
+  has_many :inverse_friends_ship,  :foreign_key => 'direct_friend_id',   :class_name => 'UserFriendShip'    
+  has_many :direct_friends, :through => :direct_friends_ship
+  has_many :inverse_friends,  :through => :inverse_friends_ship
+
   def self.find_for_database_authentication(conditions={})
     self.where("fb_id = ?", conditions[:fb_id]).limit(1).first
   end
@@ -33,11 +38,20 @@ class User < ActiveRecord::Base
   end
 
   def facebook_friends_use_app
-    return @friends if @friends
+    # return @friends if @friends
     users = []
     facebook { |fb| @friends = fb.fql_query("SELECT uid2 FROM friend WHERE uid1=me()")}
-    return [] unless @friends
+    # return [] unless @friends
     uid2s = @friends.map{|item| item["uid2"]}
     @friends = User.where('fb_id in (?) ', uid2s)
+
+    @friends.each do |f|
+      direct_friends << f unless f.direct_friends.include? f
+    end
+
+  end
+
+  def friends
+    direct_friends | inverse_friends
   end
 end
