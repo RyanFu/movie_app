@@ -56,4 +56,9 @@ class Api::V1::RecordsController < Api::ApiController
   def show
     @record = Record.includes(:user).find(params[:id])
   end
+
+  def friend_stream
+    @user = User.find_by_fb_id(params[:fb_id])
+    @records = Record.friend_records(@user).by_updated
+  end
 end
