@@ -34,7 +34,7 @@ class Movie < ActiveRecord::Base
 
   def find_friends_origin_records friends
     r = []
-    records.each do |item|
+    self.records.each do |item|
       r << item if friends.include? item.user
     end
     r
