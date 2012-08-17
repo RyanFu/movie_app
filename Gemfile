@@ -40,3 +40,5 @@ end
 
 gem 'capistrano'
 gem 'capistrano-ext'
+
+gem 'gcm_on_rails'

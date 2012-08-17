@@ -5,7 +5,10 @@ class Api::V1::UsersController < Api::ApiController
     logger.info("create user params: #{params}")
 
     user = User.find_by_fb_id(params[:fb_id])
-    user.fb_token = params[:fb_token] if user
+    if user
+      user.fb_token = params[:fb_token]
+      user.registration_id = params[:registration_id]
+    end
 
     u = User.new
     u.fb_id = params[:fb_id]
@@ -13,6 +16,7 @@ class Api::V1::UsersController < Api::ApiController
     u.name = params[:name]
     u.sex = params[:sex]
     u.birthday = params[:birthday]
+    u.registration_id = params[:registration_id]
     u.password = "111111"
     u.email = u.fb_id + "@gmail.com"
      

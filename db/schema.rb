@@ -11,13 +11,35 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120814144221) do
+ActiveRecord::Schema.define(:version => 20120817090204) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "gcm_devices", :force => true do |t|
+    t.string   "registration_id",    :null => false
+    t.datetime "last_registered_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  add_index "gcm_devices", ["registration_id"], :name => "index_gcm_devices_on_registration_id", :unique => true
+
+  create_table "gcm_notifications", :force => true do |t|
+    t.integer  "device_id",        :null => false
+    t.string   "collapse_key"
+    t.text     "data"
+    t.boolean  "delay_while_idle"
+    t.datetime "sent_at"
+    t.integer  "time_to_live"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "gcm_notifications", ["device_id"], :name => "index_gcm_notifications_on_device_id"
 
   create_table "movie_theater_ships", :force => true do |t|
     t.integer  "movie_id"
@@ -97,8 +119,11 @@ ActiveRecord::Schema.define(:version => 20120814144221) do
     t.string   "fb_token"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.integer  "device_id"
+    t.string   "registration_id"
   end
 
+  add_index "users", ["device_id"], :name => "index_users_on_device_id"
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
