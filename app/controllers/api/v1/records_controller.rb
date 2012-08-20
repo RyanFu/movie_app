@@ -38,7 +38,7 @@ class Api::V1::RecordsController < Api::ApiController
     @record = Record.find(params[:id])
     @record.destroy
 
-    render :status=>401, :json=>{:message=> "destroy success" }
+    render :status=>200, :json=>{:message=> "destroy success" }
   end
 
   def index
