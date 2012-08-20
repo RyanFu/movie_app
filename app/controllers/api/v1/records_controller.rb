@@ -24,7 +24,6 @@ class Api::V1::RecordsController < Api::ApiController
 
     @record.score = params[:score]
     @record.comment = params[:comment]
-    @record.movie_id = params[:movie_id]
 
     if @record.save
       render :status=>200, :json=>{:message => "success"}
