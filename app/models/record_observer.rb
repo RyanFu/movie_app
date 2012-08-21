@@ -29,5 +29,6 @@ class RecordObserver < ActiveRecord::Observer
       }
       notification.save
     end
+    system "rake gcm:notifications:deliver --trace >> #{Rails.root}/log/rake.log"
   end
 end
