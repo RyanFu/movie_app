@@ -19,6 +19,7 @@ MovieApp::Application.routes.draw do
           get 'second_round'
         end 
       end
+      resources :comments,:only => [:create, :destroy]
     end
   end
 
