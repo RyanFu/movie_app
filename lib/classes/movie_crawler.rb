@@ -51,7 +51,9 @@ class MovieCrawler
     
     actors_array = nodes[1].text.split(" ")
     actors_array.delete_at(0)
-    actors_array.last = actors_array.last.chars.select{|i| i.valid_encoding?}.join
+    str = actors_array.last.chars.select{|i| i.valid_encoding?}.join
+    actors_array[actors_array.size-1] = str
+
     @movie_actors = actors_array
 
     puts @movie_directors

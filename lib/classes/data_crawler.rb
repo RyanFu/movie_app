@@ -16,6 +16,7 @@ class DataCrawler
         m.parse_all
         m.save_to_movie ({:is_first_round=>true})
       rescue
+        puts "error"
       end
     end
   end
