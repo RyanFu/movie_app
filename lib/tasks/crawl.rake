@@ -34,6 +34,16 @@ namespace :crawl do
 
   task :fetch_movies => :environment do
     Movie.all.each do |m|
+
+      actors_array = m.actors
+      str = actors_array.last.chars.select{|i| i.valid_encoding?}.join
+      actors_array[actors_array.size-1] = str
+      m.actors = actors_array
+
+      m.save
+    end
+
+    Movie.all.each do |m|
       m.is_first_round = false
       m.is_second_round = false
       m.save
@@ -44,6 +54,10 @@ namespace :crawl do
   end
 
   task :build_movie_theater_relation => :environment do
+    MovieTheaterShip.all.each do |m|
+      m.delete
+    end
+
     urls ={
         "基隆"=>"http://www.atmovies.com.tw/showtime/area_a01.html",
         "台北"=>"http://www.atmovies.com.tw/showtime/area_a02.html",
