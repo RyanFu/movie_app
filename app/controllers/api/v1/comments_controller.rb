@@ -3,7 +3,7 @@ class Api::V1::CommentsController < Api::ApiController
   
   def create
     comment = Comment.new
-    comment.user_id = params[:user_id]
+    comment.user = User.find_by_fb_id(params[:fb_id])
     comment.record_id = params[:record_id]
     comment.text = params[:text]
 
