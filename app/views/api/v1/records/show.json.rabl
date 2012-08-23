@@ -18,6 +18,6 @@ node(:movie){ |record|
 
 child(:comments) do
   attributes :id, :user_id, :text
-  node(:user_fb_id){|comment| comment.user.id}
+  node(:user_fb_id){|comment| comment.user.fb_id}
   node(:created_at){ |comment| comment.created_at.strftime "%Y/%m/%d %H:%M" }
 end
