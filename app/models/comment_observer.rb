@@ -1,10 +1,9 @@
-# encoding: UTF-8
-class RecordObserver < ActiveRecord::Observer
-  observe :record
-  def after_create(record)
-    # puts "test"
-    friends = record.user.friends
-    friends.each do |f|
+class CommentObserver < ActiveRecord::Observer
+  observe :comment
+  def after_create(comment)
+    record = comment.record
+    users = comment.record.comments.map{|c| c.user}.uniq{|u| u.id }
+    users.each do |f|
       next unless f.registration_id
       device = Gcm::Device.find_by_registration_id(f.registration_id)
       unless device
@@ -19,11 +18,11 @@ class RecordObserver < ActiveRecord::Observer
       notification.data = {
         :registration_ids => [f.registration_id], 
         :data => {
-          :type => 1,
-          :user_name => record.user.name,
-          :user_id => record.user.id,
-          :comment => record.comment,
-          :score => record.score,
+          :type => 2,
+          :user_name => comment.user.name,
+          :user_id => comment.user.id,
+          :record_id => record.id,
+          :comment_text => comment.text,
           :movie_name => record.movie.name,
           :movie_id => record.movie.id
         }
