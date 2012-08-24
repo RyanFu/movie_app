@@ -26,7 +26,7 @@ class Api::V1::UsersController < Api::ApiController
       logger.info("user create: already registered")
       render :status=>200, :json=>{:message => "already registered"}
     elsif u.save
-      user.facebook_friends_use_app
+      u.facebook_friends_use_app
       logger.info("user create: success")
       render :status=>200, :json=>{:message => "success"}
     else
