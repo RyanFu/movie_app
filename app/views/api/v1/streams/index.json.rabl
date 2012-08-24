@@ -25,6 +25,8 @@ node(:stream){ |stream|
     child(:comment) do
       attributes :id, :user_id, :text
       node(:user_fb_id){|comment| comment.user.fb_id}
+      node(:user_name){|comment| comment.user.name}
+      node(:record_id){|comment| comment.record.id}
       node(:created_at){ |comment| comment.created_at.strftime "%Y/%m/%d %H:%M" }
     end
   end
