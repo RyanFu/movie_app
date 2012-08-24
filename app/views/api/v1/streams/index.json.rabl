@@ -28,6 +28,7 @@ node(:stream){ |stream|
       node(:user_name){|comment| comment.user.name}
       node(:record_id){|comment| comment.record.id}
       node(:created_at){ |comment| comment.created_at.strftime "%Y/%m/%d %H:%M" }
+      node(:movie_name){ |comment| comment.record.movie.name }
     end
   end
   {}
