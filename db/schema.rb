@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120823053911) do
+ActiveRecord::Schema.define(:version => 20120824090647) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -90,6 +90,15 @@ ActiveRecord::Schema.define(:version => 20120823053911) do
 
   add_index "records", ["movie_id"], :name => "index_records_on_movie_id"
   add_index "records", ["user_id"], :name => "index_records_on_user_id"
+
+  create_table "streams", :force => true do |t|
+    t.integer  "record_id"
+    t.integer  "comment_id"
+    t.integer  "stream_type"
+    t.integer  "user_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "theaters", :force => true do |t|
     t.string   "name"

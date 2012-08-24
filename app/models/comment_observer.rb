@@ -14,7 +14,7 @@ class CommentObserver < ActiveRecord::Observer
         device.save
       end
       notification = Gcm::Notification.new
-      notification.device_id = device
+      notification.device = device
        # notification.data = {:registration_ids => [f.registration_id], :data => {:message_text => record.user.name + "說 \"" + record.movie.name + "\"" + record.comment}}
       notification.collapse_key = "updates_available"
       notification.data = {
