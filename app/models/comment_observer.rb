@@ -4,7 +4,7 @@ class CommentObserver < ActiveRecord::Observer
     record = comment.record
     users = comment.record.comments.map{|c| c.user}
     users << record.user
-    users.uniq{|u| u.id }
+    users = users.uniq{|u| u.id }.select{|u| u != comment.user}
     users.each do |f|
       next unless f.registration_id
       device = Gcm::Device.find_by_registration_id(f.registration_id)
