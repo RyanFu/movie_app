@@ -3,8 +3,16 @@ class RecordObserver < ActiveRecord::Observer
   observe :record
   def after_create(record)
     # puts "test"
+
     friends = record.user.friends
     friends.each do |f|
+
+      stream = Stream.new
+      stream.user = f
+      stream.record_id = record.id
+      stream.stream_type = 1
+      stream.save
+
       next unless f.registration_id
       device = Gcm::Device.find_by_registration_id(f.registration_id)
       unless device

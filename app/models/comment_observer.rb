@@ -1,11 +1,19 @@
 class CommentObserver < ActiveRecord::Observer
   observe :comment
   def after_create(comment)
+    
     record = comment.record
     users = comment.record.comments.map{|c| c.user}
     users << record.user
     users = users.uniq{|u| u.id }.select{|u| u != comment.user}
     users.each do |f|
+      
+      stream = Stream.new
+      stream.user = f
+      stream.comment_id = comment.id
+      stream.stream_type = 2
+      stream.save
+
       next unless f.registration_id
       device = Gcm::Device.find_by_registration_id(f.registration_id)
       unless device

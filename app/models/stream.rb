@@ -1,6 +1,6 @@
 class Stream < ActiveRecord::Base
-  # attr_accessible :title, :body
   belongs_to :user
   belongs_to :record
   belongs_to :comment
+  default_scope :order => 'created_at DESC'
 end
