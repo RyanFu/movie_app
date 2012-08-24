@@ -9,7 +9,7 @@ class Api::V1::CommentsController < Api::ApiController
 
     if comment.save
       logger.info("params message: #{params.to_json}")
-      render :status=>200, :json=>{:message => "success"}
+      render :status=>200, :json=>{:message => "success",:comment_id => comment.id}
     else
       logger.info("params message: #{params.to_json}")
       logger.info("error message: #{comment.errors.messages}")
