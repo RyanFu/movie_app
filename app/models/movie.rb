@@ -16,7 +16,7 @@ class Movie < ActiveRecord::Base
 
   def find_friends_records friends
     r = []
-    records.each do |item|
+    records.by_updated.each do |item|
       r << item if friends.include? item.user
     end
     return_record = []
@@ -34,7 +34,7 @@ class Movie < ActiveRecord::Base
 
   def find_friends_origin_records friends
     r = []
-    self.records.each do |item|
+    self.records.by_updated.each do |item|
       r << item if friends.include? item.user
     end
     r

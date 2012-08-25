@@ -48,7 +48,7 @@ class Api::V1::RecordsController < Api::ApiController
       @records = movie.find_friends_origin_records(@user.friends)
     else
       @user = User.find_by_fb_id(params[:fb_id])
-      @records = @user.records
+      @records = @user.records.by_updated
     end
   end
 
