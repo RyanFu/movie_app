@@ -41,6 +41,9 @@ class MovieTheaterShipCrawl
         puts item.text.strip[2..item.text.strip.length] + "影城"
         t = Theater.find_by_name(item.text.strip[2..item.text.strip.length] + "影城")
       end
+      if t==nil
+        t = Theater.find_by_name(item.text.strip + "影城")
+      end
 
       # puts "    Theater name : " + t.name
       t.on_view_movies << movie unless t.on_view_movies.include? movie
