@@ -42,3 +42,5 @@ gem 'capistrano'
 gem 'capistrano-ext'
 
 gem 'gcm_on_rails'
+
+gem 'newrelic_rpm'
