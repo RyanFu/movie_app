@@ -19,7 +19,7 @@ class Api::V1::MoviesController < Api::ApiController
   end
 
   def hot
-    @movies = Movie.hot.order("release_date DESC")
+    @movies = MovieBoxOfficeShip.hot_movies
   end
 
   def show
