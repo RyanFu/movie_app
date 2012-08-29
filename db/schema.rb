@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120825012529) do
+ActiveRecord::Schema.define(:version => 20120829022022) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -52,6 +52,14 @@ ActiveRecord::Schema.define(:version => 20120825012529) do
 
   add_index "gcm_notifications", ["device_id"], :name => "index_gcm_notifications_on_device_id"
 
+  create_table "movie_box_office_ships", :force => true do |t|
+    t.integer  "movie_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "movie_box_office_ships", ["movie_id"], :name => "index_movie_box_office_ships_on_movie_id"
+
   create_table "movie_theater_ships", :force => true do |t|
     t.integer  "movie_id"
     t.integer  "theater_id"
@@ -72,12 +80,15 @@ ActiveRecord::Schema.define(:version => 20120825012529) do
     t.string   "level_url"
     t.string   "actors"
     t.string   "directors"
-    t.boolean  "is_first_round",  :default => false
-    t.boolean  "is_second_round", :default => false
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
-    t.boolean  "is_hot",          :default => false
+    t.boolean  "is_first_round",   :default => false
+    t.boolean  "is_second_round",  :default => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.boolean  "is_hot",           :default => false
+    t.string   "youtube_video_id"
   end
+
+  add_index "movies", ["youtube_video_id"], :name => "index_movies_on_youtube_video_id"
 
   create_table "records", :force => true do |t|
     t.string   "comment"

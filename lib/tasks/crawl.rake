@@ -53,6 +53,16 @@ namespace :crawl do
     d.get_second_round_movie
   end
 
+  task :build_movie_box_office_relation => :environment do
+    MovieBoxOfficeShip.all.each do |m|
+      m.delete
+    end
+    crawler = MovieBoxOfficeShipCrawl.new
+    crawler.fetch
+    crawler.parse_first_movie
+    crawler.parse_box_office
+  end
+
   task :build_movie_theater_relation => :environment do
     MovieTheaterShip.all.each do |m|
       m.delete
