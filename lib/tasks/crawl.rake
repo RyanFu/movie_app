@@ -33,15 +33,6 @@ namespace :crawl do
   end
 
   task :fetch_movies => :environment do
-    Movie.all.each do |m|
-
-      actors_array = m.actors
-      str = actors_array.last.chars.select{|i| i.valid_encoding?}.join
-      actors_array[actors_array.size-1] = str
-      m.actors = actors_array
-
-      m.save
-    end
 
     Movie.all.each do |m|
       m.is_first_round = false
