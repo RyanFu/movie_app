@@ -10,12 +10,12 @@ class Api::V1::MoviesController < Api::ApiController
 
   def first_round
     @user = User.find_by_fb_id(params[:fb_id])  if params[:fb_id]
-    @movies = Movie.first_round.includes(:records).order("release_date DESC")
+    @movies = Movie.first_round.order("release_date DESC")
   end
 
   def second_round
     @user = User.find_by_fb_id(params[:fb_id])  if params[:fb_id]
-    @movies = Movie.second_round.includes(:records).order("release_date DESC")
+    @movies = Movie.second_round.order("release_date DESC")
   end
 
   def hot
