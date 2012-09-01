@@ -54,6 +54,6 @@ class User < ActiveRecord::Base
   end
 
   def friends
-    direct_friends | inverse_friends
+    direct_friends 
   end
 end
