@@ -3,7 +3,7 @@ attributes :stream_type
 
 node(:stream){ |stream|
   if (stream.stream_type == 1)
-    child(:record) do
+    child(:record,:include => [:user]) do
     	attributes :id, :comment, :score, :movie_id, :user_id
 
       node(:created_at){ |record| record.updated_at.strftime "%Y/%m/%d %H:%M" }

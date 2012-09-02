@@ -36,6 +36,7 @@ group :test, :development do
   gem "rspec-rails"
   gem "factory_girl_rails"
   gem "shoulda-matchers"
+  gem "bullet"
 end
 
 gem 'capistrano'
