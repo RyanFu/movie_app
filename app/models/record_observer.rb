@@ -4,7 +4,7 @@ class RecordObserver < ActiveRecord::Observer
   def after_create(record)
     # puts "test"
 
-    friends = record.user.friends
+    friends = record.user.friends.uniq{|u| u.id }
     friends.each do |f|
 
       stream = Stream.new
