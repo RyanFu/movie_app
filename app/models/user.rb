@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
     @friends = User.where('fb_id in (?) ', uid2s)
 
     @friends.each do |f|
-      direct_friends << f unless f.direct_friends.include? f
+      direct_friends << f unless direct_friends.include? f
     end
 
   end
