@@ -4,7 +4,7 @@ class MovieBoxOfficeShip < ActiveRecord::Base
 
   def self.hot_movies
     movies = []
-    self.all.each do |b|
+    self.includes(:movie).all.each do |b|
       movies << b.movie
     end
     movies

@@ -18,8 +18,8 @@ class MovieBoxOfficeShipCrawl
   end
   
   def parse_box_office
-    nodes = @page_html.css(".alt .c3 a")
-    (0..nodes.size/2-1).each do |i|
+    nodes = @page_html.css(".c3 a")
+    (2..nodes.size/2-1).each do |i|
       movie_name = nodes[i*2+1].text.strip
       puts movie_name
       movie = Movie.find_by_name_en(movie_name)
