@@ -35,6 +35,11 @@ class Api::V1::UsersController < Api::ApiController
     end
   end
 
+  def friends_list
+    user = User.find_by_fb_id(params[:fb_id])
+    @users = user.friends
+  end
+
   # def update
   #   @user = User.find(params[:id])
 

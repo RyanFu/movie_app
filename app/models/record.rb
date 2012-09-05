@@ -1,6 +1,6 @@
 class Record < ActiveRecord::Base
   belongs_to :movie
-  belongs_to :user
+  belongs_to :user, :counter_cache => true
   has_many :comments, :dependent => :destroy
   has_many :streams, :dependent => :delete_all
   

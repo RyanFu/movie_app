@@ -97,4 +97,41 @@ namespace :crawl do
       m.save
     end
   end
+
+  task :crawl_yahoo_on_view => :environment do
+    d = DataCrawler.new
+    d.get_yahoo_on_view_movies
+  end
+
+  task :crawl_yahoo_dvd_movies => :environment do
+    urls =[
+        "http://tw.movie.yahoo.com/dvdgenre_result.html?g=1",
+        "http://tw.movie.yahoo.com/dvdgenre_result.html?g=2",
+        "http://tw.movie.yahoo.com/dvdgenre_result.html?g=3",
+        "http://tw.movie.yahoo.com/dvdgenre_result.html?g=4",
+        "http://tw.movie.yahoo.com/dvdgenre_result.html?g=5",
+        "http://tw.movie.yahoo.com/dvdgenre_result.html?g=6",
+        "http://tw.movie.yahoo.com/dvdgenre_result.html?g=7",
+        "http://tw.movie.yahoo.com/dvdgenre_result.html?g=8",
+        "http://tw.movie.yahoo.com/dvdgenre_result.html?g=9",
+        "http://tw.movie.yahoo.com/dvdgenre_result.html?g=10",
+        "http://tw.movie.yahoo.com/dvdgenre_result.html?g=11",
+        "http://tw.movie.yahoo.com/dvdgenre_result.html?g=12",
+        "http://tw.movie.yahoo.com/dvdgenre_result.html?g=13",
+        "http://tw.movie.yahoo.com/dvdgenre_result.html?g=14",
+        "http://tw.movie.yahoo.com/dvdgenre_result.html?g=15",
+        "http://tw.movie.yahoo.com/dvdgenre_result.html?g=16",
+        "http://tw.movie.yahoo.com/dvdgenre_result.html?g=17",
+        "http://tw.movie.yahoo.com/dvdgenre_result.html?g=18"
+    ]
+    urls.each do |url|
+      d = DataCrawler.new
+      d.get_yahoo_dvd_movies url
+    end
+  end
+  task :set_first_second_round_movie => :environment do 
+    d = DataCrawler.new
+    d.set_first_round_movie
+    d.set_second_round_movie
+  end
 end

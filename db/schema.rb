@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120829022022) do
+ActiveRecord::Schema.define(:version => 20120905092411) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -78,8 +78,8 @@ ActiveRecord::Schema.define(:version => 20120829022022) do
     t.string   "release_date"
     t.string   "running_time"
     t.string   "level_url"
-    t.string   "actors"
-    t.string   "directors"
+    t.text     "actors"
+    t.text     "directors"
     t.boolean  "is_first_round",   :default => false
     t.boolean  "is_second_round",  :default => false
     t.datetime "created_at",                          :null => false
@@ -156,6 +156,7 @@ ActiveRecord::Schema.define(:version => 20120829022022) do
     t.datetime "updated_at",                             :null => false
     t.integer  "device_id"
     t.string   "registration_id"
+    t.integer  "records_count",          :default => 0
   end
 
   add_index "users", ["device_id"], :name => "index_users_on_device_id"

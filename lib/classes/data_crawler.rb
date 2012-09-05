@@ -38,4 +38,89 @@ class DataCrawler
       end
     end
   end
+  
+  # yahoo 上映中電影
+  def get_yahoo_on_view_movies url="http://tw.movie.yahoo.com/movie_intheaters.html"
+    fetch url
+    nodes = @page_html.css(".row-container .item .img a")
+    nodes.each do |item|
+      url = item[:href]
+      puts url
+
+      begin
+        m = MovieCrawlerYahoo.new
+        m.fetch url
+        m.parse_all
+        m.save_to_movie
+      end
+    end
+    
+    nodes = @page_html.css(".ymvpaging .n .pagelink")
+    unless nodes.blank?
+      url = "http://tw.movie.yahoo.com/movie_intheaters.html" + nodes[0][:href]
+      data = DataCrawler.new
+      data.get_yahoo_on_view_movies url
+    end
+
+  end
+
+  def get_yahoo_dvd_movies url
+    fetch url
+    nodes = @page_html.css(".row-container .item .img a")
+    nodes.each do |item|
+      url = item[:href]
+      puts url
+
+      begin
+        m = MovieCrawlerYahoo.new
+        m.fetch url
+        m.parse_dvd_all
+        m.save_to_movie
+      rescue
+        puts ".........................crawl fail....................................."
+        puts ".........................crawl fail....................................."
+        puts ".........................crawl fail....................................."
+        puts ".........................crawl fail....................................."
+        puts ".........................crawl fail....................................."
+        puts ".........................crawl fail....................................."
+      end
+    end
+    nodes = @page_html.css(".ymvpaging .n .pagelink")
+    unless nodes.blank?
+      url = "http://tw.movie.yahoo.com/dvdgenre_result.html" + nodes[0][:href]
+      data = DataCrawler.new
+      data.get_yahoo_dvd_movies url
+    end
+  end
+
+  def set_first_round_movie
+    fetch "http://www.atmovies.com.tw/movie/movie_now-0.html"
+    nodes = @page_html.css(".listall a")
+    nodes.each do |item|
+      begin
+        name = item.text.strip
+        m = Movie.find_by_name name
+        m.is_first_round = true
+        m.save
+      rescue
+        puts item.text.strip
+        puts "error"
+      end
+    end
+  end
+  def set_second_round_movie
+    fetch "http://www.atmovies.com.tw/movie/movie_now2-0.html"
+    nodes = @page_html.css(".listall a")
+    nodes.each do |item|
+      begin
+        name = item.text.strip
+        m = Movie.find_by_name name
+        m.is_second_round = true
+        m.save
+      rescue
+        puts item.text.strip
+        puts "error"
+      end
+    end
+  end 
 end

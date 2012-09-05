@@ -4,7 +4,11 @@ MovieApp::Application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :users,:only => [:create, :update]
+      resources :users,:only => [:create, :update] do
+        collection do
+          get 'friends_list'
+        end
+      end
       resources :records,:only => [:create, :update, :destroy, :index, :show] do
         collection do
           get 'friend_stream'
