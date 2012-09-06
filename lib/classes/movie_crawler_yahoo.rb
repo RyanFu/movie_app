@@ -44,8 +44,19 @@ class MovieCrawlerYahoo
   def parse_release_date_and_running_time
     str = @page_html.css(".text.bulletin .dta")[0].text
     @movie_release_date = str.gsub("-","/")
-    @movie_running_time = @page_html.css(".text.bulletin .dta")[2].text
+    @movie_release_date = nil if @movie_release_date == "未提供"
+    running_time = @page_html.css(".text.bulletin .dta")[2].text
+    if running_time == "未提供"
+      @movie_running_time = nil
+    else
+      hour = running_time[0].to_i
+      min = running_time[2..3].to_i
+      time = hour * 60 + min
+      @movie_running_time = time.to_s
+    end
 
+
+    movie_running_time
     puts @movie_release_date
     puts @movie_running_time
   end
@@ -84,7 +95,8 @@ class MovieCrawlerYahoo
   def parse_dvd_release_date_and_running_time
     str = @page_html.css(".text.bulletin .dta")[0].text
     @movie_release_date = str.gsub("-","/")
-    @movie_running_time = "未提供"
+    @movie_release_date = nil if @movie_release_date == "未提供"
+    @movie_running_time = nil
 
     puts @movie_release_date
     puts @movie_running_time
