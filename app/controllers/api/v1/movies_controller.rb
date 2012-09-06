@@ -27,4 +27,8 @@ class Api::V1::MoviesController < Api::ApiController
     @user = User.find_by_fb_id(params[:fb_id])  if params[:fb_id]
     @records = @movie.find_friends_records @user.friends if @user
   end
+
+  def all
+    @movies = Movie.all
+  end
 end

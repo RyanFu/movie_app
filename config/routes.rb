@@ -21,6 +21,7 @@ MovieApp::Application.routes.draw do
           get 'hot'
           get 'first_round'
           get 'second_round'
+          get 'all'
         end 
       end
       resources :comments,:only => [:create, :destroy]
