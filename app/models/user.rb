@@ -44,11 +44,13 @@ class User < ActiveRecord::Base
     users = []
     facebook { |fb| @friends = fb.fql_query("SELECT uid2 FROM friend WHERE uid1=me()")}
     # return [] unless @friends
-    uid2s = @friends.map{|item| item["uid2"]}
-    @friends = User.where('fb_id in (?) ', uid2s)
+    unless @friends.blank?
+      uid2s = @friends.map{|item| item["uid2"]}
+      @friends = User.where('fb_id in (?) ', uid2s)
 
-    @friends.each do |f|
-      direct_friends << f unless direct_friends.include? f
+      @friends.each do |f|
+        direct_friends << f unless direct_friends.include? f
+      end
     end
 
   end
