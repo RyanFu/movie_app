@@ -49,3 +49,6 @@ gem 'newrelic_rpm'
 # 效能相關
 gem 'cells'
 gem 'sneaky-save'
+
+# cron table
+gem 'whenever', :require => false
