@@ -147,5 +147,8 @@ namespace :crawl do
       d.get_yahoo_comming_movies url
     end
   end
-
+  task :crawl_yahoo_this_week_movies => :environment do
+    d = DataCrawler.new
+    d.get_yahoo_this_week_movie
+  end
 end

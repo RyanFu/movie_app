@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120906033150) do
+ActiveRecord::Schema.define(:version => 20120906074522) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(:version => 20120906033150) do
     t.boolean  "is_hot",           :default => false
     t.string   "youtube_video_id"
     t.boolean  "is_comming",       :default => false
+    t.boolean  "is_this_week",     :default => false
   end
 
   add_index "movies", ["youtube_video_id"], :name => "index_movies_on_youtube_video_id"

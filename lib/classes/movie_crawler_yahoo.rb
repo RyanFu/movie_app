@@ -141,6 +141,6 @@ class MovieCrawlerYahoo
     option.each do |key, value|
       movie[key] = value
     end
-    movie.sneaky_save
+    movie.save
   end
 end

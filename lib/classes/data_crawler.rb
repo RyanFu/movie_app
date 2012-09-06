@@ -139,5 +139,22 @@ class DataCrawler
         m.save_to_movie ({:is_comming=>true})
       end
     end
+  end
+
+  def get_yahoo_this_week_movie
+    url = "http://tw.movies.yahoo.com/movie_thisweek.html"
+    fetch url
+    nodes = @page_html.css(".row-container .item .img a")
+    nodes.each do |item|
+      url = item[:href]
+      puts url
+
+      begin
+        m = MovieCrawlerYahoo.new
+        m.fetch url
+        m.parse_all
+        m.save_to_movie ({:is_comming=>true, :is_this_week => true})
+      end
+    end
   end 
 end

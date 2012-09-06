@@ -7,6 +7,7 @@ MovieApp::Application.routes.draw do
       resources :users,:only => [:create, :update] do
         collection do
           get 'friends_list'
+          get 'user_info'
         end
       end
       resources :records,:only => [:create, :update, :destroy, :index, :show] do
