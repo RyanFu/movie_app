@@ -134,4 +134,17 @@ namespace :crawl do
     d.set_first_round_movie
     d.set_second_round_movie
   end
+  task :crawl_yahoo_comming_movies => :environment do
+    urls =[
+        "http://tw.movies.yahoo.com/movie_comingsoon.html?p=1",
+        "http://tw.movies.yahoo.com/movie_comingsoon.html?p=2",
+        "http://tw.movies.yahoo.com/movie_comingsoon.html?p=3",
+        "http://tw.movies.yahoo.com/movie_comingsoon.html?p=4",
+        "http://tw.movies.yahoo.com/movie_comingsoon.html?p=5"
+    ]
+    urls.each do |url|
+      d = DataCrawler.new
+      d.get_yahoo_comming_movies url
+    end
+  end
 end

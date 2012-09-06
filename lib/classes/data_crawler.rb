@@ -108,6 +108,7 @@ class DataCrawler
       end
     end
   end
+
   def set_second_round_movie
     fetch "http://www.atmovies.com.tw/movie/movie_now2-0.html"
     nodes = @page_html.css(".listall a")
@@ -120,6 +121,22 @@ class DataCrawler
       rescue
         puts item.text.strip
         puts "error"
+      end
+    end
+  end
+
+  def get_yahoo_comming_movies url
+    fetch url
+    nodes = @page_html.css(".row-container .item .img a")
+    nodes.each do |item|
+      url = item[:href]
+      puts url
+
+      begin
+        m = MovieCrawlerYahoo.new
+        m.fetch url
+        m.parse_all
+        m.save_to_movie ({:is_comming=>true})
       end
     end
   end 
