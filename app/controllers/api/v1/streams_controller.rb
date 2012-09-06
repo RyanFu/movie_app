@@ -22,7 +22,7 @@ class Api::V1::StreamsController < Api::ApiController
         r["record"]["movie"] = {}
         r["record"]["movie"]["name"] = movie.name
         r["record"]["movie"]["name_en"] = movie.name_en
-        r["record"]["movie"]["release"] = Date.parse(movie.release_date).strftime "%Y/%m/%d"
+        r["record"]["movie"]["release"] = Date.parse(movie.release_date).strftime "%Y/%m/%d" if movie.release_date
         r["record"]["movie"]["poster_url"] = movie.poster_url
         r["record"]["movie"]["level_url"] = movie.level_url
         r["record"]["movie"]["running_time"] = movie.running_time

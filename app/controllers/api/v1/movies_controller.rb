@@ -1,21 +1,21 @@
 class Api::V1::MoviesController < Api::ApiController
   def index
     if params[:theater_id]
-      @movies = Theater.find(params[:theater_id]).on_view_movies.order("release_date DESC")
+      @movies = Theater.find(params[:theater_id]).on_view_movies.order("updated_at DESC")
       # @user = User.find_by_fb_id(params[:fb_id]) if params[:fb_id]
     else
-      @movies = Movie.all.order("release_date DESC")
+      @movies = Movie.order("updated_at DESC").all
     end
   end
 
   def first_round
     # @user = User.find_by_fb_id(params[:fb_id])  if params[:fb_id]
-    @movies = Movie.first_round.order("release_date DESC")
+    @movies = Movie.first_round.order("updated_at DESC")
   end
 
   def second_round
     # @user = User.find_by_fb_id(params[:fb_id])  if params[:fb_id]
-    @movies = Movie.second_round.order("release_date DESC")
+    @movies = Movie.second_round.order("updated_at DESC")
   end
 
   def hot
