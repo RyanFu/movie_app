@@ -14,7 +14,7 @@ node(:stream){ |stream|
         m ={}
         m["name"] = movie.name
         m["name_en"] = movie.name_en
-        m["release"] = Date.parse(movie.release_date).strftime "%Y/%m/%d" if movie.release_date
+        m["release"] = movie.release_date.strftime "%Y/%m/%d" if movie.release_date
         m["poster_url"] = movie.poster_url
         m["level_url"] = movie.level_url
         m["running_time"] = movie.running_time

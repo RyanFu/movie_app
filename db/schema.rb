@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120906074522) do
+ActiveRecord::Schema.define(:version => 20120907051732) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(:version => 20120906074522) do
     t.string   "name_en"
     t.text     "intro"
     t.string   "poster_url"
-    t.string   "release_date"
+    t.date     "release_date"
     t.string   "running_time"
     t.string   "level_url"
     t.text     "actors"
