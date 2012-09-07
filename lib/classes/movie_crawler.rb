@@ -88,6 +88,7 @@ class MovieCrawler
     option.each do |key, value|
       movie[key] = value
     end
+    movie.release_date = @movie_release_date
     puts movie.name
     movie.save
   end
