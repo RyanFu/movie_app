@@ -21,5 +21,5 @@
 
 
 every :day, :at => '00:01am' do
-  rake 'user:update_user_friends_ship',:output => {:error => 'error.log', :standard => 'cron.log'} 
+  rake 'user:update_user_friends_ship',:output => {:error => 'log/error.log', :standard => 'log/cron.log'} 
 end
