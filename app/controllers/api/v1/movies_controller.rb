@@ -18,6 +18,10 @@ class Api::V1::MoviesController < Api::ApiController
     @movies = Movie.second_round.order("release_date DESC")
   end
 
+  def comming
+    @movies = Movie.comming
+  end
+
   def hot
     @movies = MovieBoxOfficeShip.hot_movies
   end
