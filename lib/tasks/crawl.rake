@@ -150,4 +150,8 @@ namespace :crawl do
     d = DataCrawler.new
     d.get_yahoo_this_week_movie
   end
+  task :crawl_all_yahoo_movies => :environment do
+    d = DataCrawler.new
+    d.get_yahoo_all_movies
+  end
 end

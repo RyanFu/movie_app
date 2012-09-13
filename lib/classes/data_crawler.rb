@@ -64,6 +64,26 @@ class DataCrawler
 
   end
 
+  def get_yahoo_all_movies 
+    (1..4440).each do |i|
+      url = "http://tw.movie.yahoo.com/movieinfo_main.html/id=" + i.to_s
+      begin
+        m = MovieCrawlerYahoo.new
+        m.fetch url
+        m.parse_all
+        m.save_to_movie
+      rescue
+        puts ".........................crawl fail....................................."
+        puts ".........................crawl fail....................................."
+        puts ".........................crawl fail....................................."
+        puts url
+        puts ".........................crawl fail....................................."
+        puts ".........................crawl fail....................................."
+        puts ".........................crawl fail....................................."
+      end
+    end
+  end
+
   def get_yahoo_dvd_movies url
     fetch url
     nodes = @page_html.css(".row-container .item .img a")
