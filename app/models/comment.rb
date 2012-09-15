@@ -5,6 +5,15 @@ class Comment < ActiveRecord::Base
   has_many :streams, :dependent => :delete_all
 
   def create_stream_gcm(comment)
+    logger.info("............delayjob comment start......")
+    logger.info("............delayjob comment start......")
+    logger.info("............delayjob comment start......")
+    logger.info("............delayjob comment start......")
+    logger.info("............delayjob comment start......")
+    logger.info("............delayjob comment start......")
+    logger.info("............delayjob comment start......")
+    logger.info("............delayjob comment start......")
+
     record = comment.record
     users = comment.record.comments.map{|c| c.user}
     users << record.user

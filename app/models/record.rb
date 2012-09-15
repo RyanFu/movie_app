@@ -11,6 +11,15 @@ class Record < ActiveRecord::Base
   scope :by_id_asc, order('id ASC')
 
   def create_stream_gcm(record)
+    logger.info("............delayjob record start............")
+    logger.info("............delayjob record start............")
+    logger.info("............delayjob record start............")
+    logger.info("............delayjob record start............")
+    logger.info("............delayjob record start............")
+    logger.info("............delayjob record start............")
+    logger.info("............delayjob record start............")
+    logger.info("............delayjob record start............")
+    
     friends = record.user.friends.uniq{|u| u.id }
     friends.each do |f|
 
