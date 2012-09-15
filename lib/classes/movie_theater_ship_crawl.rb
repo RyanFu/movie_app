@@ -31,6 +31,10 @@ class MovieTheaterShipCrawl
   def parse_relation_ship
     movie_name_en = @page_html.css(".at12b_gray").text.strip
     movie = Movie.find_by_name_en(movie_name_en)
+    unless movie
+      movie_name = @page_html.css(".at21b").text.strip
+      movie = Movie.find_by_name(movie_name)
+    end
     return unless movie
     nodes = @page_html.css('.row-1_2 a')
     
