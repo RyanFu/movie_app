@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120918072538) do
+ActiveRecord::Schema.define(:version => 20120918080928) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -155,6 +155,16 @@ ActiveRecord::Schema.define(:version => 20120918072538) do
 
   add_index "user_friend_ships", ["direct_friend_id"], :name => "index_user_friend_ships_on_direct_friend_id"
   add_index "user_friend_ships", ["inverse_friend_id"], :name => "index_user_friend_ships_on_inverse_friend_id"
+
+  create_table "user_love_record_ships", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "record_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "user_love_record_ships", ["record_id"], :name => "index_user_love_record_ships_on_record_id"
+  add_index "user_love_record_ships", ["user_id"], :name => "index_user_love_record_ships_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

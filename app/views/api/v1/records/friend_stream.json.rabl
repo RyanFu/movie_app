@@ -1,5 +1,5 @@
 collection @records
-attributes :id, :comment, :score, :movie_id, :user_id
+attributes :id, :comment, :score, :movie_id, :user_id, :comments_count, :love_count
 
 node(:created_at){ |record| record.updated_at.strftime "%Y/%m/%d %H:%M" }
 node(:user_name){ |record| record.user.name}

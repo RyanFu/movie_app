@@ -14,6 +14,10 @@ MovieApp::Application.routes.draw do
         collection do
           get 'friend_stream'
         end
+        member do
+          post 'love'
+          delete 'unlove'
+        end
       end
       resources :theaters, :only => [:show, :index]
       resources :areas, :only => [:index]

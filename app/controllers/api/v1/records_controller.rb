@@ -60,4 +60,23 @@ class Api::V1::RecordsController < Api::ApiController
     @user = User.find_by_fb_id(params[:fb_id])
     @records = Record.friend_records(@user).by_updated.includes(:user)
   end
+
+  def love
+    user = User.find_by_fb_id(params[:fb_id])
+    record = Record.find(params[:id])
+    love_records = user.love_records
+    if love_records.include? record
+      render :status=>403, :json=>{:message => "already loved"}
+    else
+      user.love_records << record
+      render :status=>200, :json=>{:message => "success"}
+    end
+  end
+
+  def unlove
+    user = User.find_by_fb_id(params[:fb_id])
+    record = Record.find(params[:id])
+    user.love_records.destroy record
+    render :status=>200, :json=>{:message => "success"}
+  end
 end

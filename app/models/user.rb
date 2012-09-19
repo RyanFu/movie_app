@@ -19,6 +19,9 @@ class User < ActiveRecord::Base
   has_many :direct_friends, :through => :direct_friends_ship
   has_many :inverse_friends,  :through => :inverse_friends_ship
 
+  has_many :user_love_record_ships
+  has_many :love_records, :through => :user_love_record_ships, :source => :record
+
   def self.find_for_database_authentication(conditions={})
     self.where("fb_id = ?", conditions[:fb_id]).limit(1).first
   end
