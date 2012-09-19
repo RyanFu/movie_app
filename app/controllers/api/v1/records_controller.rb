@@ -1,6 +1,6 @@
 # encoding: UTF-8
 class Api::V1::RecordsController < Api::ApiController
-  protect_from_forgery :except => :create
+  protect_from_forgery :except => :create, :love
 
   def create
     record = Record.new
