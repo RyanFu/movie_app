@@ -13,6 +13,7 @@ MovieApp::Application.routes.draw do
       resources :records,:only => [:create, :update, :destroy, :index, :show] do
         collection do
           get 'friend_stream'
+          get 'get_movie_records'
         end
         member do
           post 'love'

@@ -52,6 +52,11 @@ class Api::V1::RecordsController < Api::ApiController
     end
   end
 
+  def get_movie_records
+    @movie = Movie.find(params[:movie_id])
+    @records = Record.includes(:user).movie_record(@movie)
+  end
+
   def show
     @record = Record.includes(:user).find(params[:id])
   end

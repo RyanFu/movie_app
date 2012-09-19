@@ -12,6 +12,8 @@ class Record < ActiveRecord::Base
   scope :by_updated, order('updated_at DESC')
   scope :by_updated_asc, order('updated_at ASC')
   scope :by_id_asc, order('id ASC')
+  scope :movie_record, lambda { |movies| where('movie_id in (?)', movies) }
+
 
   def create_stream_gcm(record)
     logger.info("............delayjob record start............")
