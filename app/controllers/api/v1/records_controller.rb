@@ -55,9 +55,11 @@ class Api::V1::RecordsController < Api::ApiController
   def get_movie_records
     @movie = Movie.find(params[:movie_id])
     @records = Record.includes(:user).movie_record(@movie)
+    @user = User.find_by_fb_id(params[:fb_id]) if params[:fb_id]
   end
 
   def show
+    @user = User.find_by_fb_id(params[:fb_id]) if params[:fb_id]
     @record = Record.includes(:user).find(params[:id])
   end
 
