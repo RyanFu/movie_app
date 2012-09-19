@@ -27,9 +27,11 @@ class MovieBoxOfficeShipCrawl
         movie_name = nodes[i*2].text.strip
         movie = Movie.find_by_name(movie_name)
       end
-      ship = MovieBoxOfficeShip.new
-      ship.movie = movie
-      ship.save
+      if movie
+        ship = MovieBoxOfficeShip.new
+        ship.movie = movie
+        ship.save
+      end
     end
   end
 end
