@@ -134,6 +134,12 @@ namespace :crawl do
     d.set_second_round_movie
   end
   task :crawl_yahoo_comming_movies => :environment do
+    
+    Movie.comming.each do |m|
+      m.is_comming = false
+      m.save
+    end
+
     urls =[
         "http://tw.movies.yahoo.com/movie_comingsoon.html?p=1",
         "http://tw.movies.yahoo.com/movie_comingsoon.html?p=2",
