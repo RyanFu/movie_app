@@ -11,6 +11,7 @@ class Record < ActiveRecord::Base
   scope :friend_records, lambda { |user| where('user_id in (?)', user.friends) if user.friends.size > 0 }
   scope :by_updated, order('updated_at DESC')
   scope :by_updated_asc, order('updated_at ASC')
+  scope :by_created, order('created_at DESC')
   scope :by_id_asc, order('id ASC')
   scope :movie_record, lambda { |movies| where('movie_id in (?)', movies) }
 
