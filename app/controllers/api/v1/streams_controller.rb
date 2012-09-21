@@ -2,7 +2,7 @@
 class Api::V1::StreamsController < Api::ApiController
   def index
     @user = User.find_by_fb_id(params[:fb_id])
-    @streams = Stream.includes(:record,:comment,:movie,:stream_user).user_streams(@user)
+    @streams = Stream.includes(:record,:comment,:movie,:stream_user).user_streams(@user).by_id
     @love_records = @user.love_records.map{|r| r.id}
     output = []
     @streams.each do |stream|
