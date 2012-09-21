@@ -2,15 +2,17 @@
 class Api::V1::StreamsController < Api::ApiController
   def index
     @user = User.find_by_fb_id(params[:fb_id])
-    @streams = @user.streams.by_id
+    @streams = Stream.includes(:record,:comment,:movie,:stream_user).user_streams(@user)
+    @love_records = @user.love_records.map{|r| r.id}
     output = []
     @streams.each do |stream|
       r = {}
       r["stream_type"] = stream.stream_type
       if stream.stream_type == 1
-        record = Record.includes(:movie,:user).find(stream.record_id)
-        user = record.user
-        movie = record.movie
+        record = stream.record
+        # record = Record.includes(:movie,:user).find(stream.record_id)
+        user = stream.stream_user
+        movie = stream.movie
         r["record"] = {}
         r["record"]["id"] = record.id
         r["record"]["comment"] = record.comment
@@ -18,7 +20,7 @@ class Api::V1::StreamsController < Api::ApiController
         r["record"]["movie_id"] = movie.id
         r["record"]["comments_count"] = record.comments_count
         r["record"]["love_count"] = record.love_count
-        r["record"]["is_loved_by_user"] = (@user.love_records.include? record)
+        r["record"]["is_loved_by_user"] = (@love_records.include? record.id)
         r["record"]["created_at"] = record.updated_at.strftime "%Y/%m/%d %H:%M"
         r["record"]["user_name"] = user.name
         r["record"]["user_fb_id"] = user.fb_id
@@ -32,8 +34,9 @@ class Api::V1::StreamsController < Api::ApiController
         s = {"stream" => r}
         output << s 
       elsif  stream.stream_type == 2
-        comment = Comment.includes(:record,:user).find(stream.comment_id)
-        user = comment.user
+        comment = stream.comment
+        # comment = Comment.includes(:record,:user).find(stream.comment_id)
+        user = stream.stream_user
         r["comment"] = {}
         r["comment"]["id"] = comment.id
         r["comment"]["user_id"] = user.id
@@ -42,7 +45,7 @@ class Api::V1::StreamsController < Api::ApiController
         r["comment"]["user_name"] = user.name
         r["comment"]["record_id"] = comment.record_id
         r["comment"]["created_at"] = comment.updated_at.strftime "%Y/%m/%d %H:%M"
-        r["comment"]["movie_name"] = comment.record.movie.name
+        r["comment"]["movie_name"] = stream.movie.name
         s = {"stream" => r}
         output << s 
 

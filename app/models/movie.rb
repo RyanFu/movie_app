@@ -1,5 +1,7 @@
 class Movie < ActiveRecord::Base
   
+  has_many :streams
+
   has_one  :movie_box_office_ship
   has_many :records
 

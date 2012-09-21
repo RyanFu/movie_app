@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120919131428) do
+ActiveRecord::Schema.define(:version => 20120921090417) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -128,12 +128,16 @@ ActiveRecord::Schema.define(:version => 20120919131428) do
     t.integer  "comment_id"
     t.integer  "stream_type"
     t.integer  "user_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "stream_user_id"
+    t.integer  "movie_id"
   end
 
   add_index "streams", ["comment_id"], :name => "index_streams_on_comment_id"
+  add_index "streams", ["movie_id"], :name => "index_streams_on_movie_id"
   add_index "streams", ["record_id"], :name => "index_streams_on_record_id"
+  add_index "streams", ["stream_user_id"], :name => "index_streams_on_stream_user_id"
   add_index "streams", ["user_id"], :name => "index_streams_on_user_id"
 
   create_table "theaters", :force => true do |t|

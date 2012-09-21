@@ -24,6 +24,8 @@ class Comment < ActiveRecord::Base
       stream.user = f
       stream.comment_id = comment.id
       stream.stream_type = 2
+      stream.stream_user_id = comment.user_id
+      stream.movie_id = comment.record.movie_id
       stream.save
 
       next unless f.registration_id

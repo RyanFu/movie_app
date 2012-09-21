@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   has_many :records
   has_many :comments
   has_many :streams
+  # has_many :streams_created_by_user, :foreign_key => "stream_user_id", :class => "Stream"
   
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,

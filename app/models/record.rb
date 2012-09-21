@@ -33,6 +33,8 @@ class Record < ActiveRecord::Base
       stream.user = f
       stream.record_id = record.id
       stream.stream_type = 1
+      stream.stream_user_id = record.user_id
+      stream.movie_id = record.movie_id
       stream.save
 
       next unless f.registration_id
