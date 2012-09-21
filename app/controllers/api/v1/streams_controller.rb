@@ -1,8 +1,8 @@
 # encoding: UTF-8
 class Api::V1::StreamsController < Api::ApiController
   def index
-    user = User.find_by_fb_id(params[:fb_id])
-    @streams = user.streams.by_id
+    @user = User.find_by_fb_id(params[:fb_id])
+    @streams = @user.streams.by_id
     output = []
     @streams.each do |stream|
       r = {}
@@ -16,6 +16,9 @@ class Api::V1::StreamsController < Api::ApiController
         r["record"]["comment"] = record.comment
         r["record"]["score"] = record.score
         r["record"]["movie_id"] = movie.id
+        r["record"]["comments_count"] = record.comments_count
+        r["record"]["love_count"] = record.love_count
+        r["record"]["is_loved_by_user"] = (@user.love_records.include? record)
         r["record"]["created_at"] = record.updated_at.strftime "%Y/%m/%d %H:%M"
         r["record"]["user_name"] = user.name
         r["record"]["user_fb_id"] = user.fb_id
