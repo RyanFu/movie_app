@@ -1,4 +1,7 @@
 class Record < ActiveRecord::Base
+  
+  validates_presence_of :user, :movie
+
   belongs_to :movie, :counter_cache => true
   belongs_to :user, :counter_cache => true
   has_many :comments, :dependent => :destroy

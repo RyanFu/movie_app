@@ -1,4 +1,7 @@
 class Comment < ActiveRecord::Base
+  
+  validates_presence_of :user, :record
+
   attr_accessible :record_id, :user_id, :text
   belongs_to :record, :counter_cache => true
   belongs_to :user
