@@ -29,6 +29,7 @@ MovieApp::Application.routes.draw do
           get 'second_round'
           get 'all'
           get 'comming'
+          get 'this_week'
         end 
       end
       resources :comments,:only => [:create, :destroy]

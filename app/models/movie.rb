@@ -17,6 +17,7 @@ class Movie < ActiveRecord::Base
   scope :second_round, where(["is_second_round = ? ", true ])
   scope :hot, where(["is_hot = ? ", true ])
   scope :comming, where(["is_comming = ? ", true ])
+  scope :this_week, where(["is_this_week = ? ", true ])
 
   def find_friends_records friends
     r = []

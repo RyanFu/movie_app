@@ -16,7 +16,13 @@ class DataCrawler
         m.parse_all
         m.save_to_movie ({:is_first_round=>true})
       rescue
-        puts "error"
+        puts ".........................crawl fail....................................."
+        puts ".........................crawl fail....................................."
+        puts ".........................crawl fail....................................."
+        puts url
+        puts ".........................crawl fail....................................."
+        puts ".........................crawl fail....................................."
+        puts ".........................crawl fail....................................."
       end
     end
   end
@@ -35,6 +41,13 @@ class DataCrawler
         m.parse_all
         m.save_to_movie ({:is_second_round=>true})
       rescue
+        puts ".........................crawl fail....................................."
+        puts ".........................crawl fail....................................."
+        puts ".........................crawl fail....................................."
+        puts url
+        puts ".........................crawl fail....................................."
+        puts ".........................crawl fail....................................."
+        puts ".........................crawl fail....................................."
       end
     end
   end
@@ -173,7 +186,7 @@ class DataCrawler
         m = MovieCrawlerYahoo.new
         m.fetch url
         m.parse_all
-        m.save_to_movie ({:is_comming=>true, :is_this_week => true})
+        m.save_to_movie ({:is_this_week => true})
       end
     end
   end 

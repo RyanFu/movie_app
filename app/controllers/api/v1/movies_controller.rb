@@ -26,6 +26,10 @@ class Api::V1::MoviesController < Api::ApiController
     @movies = MovieBoxOfficeShip.hot_movies
   end
 
+  def this_week
+    @movies = Movie.this_week
+  end
+
   def show
     @movie = Movie.find(params[:id])
     @user = User.find_by_fb_id(params[:fb_id])  if params[:fb_id]
