@@ -32,7 +32,7 @@ namespace :crawl do
      end
   end
 
-  task :fetch_movies => :environment do
+  task :set_first_second_round_movie => :environment do
     d = DataCrawler.new
     d.get_first_round_movie
     d.get_second_round_movie
@@ -123,16 +123,16 @@ namespace :crawl do
       d.get_yahoo_dvd_movies url
     end
   end
-  task :set_first_second_round_movie => :environment do
-    Movie.all.each do |m|
-      m.is_first_round = false
-      m.is_second_round = false
-      m.save
-    end 
-    d = DataCrawler.new
-    d.set_first_round_movie
-    d.set_second_round_movie
-  end
+  # task :set_first_second_round_movie => :environment do
+  #   Movie.all.each do |m|
+  #     m.is_first_round = false
+  #     m.is_second_round = false
+  #     m.save
+  #   end 
+  #   d = DataCrawler.new
+  #   d.set_first_round_movie
+  #   d.set_second_round_movie
+  # end
   task :crawl_yahoo_comming_movies => :environment do
     
     Movie.comming.each do |m|

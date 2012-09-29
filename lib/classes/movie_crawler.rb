@@ -73,23 +73,33 @@ class MovieCrawler
      
 
 
-    movie = Movie.new(
-      :name => @movie_name,
-      :name_en => @movie_name_en,
-      :intro => @movie_intro,
-      :poster_url => @movie_poster_url,
-      :release_date => @movie_release_date,
-      :running_time => @movie_running_time,
-      :level_url => @movie_level_url,
-      :actors => @movie_actors,
-      :directors => @movie_directors
-    )
-    movie = Movie.find_by_name(@movie_name) if Movie.find_by_name(@movie_name)
-    option.each do |key, value|
-      movie[key] = value
+    # movie = Movie.new(
+    #   :name => @movie_name,
+    #   :name_en => @movie_name_en,
+    #   :intro => @movie_intro,
+    #   :poster_url => @movie_poster_url,
+    #   :release_date => @movie_release_date,
+    #   :running_time => @movie_running_time,
+    #   :level_url => @movie_level_url,
+    #   :actors => @movie_actors,
+    #   :directors => @movie_directors
+    # )
+    if Movie.find_by_name(@movie_name)
+      movie = Movie.find_by_name(@movie_name) 
+      option.each do |key, value|
+        movie[key] = value
+      end
+      movie.release_date = @movie_release_date
+      puts movie.name
+      movie.save
+    else
+      puts ".........................movie not find....................................."
+      puts ".........................crawl fail....................................."
+      puts ".........................crawl fail....................................."
+      puts url
+      puts ".........................crawl fail....................................."
+      puts ".........................crawl fail....................................."
+      puts ".........................crawl fail....................................." 
     end
-    movie.release_date = @movie_release_date
-    puts movie.name
-    movie.save
   end
 end
