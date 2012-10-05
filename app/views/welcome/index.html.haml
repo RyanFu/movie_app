@@ -1,0 +1,62 @@
+.span9
+  #myCarousel.carousel.slide
+    .carousel-inner
+      .item
+        %img{:alt => "", :src => "http://twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-01.jpg"}
+          .carousel-caption
+            %h4 First Thumbnail label
+            %p Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+      .item
+        %img{:alt => "", :src => "http://twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-02.jpg"}
+          .carousel-caption
+            %h4 Second Thumbnail label
+            %p Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+      .item.active
+        %img{:alt => "", :src => "http://twitter.github.com/bootstrap/assets/img/bootstrap-mdo-sfmoma-03.jpg"}
+          .carousel-caption
+            %h4 Third Thumbnail label
+            %p Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+    %a.left.carousel-control{"data-slide" => "prev", :href => "#myCarousel"} ‹
+    %a.right.carousel-control{"data-slide" => "next", :href => "#myCarousel"} ›
+  .well
+    打卡牆
+    %hr
+    %hr
+    %hr
+    %hr
+    %hr
+    %hr
+  %h3.group-divider
+    熱門電影
+    %a{:href => "#"} 更多 »
+  .movie-container
+    =render :partial => "_partials/movies_container", :locals => {:movies => @movies}
+  %h3.group-divider
+    首輪電影
+    %a{:href => "#"} 更多 »
+  .movie-container
+    =render :partial => "_partials/movies_container", :locals => {:movies => @movies}
+  %h3.group-divider
+    二輪電影
+    %a{:href => "#"} 更多 »
+  .movie-container
+    =render :partial => "_partials/movies_container", :locals => {:movies => @movies}
+.span3
+  .well
+    最受推薦電影
+    %hr
+    %hr
+    %hr
+    %hr
+    %hr
+    %hr
+  .well
+    最有價值評論
+    %hr
+    %hr
+    %hr
+    %hr
+    %hr
+    %hr
+  =render :partial => "_partials/facebook_like_box"
+

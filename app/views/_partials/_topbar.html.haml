@@ -1,0 +1,28 @@
+.navbar.navbar-fixed-top
+  .navbar-inner
+    .container-fluid
+      %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.brand{:href => "#"} Movie_App
+      .nav-collapse
+        %ul.nav
+          %li.active
+            = link_to "首輪電影","#"
+          %li
+            = link_to "二輪電影","#"
+          %li
+            = link_to "本周新片","#"
+          %li
+            = link_to "近期上映","#"
+          %li
+            = link_to "票房排行","#"
+          %li
+            = link_to "電視頻道","#"
+        .navbar-search
+          = form_tag "#", :method => :post do
+            = text_field_tag "search","",:class => "search-query span3", :placeholder => "Search"
+            .icon-search
+        %p.navbar-text.pull-right
+          %a{:href => "#"} username

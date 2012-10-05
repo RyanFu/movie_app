@@ -11,6 +11,7 @@ gem 'yaml_db'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
+  gem 'compass-rails'
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'therubyracer', :platforms => :ruby
@@ -25,6 +26,9 @@ gem 'rabl'
 
 #user
 gem 'devise'
+gem 'omniauth'
+gem 'oauth2'
+gem 'omniauth-facebook'
 
 # 爬蟲
 gem 'nokogiri'
@@ -55,3 +59,22 @@ gem 'whenever', :require => false
 
 gem 'delayed_job_active_record'
 gem "daemons"
+
+#分頁
+gem 'will_paginate', '~> 3.0'
+
+#bootstrap
+gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',:git => 'git://github.com/anjlab/bootstrap-rails.git'
+
+#haml
+gem 'haml'
+
+#語系檔
+gem 'rails-i18n'
+
+# 多媒體處理
+# gem 'carrierwave'
+# gem 'rmagick'
+# gem 'mini_magick'
+# gem 'flash_cookie_session', :git => 'git://github.com/trevorturk/flash_cookie_session.git'
+# gem 'plupload-rails'

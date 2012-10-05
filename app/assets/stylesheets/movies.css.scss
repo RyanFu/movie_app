@@ -1,0 +1,14 @@
+@import "compass";
+
+.movie-info{
+}
+
+.movie-block.span3{
+	display: inline-block;
+	@include clearfix;
+	margin-left: 0;
+}
+
+.movie-container{
+	@include clearfix;
+}

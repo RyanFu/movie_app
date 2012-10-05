@@ -1,0 +1,14 @@
+- movies.each do |m|
+  .movie-block.span3
+    = link_to movie_path(m),:title => "test" do
+      =image_tag m.poster_url
+      %h3 test
+    .movie-info
+      %a.author{:href => "/user/100003003846256/recipes"}
+      %span 陳韋倫
+      %span.view-count
+        %i.icon-eye-open>
+        0
+      %span.like-count
+        %i.icon-thumbs-up>
+        0

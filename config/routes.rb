@@ -1,7 +1,17 @@
 MovieApp::Application.routes.draw do
   
-  devise_for :users
-
+  devise_for :users, :controllers => {
+    :registrations => "registrations",
+    :omniauth_callbacks => "users/omniauth_callbacks"
+  } do
+    get "logout" => "devise/sessions#destroy"
+  end
+  
+  resources :users
+  resources :movies
+  root :to => 'welcome#index'
+  
+  # routes for api
   namespace :api do
     namespace :v1 do
       resources :users,:only => [:create, :update] do
