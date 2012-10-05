@@ -1,0 +1,26 @@
+.span12.user-profile
+  = link_to image_tag(user_avatar(@user.fb_id)), user_path(@user)
+  = @user.name
+  = @user.sex
+  .movie-collection
+    .span6
+      .well
+        電影櫃
+        %hr
+        %hr
+        %hr
+        %hr
+        %hr
+        %hr
+  .friend-stream
+    .span6
+      .well
+        朋友動態
+        %hr
+        %hr
+        %hr
+        %hr
+        %hr
+        %hr
+
+
