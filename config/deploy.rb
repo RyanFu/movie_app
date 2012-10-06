@@ -5,7 +5,7 @@ require "delayed/recipes"
 set :application, "movie_app"
 set :rails_env, "production"
 
-set :branch, "master"
+set :branch, "web"
 set :repository,  "git://github.com/StevenKo/movie_app.git"
 set :scm, "git"
 set :user, "apps" # 一個伺服器上的帳戶用來放你的應用程式，不需要有sudo權限，但是需要有權限可以讀取Git repository拿到原始碼
@@ -16,9 +16,13 @@ set :deploy_to, "/home/apps/movie_app"
 set :deploy_via, :remote_cache
 set :use_sudo, false
 
-role :web, "106.187.101.252"
-role :app, "106.187.101.252"
-role :db,  "106.187.101.252", :primary => true
+role :web, "106.187.102.146"
+role :app, "106.187.102.146"
+role :db,  "106.187.102.146", :primary => true
+
+set :default_environment, {
+    'PATH' => "/opt/ruby/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games"
+}
 
 
 namespace :deploy do
