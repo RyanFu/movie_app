@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121005080146) do
+ActiveRecord::Schema.define(:version => 20121009142342) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(:version => 20121005080146) do
     t.integer  "theater_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "timetable"
   end
 
   add_index "movie_theater_ships", ["movie_id"], :name => "index_movie_theater_ships_on_movie_id"
@@ -108,6 +109,14 @@ ActiveRecord::Schema.define(:version => 20121005080146) do
   end
 
   add_index "movies", ["youtube_video_id"], :name => "index_movies_on_youtube_video_id"
+
+  create_table "news", :force => true do |t|
+    t.string   "title"
+    t.string   "content"
+    t.string   "link"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "ptt_data", :force => true do |t|
     t.string   "ptt_user_id"
