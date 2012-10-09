@@ -33,6 +33,11 @@ namespace :crawl do
   end
 
   task :set_first_second_round_movie => :environment do
+    Movie.all.each do |m|
+      m.is_first_round = false
+      m.is_second_round = false
+      m.save
+    end 
     d = DataCrawler.new
     d.get_first_round_movie
     d.get_second_round_movie
