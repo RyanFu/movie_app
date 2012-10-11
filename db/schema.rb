@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121011064834) do
+ActiveRecord::Schema.define(:version => 20121011073752) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -115,10 +115,11 @@ ActiveRecord::Schema.define(:version => 20121011064834) do
     t.string   "title"
     t.string   "content"
     t.string   "link"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.string   "picture_url"
     t.integer  "news_type"
+    t.string   "thumbnail_url"
   end
 
   create_table "ptt_data", :force => true do |t|
