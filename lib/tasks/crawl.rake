@@ -4,31 +4,23 @@ namespace :crawl do
   desc "Craw Website Item"
 
   task :fetch_theater => :environment do
-     urls ={
-        "基隆"=>"http://www.atmovies.com.tw/showtime/area_a01.html",
-        "台北"=>"http://www.atmovies.com.tw/showtime/area_a02.html",
-        "桃園"=>"http://www.atmovies.com.tw/showtime/area_a03.html",
-        "新竹"=>"http://www.atmovies.com.tw/showtime/area_a35.html",
-        "苗粟"=>"http://www.atmovies.com.tw/showtime/area_a37.html",
-        "台中"=>"http://www.atmovies.com.tw/showtime/area_a04.html",
-        "彰化"=>"http://www.atmovies.com.tw/showtime/area_a47.html",
-        "雲林"=>"http://www.atmovies.com.tw/showtime/area_a45.html",
-        "南投"=>"http://www.atmovies.com.tw/showtime/area_a49.html",
-        "嘉義"=>"http://www.atmovies.com.tw/showtime/area_a05.html",
-        "台南"=>"http://www.atmovies.com.tw/showtime/area_a06.html",
-        "高雄"=>"http://www.atmovies.com.tw/showtime/area_a07.html",
-        "宜蘭"=>"http://www.atmovies.com.tw/showtime/area_a39.html",
-        "花蓮"=>"http://www.atmovies.com.tw/showtime/area_a38.html",
-        "台東"=>"http://www.atmovies.com.tw/showtime/area_a89.html",
-        "屏東"=>"http://www.atmovies.com.tw/showtime/area_a87.html",
-        "澎湖"=>"http://www.atmovies.com.tw/showtime/area_a69.html"
-     }
+
+    Area.all.each do |a|
+      a.delete
+    end
+    
+    Theater.all.each do |t|
+      t.delete
+    end
+
+     url = "http://tw.movies.yahoo.com/theater_list.html"
+     area_values = [0,3,18,16,1,20,15,2,22,19,13,21,10,17,11,12,9,14,23]
+
      t = TheaterCrawler.new
-     urls.each do |local, url|
-       t.fetch url
-       t.parse_location
-       t.parse_theater
-       t.save_to_theater
+     area_values.each do |area_value|
+      option = { 'area' => area_value }
+      t.post_fetch(url,option)
+      t.parse_theater
      end
   end
 
@@ -53,36 +45,46 @@ namespace :crawl do
     crawler.parse_box_office
   end
 
-  task :build_movie_theater_relation => :environment do
+  task :parse_movie_time_and_theater_ship => :environment do
     MovieTheaterShip.all.each do |m|
       m.delete
     end
 
-    urls ={
-        "基隆"=>"http://www.atmovies.com.tw/showtime/area_a01.html",
-        "台北"=>"http://www.atmovies.com.tw/showtime/area_a02.html",
-        "桃園"=>"http://www.atmovies.com.tw/showtime/area_a03.html",
-        "新竹"=>"http://www.atmovies.com.tw/showtime/area_a35.html",
-        "苗粟"=>"http://www.atmovies.com.tw/showtime/area_a37.html",
-        "台中"=>"http://www.atmovies.com.tw/showtime/area_a04.html",
-        "彰化"=>"http://www.atmovies.com.tw/showtime/area_a47.html",
-        "雲林"=>"http://www.atmovies.com.tw/showtime/area_a45.html",
-        "南投"=>"http://www.atmovies.com.tw/showtime/area_a49.html",
-        "嘉義"=>"http://www.atmovies.com.tw/showtime/area_a05.html",
-        "台南"=>"http://www.atmovies.com.tw/showtime/area_a06.html",
-        "高雄"=>"http://www.atmovies.com.tw/showtime/area_a07.html",
-        "宜蘭"=>"http://www.atmovies.com.tw/showtime/area_a39.html",
-        "花蓮"=>"http://www.atmovies.com.tw/showtime/area_a38.html",
-        "台東"=>"http://www.atmovies.com.tw/showtime/area_a89.html",
-        "屏東"=>"http://www.atmovies.com.tw/showtime/area_a87.html",
-        "澎湖"=>"http://www.atmovies.com.tw/showtime/area_a69.html"
-     }
-     t = MovieTheaterShipCrawl.new
-     urls.each do |local, url|
-       t.fetch url
-       t.parse_first_round_movie
-       t.parse_second_round_movie
-     end
+    url = "http://tw.movies.yahoo.com/theater_list.html"
+    area_values = [0,3,18,16,1,20,15,2,22,19,13,21,10,17,11,12,9,14,23]
+
+    t = MovieTheaterShipCrawl.new
+    area_values.each do |area_value|
+      option = { 'area' => area_value }
+      t.post_fetch(url,option)
+      t.parse_theater_movie
+    end
+
+    # urls ={
+    #     "基隆"=>"http://www.atmovies.com.tw/showtime/area_a01.html",
+    #     "台北"=>"http://www.atmovies.com.tw/showtime/area_a02.html",
+    #     "桃園"=>"http://www.atmovies.com.tw/showtime/area_a03.html",
+    #     "新竹"=>"http://www.atmovies.com.tw/showtime/area_a35.html",
+    #     "苗粟"=>"http://www.atmovies.com.tw/showtime/area_a37.html",
+    #     "台中"=>"http://www.atmovies.com.tw/showtime/area_a04.html",
+    #     "彰化"=>"http://www.atmovies.com.tw/showtime/area_a47.html",
+    #     "雲林"=>"http://www.atmovies.com.tw/showtime/area_a45.html",
+    #     "南投"=>"http://www.atmovies.com.tw/showtime/area_a49.html",
+    #     "嘉義"=>"http://www.atmovies.com.tw/showtime/area_a05.html",
+    #     "台南"=>"http://www.atmovies.com.tw/showtime/area_a06.html",
+    #     "高雄"=>"http://www.atmovies.com.tw/showtime/area_a07.html",
+    #     "宜蘭"=>"http://www.atmovies.com.tw/showtime/area_a39.html",
+    #     "花蓮"=>"http://www.atmovies.com.tw/showtime/area_a38.html",
+    #     "台東"=>"http://www.atmovies.com.tw/showtime/area_a89.html",
+    #     "屏東"=>"http://www.atmovies.com.tw/showtime/area_a87.html",
+    #     "澎湖"=>"http://www.atmovies.com.tw/showtime/area_a69.html"
+    #  }
+    #  t = MovieTheaterShipCrawl.new
+    #  urls.each do |local, url|
+    #    t.fetch url
+    #    t.parse_first_round_movie
+    #    t.parse_second_round_movie
+    #  end
   end
 
   task :reset_running_time => :environment do
