@@ -29,7 +29,6 @@ class PttDataTransfer
         title = data.title
         link = "www.ptt.cc" + data.link
         
-        score = 0
         movie_id = @movie_id
 
         #puts "ptt_user_id: " + ptt_user_id
