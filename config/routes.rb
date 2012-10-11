@@ -34,6 +34,7 @@ MovieApp::Application.routes.draw do
       end
       resources :comments,:only => [:create, :destroy]
       resources :streams,:only => [:index]
+      resources :news, :only => [:index]
     end
   end
 
