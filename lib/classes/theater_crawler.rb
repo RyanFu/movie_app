@@ -4,21 +4,35 @@ class TheaterCrawler
   
   attr_accessor :names, :location
 
-  def parse_location
-    @location = @page_html.css("#title").text.strip
-    puts @location
+  def post_fetch url, option
+    @page_url = url
+    url = URI.parse(url)
+    resp, data = Net::HTTP.post_form(url, option)
+    @page_html = Nokogiri::HTML(resp.body)
   end
 
   def parse_theater
-    @names = @page_html.css(".only_text .row .col-1").text.strip.gsub("\t","").gsub("\n","").split("\r\r\r\r")
-    puts @names
+
+    nodes = @page_html.css(".group")
+
+    nodes.each do |node|
+      area_node = node.css(".hd")
+      area = Area.new
+      area.name = area_node.text.strip
+      area.save
+      
+      theaters_node = node.css("tbody tr")
+      theaters_node.each do |theater_node|
+        tds = theater_node.css("td")
+        theater = Theater.new
+        theater.name = tds[0].text.strip
+        theater.location = tds[1].text.strip
+        theater.area = area
+        theater.save
+      end
+
+    end
+
   end
 
-  def save_to_theater
-    @names.each do |name|
-      theater = Theater.new(:name => name, :location => @location)
-      theater.save
-    end
-  end
-  
 end

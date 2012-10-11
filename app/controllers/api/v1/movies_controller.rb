@@ -39,4 +39,9 @@ class Api::V1::MoviesController < Api::ApiController
   def all
     @movies = Movie.all
   end
+
+  def timetable
+    movie = Movie.find(params[:id])
+    @ships = MovieTheaterShip.includes(:theater).find_all_by_movie_id(movie.id)
+  end
 end
