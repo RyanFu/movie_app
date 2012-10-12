@@ -7,7 +7,7 @@ class RecordObserver < ActiveRecord::Observer
 
     if record.score == 0
        m = record.movie
-       m.good_counts = m.good_count + 1
+       m.good_count = m.good_count + 1
        m.save
     end
   end
@@ -15,7 +15,7 @@ class RecordObserver < ActiveRecord::Observer
   def after_destroy(record)
     if record.score == 0
        m = record.movie
-       m.good_counts = m.good_count - 1
+       m.good_count = m.good_count - 1
        m.save
     end
   end
