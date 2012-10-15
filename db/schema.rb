@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121012081415) do
+ActiveRecord::Schema.define(:version => 20121015122635) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -82,8 +82,10 @@ ActiveRecord::Schema.define(:version => 20121012081415) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "timetable"
+    t.integer  "area_id"
   end
 
+  add_index "movie_theater_ships", ["area_id"], :name => "index_movie_theater_ships_on_area_id"
   add_index "movie_theater_ships", ["movie_id"], :name => "index_movie_theater_ships_on_movie_id"
   add_index "movie_theater_ships", ["theater_id"], :name => "index_movie_theater_ships_on_theater_id"
 
