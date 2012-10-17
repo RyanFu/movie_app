@@ -5,24 +5,18 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      %a.brand{:href => "#"} Movie_App
+      = link_to "Monster",root_path, :class => "brand"    
       .nav-collapse
         %ul.nav
-          %li.active
-            = link_to "首輪電影","#"
           %li
-            = link_to "二輪電影","#"
+            = link_to "user_name", user_path(22)
           %li
-            = link_to "本周新片","#"
+            = link_to "電影資訊", movies_path
           %li
-            = link_to "近期上映","#"
+            = link_to "電影報", news_index_path
           %li
-            = link_to "票房排行","#"
-          %li
-            = link_to "電視頻道","#"
+            = link_to "社群動態","#"
         .navbar-search
           = form_tag "#", :method => :post do
             = text_field_tag "search","",:class => "search-query span3", :placeholder => "Search"
             .icon-search
-        %p.navbar-text.pull-right
-          %a{:href => "#"} username

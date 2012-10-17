@@ -12,3 +12,13 @@
 .movie-container{
 	@include clearfix;
 }
+
+
+#content {
+    background: url("http://moon.cf2.letterboxd.com/assets/resized/sm/upload/l1/tl/2p/l9/alien-70-1200-1200-675-675-crop-000000.jpg") repeat-x scroll center top #14181C;
+    padding: 30px 0 40px;
+}
+
+.movie_content{
+	padding-top: 390px;
+}

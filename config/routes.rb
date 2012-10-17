@@ -9,7 +9,9 @@ MovieApp::Application.routes.draw do
   
   resources :users
   resources :movies
-  root :to => 'welcome#index'
+  resources :people
+  resources :news
+  root :to => 'movies#index'
   
   # routes for api
   namespace :api do

@@ -1,0 +1,20 @@
+本周最受歡迎電影
+%br
+
+%h3.group-divider
+  熱門電影
+  %a{:href => "#"} 更多 »
+.movie-container
+  =render :partial => "_partials/movies_container", :locals => {:movies => @hot_movies}
+%h3.group-divider
+  首輪電影
+  %a{:href => "#"} 更多 »
+.movie-container
+  =render :partial => "_partials/movies_container", :locals => {:movies => @first_round_movies}
+%h3.group-divider
+  二輪電影
+  %a{:href => "#"} 更多 »
+.movie-container
+  =render :partial => "_partials/movies_container", :locals => {:movies => @second_round_movies}
+
+=render :partial => "_partials/facebook_like_box"

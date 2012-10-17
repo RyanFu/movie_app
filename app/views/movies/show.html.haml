@@ -1,92 +1,33 @@
-.span9
-  .movie-show.well
-    .movie-img
-      = link_to image_tag(@movie.poster_url), "#"
-    .movie-title
-      %h3= @movie.name
-      %h3= @movie.name_en
-    .movie-buttons
-      = button_to "評論","#", :class => "btn btn-success"
-      = button_to "時刻表","#", :class => "btn btn-info"
-      = button_to "訂票","#", :class => "btn btn-info"
-  .movie-reviews
-    .span6
-      .well
-        好評
-        %hr
-        %hr
-        %hr
-        %hr
-        %hr
-        %hr
-        %hr
-        %hr
-        %hr
-        %hr
-        %hr
-        %hr
-      .well
-        差評
-        %hr
-        %hr
-        %hr
-        %hr
-        %hr
-        %hr
-        %hr
-        %hr
-        %hr
-        %hr
-        %hr
-        %hr
-    .span6
-      .well
-        精彩評論
-        =render :partial => "_partials/movie_user_review",:locals => {:records => @records}
+#content
+  .movie_content
+    .span3
+      .movie-show.well
+        .movie-img
+          = link_to image_tag(@movie.poster_url), "#"
+        .movie-title
+          %h3= @movie.name
+          %h3= @movie.name_en
+        .movie-buttons
+          = button_to "評論","#", :class => "btn btn-success"
+          = button_to "時刻表","#", :class => "btn btn-info"
+          = button_to "訂票","#", :class => "btn btn-info"
+    .span9
+      .movie-reviews
+        .well
+          好評
+          %hr
+          %hr
+          %hr
+          %hr
+          %hr
+          %hr
+          %hr
+          %hr
+          %hr
+          %hr
+          %hr
+          %hr
+
      
 
-.span3
-  .well
-    左邊欄
-    %hr
-    %hr
-    %hr
-    %hr
-    %hr
-    %hr
-    %hr
-    %hr
-    %hr
-    %hr
-    %hr
-    %hr
-    %hr
-    %hr
-    %hr
-    %hr
-    %hr
-    %hr
-    %hr
-    %hr
-    %hr
-    %hr
-    %hr
-    %hr
-    %hr
-    %hr
-    %hr
-    %hr
-    %hr
-    %hr
-    %hr
-    %hr
-    %hr
-    %hr
-    %hr
-    %hr
-    %hr
-    %hr
-    %hr
-    %hr
-    %hr
-    %hr
+
