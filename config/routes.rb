@@ -3,6 +3,8 @@ MovieApp::Application.routes.draw do
   devise_for :users
 
   namespace :api do
+
+    get 'promotion' => 'api#promotion'
     namespace :v1 do
       resources :users,:only => [:create, :update] do
         collection do

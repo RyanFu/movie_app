@@ -9,4 +9,14 @@ class Api::ApiController  < ActionController::Base
     end
   end
 
+  def promotion
+    promotion = {:picture_link => nil, 
+                 :link => nil,
+                 :tilte => nil,
+                 :description => nil
+    }
+
+    render :json => promotion.to_json
+  end
+
 end
