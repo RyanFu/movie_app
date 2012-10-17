@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-
+  extend OmniauthCallbacks
   has_many :records
   has_many :comments
   has_many :streams
@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable,:validatable
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible  :email, :password, :password_confirmation, :remember_me, :fb_id, :fb_token
@@ -61,5 +61,12 @@ class User < ActiveRecord::Base
 
   def friends
     direct_friends 
+  end
+  
+  has_many :authorizations
+  def bind_service(response)
+    provider = response["provider"]
+    uid = response["uid"]
+    authorizations.create(:provider => provider , :uid => uid ) 
   end
 end

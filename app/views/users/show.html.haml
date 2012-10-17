@@ -1,26 +1,20 @@
 .span12.user-profile
   = link_to image_tag(user_avatar(@user.fb_id)), user_path(@user)
   = @user.name
-  = @user.sex
+  
+  電影打卡
+  = @user.records.size
+  跟隨中
+  = @user.friends.size
+  跟隨者
+  = @user.friends.size
+
+  %br
+  %br
   .movie-collection
-    .span6
-      .well
-        電影櫃
-        %hr
-        %hr
-        %hr
-        %hr
-        %hr
-        %hr
-  .friend-stream
-    .span6
-      .well
-        朋友動態
-        %hr
-        %hr
-        %hr
-        %hr
-        %hr
-        %hr
+    .well
+      電影收藏
+      .movie-container
+        =render :partial => "_partials/records_container", :locals => {:records => @records}
 
 

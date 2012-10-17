@@ -1,0 +1,14 @@
+熱門使用者
+%br
+- @people.each do |person|
+  =image_tag "http://graph.facebook.com/#{person.fb_id}/picture?type=large"
+
+.steam-content
+  - @streams.each do |stream|
+    .stream-block
+      - if stream.stream_type == 1
+        = stream.movie.name
+        = stream.record.comment
+      - else
+        = stream.movie.name
+        = stream.comment.text

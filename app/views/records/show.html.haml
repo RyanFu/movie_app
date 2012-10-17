@@ -1,0 +1,13 @@
+.span3
+  = image_tag @record.movie.poster_url
+  %br
+  = @record.movie.name
+  = button_to "預告片","#", :class => "btn btn-danger"
+  = button_to "所有評論","#", :class => "btn btn-danger"
+.span9
+  = link_to image_tag(user_avatar(@record.user.fb_id)), user_path(@record.user)
+  = @record.user.name
+  %hr
+  評論：
+  = @record.comment
+  = fb_comments("http://example.com")

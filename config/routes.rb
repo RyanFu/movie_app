@@ -11,6 +11,7 @@ MovieApp::Application.routes.draw do
   resources :movies
   resources :people
   resources :news
+  resources :records
   root :to => 'movies#index'
   
   # routes for api

@@ -1,2 +1,9 @@
 - @bloggers.each do |blogger|
- = image_tag "http://graph.facebook.com/#{blogger.fb_id}/picture?type=large"
+  =image_tag "http://graph.facebook.com/#{blogger.fb_id}/picture?type=large"
+
+.news-content
+- @news.each do |each_news|
+  = link_to news_path(each_news) do
+    .news-block
+      = image_tag each_news.thumbnail_url
+      = each_news.title

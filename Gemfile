@@ -73,8 +73,12 @@ gem 'haml'
 gem 'rails-i18n'
 
 # 多媒體處理
-# gem 'carrierwave'
-# gem 'rmagick'
-# gem 'mini_magick'
-# gem 'flash_cookie_session', :git => 'git://github.com/trevorturk/flash_cookie_session.git'
-# gem 'plupload-rails'
+gem 'carrierwave'
+gem 'rmagick'
+gem 'mini_magick'
+gem 'flash_cookie_session', :git => 'git://github.com/trevorturk/flash_cookie_session.git'
+gem 'plupload-rails'
+
+
+#facebook 
+gem 'open_graph_helper'
