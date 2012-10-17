@@ -43,9 +43,13 @@ MovieApp::Application.routes.draw do
           get 'comming'
           get 'this_week'
         end 
+        member do
+          get 'timetable'
+        end
       end
       resources :comments,:only => [:create, :destroy]
       resources :streams,:only => [:index]
+      resources :news, :only => [:index]
     end
   end
 

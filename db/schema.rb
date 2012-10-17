@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120921090417) do
+ActiveRecord::Schema.define(:version => 20121015122635) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -81,8 +81,11 @@ ActiveRecord::Schema.define(:version => 20120921090417) do
     t.integer  "theater_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "timetable"
+    t.integer  "area_id"
   end
 
+  add_index "movie_theater_ships", ["area_id"], :name => "index_movie_theater_ships_on_area_id"
   add_index "movie_theater_ships", ["movie_id"], :name => "index_movie_theater_ships_on_movie_id"
   add_index "movie_theater_ships", ["theater_id"], :name => "index_movie_theater_ships_on_theater_id"
 
@@ -105,9 +108,40 @@ ActiveRecord::Schema.define(:version => 20120921090417) do
     t.boolean  "is_comming",       :default => false
     t.boolean  "is_this_week",     :default => false
     t.integer  "records_count",    :default => 0
+    t.integer  "good_count",       :default => 0
   end
 
   add_index "movies", ["youtube_video_id"], :name => "index_movies_on_youtube_video_id"
+
+  create_table "news", :force => true do |t|
+    t.string   "title"
+    t.string   "content"
+    t.string   "link"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.string   "picture_url"
+    t.integer  "news_type"
+    t.string   "thumbnail_url"
+  end
+
+  create_table "ptt_data", :force => true do |t|
+    t.string   "ptt_user_id"
+    t.string   "title"
+    t.string   "link"
+    t.string   "content"
+    t.integer  "score"
+    t.integer  "movie_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "ptt_raws", :force => true do |t|
+    t.string   "ptt_user_id"
+    t.string   "title"
+    t.string   "link"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "records", :force => true do |t|
     t.string   "comment"
@@ -147,6 +181,7 @@ ActiveRecord::Schema.define(:version => 20120921090417) do
     t.datetime "created_at",                         :null => false
     t.datetime "updated_at",                         :null => false
     t.integer  "area_id"
+    t.string   "buy_link"
   end
 
   add_index "theaters", ["area_id"], :name => "index_theaters_on_area_id"

@@ -84,8 +84,9 @@ class MovieCrawler
     #   :actors => @movie_actors,
     #   :directors => @movie_directors
     # )
-    if Movie.find_by_name(@movie_name)
-      movie = Movie.find_by_name(@movie_name) 
+    if Movie.find_by_name(@movie_name) || Movie.find_by_name_en(@movie_name_en)
+      movie = Movie.find_by_name(@movie_name)
+      movie = Movie.find_by_name_en(@movie_name_en) unless movie
       option.each do |key, value|
         movie[key] = value
       end

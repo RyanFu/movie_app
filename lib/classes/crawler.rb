@@ -7,8 +7,14 @@ module Crawler
   
   def fetch url
     @page_url = url
-    @page_html = get_page(@page_url)
-    
+    @page_html = get_page(@page_url)   
+  end
+
+  def post_fetch url, option
+    @page_url = url
+    url = URI.parse(url)
+    resp, data = Net::HTTP.post_form(url, option)
+    @page_html = Nokogiri::HTML(resp.body)
   end
   
   def get_page url
