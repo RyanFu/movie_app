@@ -22,3 +22,18 @@
 .movie_content{
 	padding-top: 390px;
 }
+
+.posters{
+  height: 370px;
+  min-width: 100%;
+  overflow: hidden;
+    
+}
+
+.poster{
+  float: left;
+  img{
+    height: 370px;
+    width: 255px;
+  }
+}
