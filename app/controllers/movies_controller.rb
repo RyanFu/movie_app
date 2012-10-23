@@ -1,7 +1,7 @@
 class MoviesController < ApplicationController
   def show
     @movie = Movie.find(params[:id])
-    @records = @movie.records
+    @records = Record.includes(:user).movie_record(@movie)
   end
 
   def index

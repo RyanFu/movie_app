@@ -4,30 +4,50 @@
       .movie-show.well
         .movie-img
           = link_to image_tag(@movie.poster_url), "#"
-        .movie-title
-          %h3= @movie.name
-          %h3= @movie.name_en
         .movie-buttons
-          = button_to "評論","#", :class => "btn btn-success"
-          = button_to "時刻表","#", :class => "btn btn-info"
-          = button_to "訂票","#", :class => "btn btn-info"
+          = button_to "預告片","test", :class => "btn btn-danger", "data-toggle" => "modal", 'data-target' => "#myModal"
+        %span.record-count
+          %i.icon-map-marker
+          = @movie.records.size
+        %span.like-count
+          %i.icon-thumbs-up
+          = @movie.good_count
     .span9
       .movie-reviews
         .well
-          好評
-          %hr
-          %hr
-          %hr
-          %hr
-          %hr
-          %hr
-          %hr
-          %hr
-          %hr
-          %hr
-          %hr
-          %hr
-
+          .movie-title
+            %h3= @movie.name
+            %h3= @movie.name_en
+          .movie-intro
+            = @movie.intro
+          = button_to "評論","#", :class => "btn btn-success"
+          = button_to "時刻表","#", :class => "btn btn-info"
+          = button_to "訂票","#", :class => "btn btn-info"
+        .well
+          熱門評論
+          .records
+            - @records.each do |r|
+              .record
+                = image_tag (user_avatar(r.user.fb_id)), :class => "img-polaroid" if r.user
+                = r.user.name
+                = r.comment
+                %span.like-count
+                  %i.icon-thumbs-up
+                  = r.love_count
+        
+  #myModal.modal.fade{:style => "display: none; width:auto;"}
+    .modal-header
+    %button.close{"data-dismiss" => "modal", :type => "button"} ×
+    太好笑了
+    .modal-body
+      %object{:style => "height: 390px; width: 640px"}
+        %param{:name => "movie", :value => "http://www.youtube.com/v/fRJ5vcXRD7Y?version=3&feature=player_detailpage"}
+          %param{:name => "allowFullScreen", :value => "true"}
+            %param{:name => "allowScriptAccess", :value => "always"}
+              %embed{:allowScriptAccess => "always", :allowfullscreen => "true", :height => "360", :src => "http://www.youtube.com/v/fRJ5vcXRD7Y?version=3&feature=player_detailpage", :type => "application/x-shockwave-flash", :width => "640"}/
+    .modal-footer
+      %p
+      .fb-like{"data-layout" => "button_count", "data-send" => "false", "data-show-faces" => "false", "data-width" => "30"}
      
 
 
