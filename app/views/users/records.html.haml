@@ -1,0 +1,11 @@
+.span12 
+  = render :partial => "user_profile", :locals => {:user => @user}
+  %br
+
+  .movie-collection
+    .well
+      電影收藏
+      .movie-container
+        =render :partial => "_partials/records_container", :locals => {:records => @records}
+
+

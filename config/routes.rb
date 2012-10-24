@@ -7,7 +7,13 @@ MovieApp::Application.routes.draw do
     get "logout" => "devise/sessions#destroy"
   end
   
-  resources :users
+  resources :users do
+    member do
+      get :records
+      get :following
+      get :follower
+    end
+  end
   resources :movies
   resources :people
   resources :news

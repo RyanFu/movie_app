@@ -44,3 +44,16 @@
 
 
 =render :partial => "_partials/facebook_like_box"
+
+#myCommentModal.modal.fade{:style => "display: none; width:auto;"}
+  .modal-header
+  %button.close{"data-dismiss" => "modal", :type => "button"} ×
+  電影評論
+  .modal-body
+    = simple_form_for Record.new do |f|
+      = f.input :score, :as => :radio, :collection => [["好看",0],["普通",1],["難看",2]]
+      = f.input :comment
+      = f.button :submit
+  .modal-footer
+    %p
+    .fb-like{"data-layout" => "button_count", "data-send" => "false", "data-show-faces" => "false", "data-width" => "30"}

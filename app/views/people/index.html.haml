@@ -1,14 +1,44 @@
 熱門使用者
 %br
-- @people.each do |person|
-  =image_tag "http://graph.facebook.com/#{person.fb_id}/picture?type=large"
+#myCarousel.carousel.slide
+  .carousel-inner
+    - @top_users_array.each_with_index do |array,index|
+      - if index == 1
+        .item.posters.active
+          %ul
+          - array.each do |person|
+            .poster
+              =image_tag "http://graph.facebook.com/#{person.fb_id}/picture?type=large"
+      -else
+        .item.posters
+          %ul
+          - array.each do |person|
+            .poster
+              =image_tag "http://graph.facebook.com/#{person.fb_id}/picture?type=large"
+  %a.left.carousel-control{"data-slide" => "prev", :href => "#myCarousel"} ‹
+  %a.right.carousel-control{"data-slide" => "next", :href => "#myCarousel"} ›
 
-.steam-content
-  - @streams.each do |stream|
-    .stream-block
-      - if stream.stream_type == 1
-        = stream.movie.name
-        = stream.record.comment
-      - else
-        = stream.movie.name
-        = stream.comment.text
+.tabbable
+  %ul.nav.nav-tabs
+    %li.active
+      %a{"data-toggle" => "tab", :href => "#1"} 全部動態
+    %li
+      %a{"data-toggle" => "tab", :href => "#2"} 朋友動態
+  .tab-content
+    #1.tab-pane.active
+      .steam-content
+        - @streams.each do |stream|
+          .stream-block
+            - if stream.stream_type == 1
+              = image_tag (user_avatar(stream.stream_user.fb_id)), :class => "img-polaroid"
+              = stream.movie.name
+              = stream.record.comment
+            - else
+              = image_tag (user_avatar(stream.user.fb_id)), :class => "img-polaroid"
+              = stream.movie.name
+              = stream.comment.text
+    #2.tab-pane
+      .movie-container
+        test
+
+

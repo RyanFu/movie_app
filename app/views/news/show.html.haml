@@ -1,8 +1,35 @@
-.span3 作者 profile
+.span3
+  .well
+    作者：
+    .user-image
+      = link_to (image_tag "http://graph.facebook.com/#{@user.fb_id}/picture?type=large"), user_path(@user)
+    電影打卡
+    = @user.records.size
+    跟隨中
+    = @user.friends.size
+    跟隨者
+    = @user.friends.size
+    %hr
+    近期文章
+    - News.limit(2).each do |each_news|
+      = link_to news_path(each_news) do
+        .news-block
+          = image_tag each_news.thumbnail_url
+          %br
+          = each_news.title
+    %hr
+    熱門文章
+    - News.limit(2).each do |each_news|
+      = link_to news_path(each_news) do
+        .news-block
+          = image_tag each_news.thumbnail_url
+          %br
+          = each_news.title
 
 .span9
   .well
     文章主題
+    = @news.text.html_safe
     %hr
     %hr
     %hr

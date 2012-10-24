@@ -28,7 +28,7 @@
           .records
             - @records.each do |r|
               .record
-                = image_tag (user_avatar(r.user.fb_id)), :class => "img-polaroid" if r.user
+                = image_tag (user_avatar(r.user.fb_id)), :class => "img-polaroid"
                 = r.user.name
                 = r.comment
                 %span.like-count

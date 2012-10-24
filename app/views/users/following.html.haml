@@ -1,0 +1,9 @@
+.span12 
+  = render :partial => "user_profile", :locals => {:user => @user}
+  %br
+
+  .people
+    .well
+      跟隨中
+      .people-container
+        =render :partial => "people_container", :locals => {:people => @followings}

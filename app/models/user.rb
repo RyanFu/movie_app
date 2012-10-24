@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   has_many :records
   has_many :comments
   has_many :streams
+  has_many :news
   # has_many :streams_created_by_user, :foreign_key => "stream_user_id", :class => "Stream"
   
   # Include default devise modules. Others available are:
@@ -22,6 +23,9 @@ class User < ActiveRecord::Base
 
   has_many :user_love_record_ships
   has_many :love_records, :through => :user_love_record_ships, :source => :record
+
+  scope :top_user, where(["is_top_user = ? ", true ])
+  scope :blogger, where(["is_blogger = ? ", true ])
 
   def self.find_for_database_authentication(conditions={})
     self.where("fb_id = ?", conditions[:fb_id]).limit(1).first

@@ -1,0 +1,7 @@
+.user-profile
+  = link_to image_tag(user_avatar(user.fb_id)), user_path(user)
+  = user.name
+  
+  = link_to "電影打卡#{user.records.size}", records_user_path(user)
+  = link_to "跟隨中#{user.friends.size}", following_user_path(user)
+  = link_to "跟隨者#{user.friends.size}", follower_user_path(user) 

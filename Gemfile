@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.6'
+gem 'rails', '3.2.8'
 
 
 #資料庫相關
@@ -21,8 +21,8 @@ end
 gem 'jquery-rails'
 
 
-# api
-gem 'rabl'
+# # api
+# gem 'rabl'
 
 #user
 gem 'devise'
@@ -38,9 +38,9 @@ gem 'koala'
 group :test, :development do
   gem "rspec"
   gem "rspec-rails"
-  gem "factory_girl_rails"
-  gem "shoulda-matchers"
-  gem "bullet"
+  # gem "factory_girl_rails"
+  # gem "shoulda-matchers"
+  # gem "bullet"
 end
 
 gem 'capistrano'
@@ -52,7 +52,7 @@ gem 'newrelic_rpm'
 
 # 效能相關
 gem 'cells'
-gem 'sneaky-save'
+# gem 'sneaky-save'
 
 # cron table
 gem 'whenever', :require => false
@@ -82,3 +82,5 @@ gem 'plupload-rails'
 
 #facebook 
 gem 'open_graph_helper'
+
+gem "simple_form"

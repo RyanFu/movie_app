@@ -1,0 +1,14 @@
+- people.each do |person|
+  .person-block.span3
+    = link_to user_path(person),:title => "test" do
+      =image_tag "http://graph.facebook.com/#{person.fb_id}/picture?type=large"
+      %h3= person.name
+    .person-info
+      %span.view-count
+        %i.icon-eye-open
+        跟隨中
+        = person.inverse_friends.size
+      %span.like-count
+        %i.icon-thumbs-up
+        跟隨者
+        = person.direct_friends.size
