@@ -11,10 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121015122635) do
+ActiveRecord::Schema.define(:version => 20121024023921) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "authorizations", :force => true do |t|
+    t.string   "provider"
+    t.integer  "user_id"
+    t.string   "uid"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -122,7 +130,11 @@ ActiveRecord::Schema.define(:version => 20121015122635) do
     t.string   "picture_url"
     t.integer  "news_type"
     t.string   "thumbnail_url"
+    t.integer  "user_id"
+    t.text     "text"
   end
+
+  add_index "news", ["user_id"], :name => "index_news_on_user_id"
 
   create_table "ptt_data", :force => true do |t|
     t.string   "ptt_user_id"
@@ -182,6 +194,7 @@ ActiveRecord::Schema.define(:version => 20121015122635) do
     t.datetime "updated_at",                         :null => false
     t.integer  "area_id"
     t.string   "buy_link"
+    t.string   "phone"
   end
 
   add_index "theaters", ["area_id"], :name => "index_theaters_on_area_id"
@@ -207,8 +220,8 @@ ActiveRecord::Schema.define(:version => 20121015122635) do
   add_index "user_love_record_ships", ["user_id"], :name => "index_user_love_record_ships_on_user_id"
 
   create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "email",                  :default => "",    :null => false
+    t.string   "encrypted_password",     :default => "",    :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -217,16 +230,18 @@ ActiveRecord::Schema.define(:version => 20121015122635) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.string   "fb_id",                  :default => "", :null => false
+    t.string   "fb_id",                  :default => "",    :null => false
     t.string   "name"
     t.string   "sex"
     t.string   "birthday"
     t.string   "fb_token"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
     t.integer  "device_id"
     t.string   "registration_id"
     t.integer  "records_count",          :default => 0
+    t.boolean  "is_top_user",            :default => false
+    t.boolean  "is_blogger",             :default => false
   end
 
   add_index "users", ["device_id"], :name => "index_users_on_device_id"

@@ -26,7 +26,8 @@ class TheaterCrawler
         tds = theater_node.css("td")
         theater = Theater.new
         theater.name = tds[0].text.strip
-        theater.location = tds[1].text.strip
+        theater.location = tds[1].children[0].text.strip
+        theater.phone = tds[1].children[1].text.strip
         theater.area = area
         theater.save
       end

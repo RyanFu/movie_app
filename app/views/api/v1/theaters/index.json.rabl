@@ -1,2 +1,2 @@
 collection @theaters
-attributes :id, :name, :location
+attributes :id, :name, :location, :phone
