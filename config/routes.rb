@@ -37,6 +37,11 @@ MovieApp::Application.routes.draw do
           get 'timetable'
         end
       end
+      resources :channels, :only => [:index] do
+        member do
+          get 'channel_time'
+        end
+      end
       resources :comments,:only => [:create, :destroy]
       resources :streams,:only => [:index]
       resources :news, :only => [:index]

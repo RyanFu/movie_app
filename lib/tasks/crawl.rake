@@ -3,6 +3,34 @@ namespace :crawl do
 
   desc "Craw Website Item"
 
+  task :fetch_channel => :environment do
+    
+    ChannelTime.all.each do |ct|
+      ct.delete
+    end
+
+
+    dates = []
+    (0..2).each do |i|
+      dates << Time.now + i.days
+    end
+
+    dates.map{|date| date.strftime "%Y/%m/%d"}
+    # dates = ["2012/10/24","2012/10/25","2012/10/26"]
+
+    dates.each do |date|
+      option = { 'date'=> date }
+      Channel.all.each do |channel|
+        url = channel.crawl_link
+        mtcrawl = MovieTvCrawler.new
+        mtcrawl.post_fetch(url,option)
+        mtcrawl.parse_date
+        mtcrawl.parse_time
+        mtcrawl.save channel
+      end
+    end
+  end
+
   task :fetch_theater => :environment do
 
     Area.all.each do |a|
