@@ -48,4 +48,9 @@ class Api::V1::MoviesController < Api::ApiController
       @ships = MovieTheaterShip.includes(:theater,:area).find_all_by_movie_id(movie.id)
     end
   end
+
+  def first_second_comming_hot
+    movies = Movie.first_round_second_round_hot_comming
+    render :json => movies.to_json
+  end
 end
