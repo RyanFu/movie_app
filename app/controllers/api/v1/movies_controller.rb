@@ -50,7 +50,30 @@ class Api::V1::MoviesController < Api::ApiController
   end
 
   def first_second_comming_hot
-    movies = Movie.first_round_second_round_hot_comming
+    movies = Movie.first_round_second_round_hot_comming_this_week
     render :json => movies.to_json
+  end
+
+  def first_second_comming_hot_update
+    @movies_first = Movie.select('id').first_round
+    @movies_second = Movie.select('id').second_round
+    @movies_commig = Movie.select('id').comming
+    @movies_hot = Movie.select('id').hot
+    @movies_this_week = Movie.select('id').this_week
+    return_object = {}
+    return_object["first_round"] = @movies_first
+    return_object["movies_second"] = @movies_second
+    return_object["movies_commig"] = @movies_commig
+    return_object["movies_hot"] = @movies_hot
+    return_object["movies_this_week"] = @movies_this_week
+    # return_object["new_movie"] = Movie.where(["created_at > ?",Time.parse("2012/10/13")])
+    render :json => return_object.to_json
+  end
+
+  def movies_info
+    movies_id = params[:movies_id]
+    movies_id_array = movies_id.split(",")
+    @movies = Movie.select('id,name,name_en,intro,poster_url,release_date,running_time,level_url,actors,actors,is_first_round,is_second_round,is_hot,youtube_video_id,is_comming,is_this_week').where(['id in (?)', movies_id_array])
+    render :json => @movies.to_json
   end
 end

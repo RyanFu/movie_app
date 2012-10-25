@@ -64,6 +64,12 @@ namespace :crawl do
   end
 
   task :build_movie_box_office_relation => :environment do
+
+    Movie.hot.each do |m|
+      m.is_hot = true
+      m.save
+    end
+
     MovieBoxOfficeShip.all.each do |m|
       m.delete
     end
@@ -71,6 +77,11 @@ namespace :crawl do
     crawler.fetch
     crawler.parse_first_movie
     crawler.parse_box_office
+
+    MovieBoxOfficeShip.hot_movies.each do |m|
+      m.is_hot = true
+      m.save
+    end
   end
 
   task :parse_movie_time_and_theater_ship => :environment do
