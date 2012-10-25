@@ -22,6 +22,8 @@ MovieApp::Application.routes.draw do
   
   # routes for api
   namespace :api do
+
+    get 'promotion' => 'api#promotion'
     namespace :v1 do
       resources :users,:only => [:create, :update] do
         collection do
@@ -49,9 +51,15 @@ MovieApp::Application.routes.draw do
           get 'all'
           get 'comming'
           get 'this_week'
+          get 'first_second_comming_hot'
         end 
         member do
           get 'timetable'
+        end
+      end
+      resources :channels, :only => [:index] do
+        member do
+          get 'channel_time'
         end
       end
       resources :comments,:only => [:create, :destroy]

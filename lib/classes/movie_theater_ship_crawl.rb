@@ -34,6 +34,7 @@ class MovieTheaterShipCrawl
       ship.movie= movie
       ship.theater = theater
       ship.timetable = timetable
+      ship.area = theater.area
       ship.save
 
     end

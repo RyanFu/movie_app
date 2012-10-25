@@ -42,6 +42,15 @@ class Api::V1::MoviesController < Api::ApiController
 
   def timetable
     movie = Movie.find(params[:id])
-    @ships = MovieTheaterShip.includes(:theater,:area).find_all_by_movie_id(movie.id)
+    if (params[:theater_id])
+      @ships = MovieTheaterShip.where(:movie_id => movie.id, :theater_id => params[:theater_id])
+    else
+      @ships = MovieTheaterShip.includes(:theater,:area).find_all_by_movie_id(movie.id)
+    end
+  end
+
+  def first_second_comming_hot
+    movies = Movie.first_round_second_round_hot_comming
+    render :json => movies.to_json
   end
 end
