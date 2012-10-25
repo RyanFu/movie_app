@@ -22,6 +22,8 @@ test:
   username: root
   password: "db"
 
+
+
 production:
   adapter: mysql2
   database: movie_app
