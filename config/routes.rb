@@ -33,6 +33,8 @@ MovieApp::Application.routes.draw do
           get 'comming'
           get 'this_week'
           get 'first_second_comming_hot'
+          get 'first_second_comming_hot_update'
+          get 'movies_info'
         end 
         member do
           get 'timetable'
