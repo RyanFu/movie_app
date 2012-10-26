@@ -64,7 +64,15 @@ class Api::V1::MoviesController < Api::ApiController
     return_object["first_round"] = @movies_first
     return_object["movies_second"] = @movies_second
     return_object["movies_commig"] = @movies_commig
-    return_object["movies_hot"] = @movies_hot
+    
+    ids = MovieBoxOfficeShip.all.map{|m| m.movie_id}
+    object = Array.new(ids.size)
+    (0..ids.size-1).each do |i|
+      object[i-1] = {:id => ids[i-1]}
+    end
+
+    return_object["movies_hot"] = object
+
     return_object["movies_this_week"] = @movies_this_week
     # return_object["new_movie"] = Movie.where(["created_at > ?",Time.parse("2012/10/13")])
     render :json => return_object.to_json
