@@ -76,4 +76,9 @@ class Api::V1::MoviesController < Api::ApiController
     @movies = Movie.select('id,name,name_en,intro,poster_url,release_date,running_time,level_url,actors,actors,is_first_round,is_second_round,is_hot,youtube_video_id,is_comming,is_this_week').where(['id in (?)', movies_id_array])
     render :json => @movies.to_json
   end
+
+  def update_release_date_running_time_youtube
+    movie = Movie.select('release_date,running_time,youtube_video_id').find(params[:id])
+    render :json => movie.to_json
+  end
 end

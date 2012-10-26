@@ -38,6 +38,7 @@ MovieApp::Application.routes.draw do
         end 
         member do
           get 'timetable'
+          get 'update_release_date_running_time_youtube'
         end
       end
       resources :channels, :only => [:index] do
