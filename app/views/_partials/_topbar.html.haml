@@ -20,4 +20,5 @@
           = form_tag "#", :method => :post do
             = text_field_tag "search","",:class => "search-query span3", :placeholder => "Search"
             .icon-search
-        = link_to "Facebook登入", user_omniauth_authorize_path(:facebook) , :class => "facebook-login"
+        .pull-right
+          = link_to "Facebook登入", user_omniauth_authorize_path(:facebook) , :class => "facebook-login"
