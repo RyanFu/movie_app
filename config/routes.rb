@@ -22,7 +22,11 @@ MovieApp::Application.routes.draw do
           delete 'unlove'
         end
       end
-      resources :theaters, :only => [:show, :index]
+      resources :theaters, :only => [:show, :index] do
+        member do
+          get 'get_movies_id'
+        end
+      end
       resources :areas, :only => [:index]
       resources :movies do
         collection do
