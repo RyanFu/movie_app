@@ -51,17 +51,19 @@ namespace :crawl do
       t.parse_theater
      end
   end
+  
+  ######## orginl form open eye but now not use
 
-  task :set_first_second_round_movie => :environment do
-    Movie.all.each do |m|
-      m.is_first_round = false
-      m.is_second_round = false
-      m.save
-    end 
-    d = DataCrawler.new
-    d.get_first_round_movie
-    d.get_second_round_movie
-  end
+  # task :set_first_second_round_movie => :environment do
+  #   Movie.all.each do |m|
+  #     m.is_first_round = false
+  #     m.is_second_round = false
+  #     m.save
+  #   end 
+  #   d = DataCrawler.new
+  #   d.get_first_round_movie
+  #   d.get_second_round_movie
+  # end
 
   task :build_movie_box_office_relation => :environment do
 
@@ -85,6 +87,9 @@ namespace :crawl do
   end
 
   task :parse_movie_time_and_theater_ship => :environment do
+    Movie.update_all(:is_first_round => false)
+    Movie.update_all(:is_second_round => false)
+
     MovieTheaterShip.all.each do |m|
       m.delete
     end

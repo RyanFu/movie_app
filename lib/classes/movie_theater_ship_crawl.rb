@@ -18,11 +18,16 @@ class MovieTheaterShipCrawl
 
   def parse_movie theater
     nodes = @page_html.css(".row-container .item .text")
+    is_second_round = theater.is_second_round
     nodes.each do |node|
       movie_name = node.css("h4")
       movie = Movie.find_by_name(movie_name.text.strip)
       
       puts "movie name :" + movie.name
+
+      movie.is_second_round = is_second_round if is_second_round
+      movie.is_first_round = true unless is_second_round
+      movie.save
 
       timetable_nodes = node.css(".mtcontainer span.tmt")
       times = timetable_nodes.map{|node| node.text.strip}
