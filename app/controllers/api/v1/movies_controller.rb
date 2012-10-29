@@ -86,7 +86,7 @@ class Api::V1::MoviesController < Api::ApiController
   end
 
   def update_release_date_running_time_youtube
-    movie = Movie.select('release_date,running_time,youtube_video_id').find(params[:id])
+    movie = Movie.select('release_date,running_time,youtube_video_id,level_url').find(params[:id])
     render :json => movie.to_json
   end
 end
