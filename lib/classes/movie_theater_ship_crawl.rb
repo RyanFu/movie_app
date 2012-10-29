@@ -9,7 +9,7 @@ class MovieTheaterShipCrawl
       puts "theater name: " + node.text.strip
       theater = Theater.find_by_name(node.text.strip)
 
-      next if [469,534,464,468,528].include? theater.id
+      next if [469,534,464,528].include? theater.id
       url = node[:href]
       crawl = MovieTheaterShipCrawl.new
       crawl.fetch url
