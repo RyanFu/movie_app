@@ -50,5 +50,5 @@ after "deploy:stop",    "delayed_job:stop"
 after "deploy:start",   "delayed_job:start"
 after "deploy:restart", "delayed_job:restart"
 after "deploy:update_code", "deploy:copy_config_files" # 如果將database.yml放在shared下，請打開
-after "deploy:create_symlink", "deploy:update_crontab"
+# after "deploy:create_symlink", "deploy:update_crontab"
 # after "deploy:finalize_update", "deploy:update_symlink" # 如果有實作使用者上傳檔案到public/system，請打開
