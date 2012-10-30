@@ -39,10 +39,10 @@ namespace :deploy do
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
   end
 
-  desc "Update the crontab file"
-  task :update_crontab, :roles => :db do
-    run "cd #{release_path} && bundle exec whenever --update-crontab #{application}"
-  end
+  # desc "Update the crontab file"
+  # task :update_crontab, :roles => :db do
+  #   run "cd #{release_path} && bundle exec whenever --update-crontab #{application}"
+  # end
 end
 
 
