@@ -33,13 +33,13 @@ namespace :crawl do
 
   task :fetch_theater => :environment do
 
-    Area.all.each do |a|
-      a.delete
-    end
+    # Area.all.each do |a|
+    #   a.delete
+    # end
     
-    Theater.all.each do |t|
-      t.delete
-    end
+    # Theater.all.each do |t|
+    #   t.delete
+    # end
 
      url = "http://tw.movies.yahoo.com/theater_list.html"
      area_values = [0,3,18,16,1,20,15,2,22,19,13,21,10,17,11,12,9,14,23]

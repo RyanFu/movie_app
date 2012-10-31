@@ -8,13 +8,14 @@ class MovieTheaterShipCrawl
     nodes.each do |node|
       puts "theater name: " + node.text.strip
       theater = Theater.find_by_name(node.text.strip)
-
+      puts "do not find the theater ggggggggggggggggxXXXXXXXXXXXDDDDDDDDDDD" unless theater
+      next unless theater
       next if [469,534,464,528].include? theater.id
       url = node[:href]
       crawl = MovieTheaterShipCrawl.new
       crawl.fetch url
       puts url
-      crawl.parse_movie theater
+      crawl.parse_movie(theater)
     end
   end
 
