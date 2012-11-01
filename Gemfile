@@ -4,7 +4,7 @@ gem 'rails', '3.2.6'
 
 
 #資料庫相關
-gem 'mysql2', '~> 0.3.6'
+gem 'sqlite3'
 gem 'yaml_db'
 
 
