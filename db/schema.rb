@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121024032914) do
+ActiveRecord::Schema.define(:version => 20121101034826) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -99,6 +99,7 @@ ActiveRecord::Schema.define(:version => 20121024032914) do
     t.datetime "updated_at", :null => false
     t.string   "timetable"
     t.integer  "area_id"
+    t.string   "hall_type"
   end
 
   add_index "movie_theater_ships", ["area_id"], :name => "index_movie_theater_ships_on_area_id"

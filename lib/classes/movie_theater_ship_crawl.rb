@@ -45,13 +45,21 @@ class MovieTheaterShipCrawl
       times = timetable_nodes.map{|node| node.text.strip}
       timetable = times.join("|")
       puts timetable
-
+      
+      hall_type = ""
+      hall_type_nodes = node.css(".mvtype img")
+      if hall_type_nodes.size > 0
+        hall_types = hall_type_nodes.map{|node| node[:src]}
+        hall_type = hall_types.join("***")
+        puts hall_type
+      end
 
       ship = MovieTheaterShip.new
       ship.movie= movie
       ship.theater = theater
       ship.timetable = timetable
       ship.area = theater.area
+      ship.hall_type = hall_type
       ship.save
 
     end

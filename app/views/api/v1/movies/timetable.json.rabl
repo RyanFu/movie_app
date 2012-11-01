@@ -1,5 +1,5 @@
 collection @ships
-attributes :id, :timetable
+attributes :id, :timetable,:hall_type
 
 node(:theater){ |ship| ship.theater.name }
 node(:theater_id){|ship| ship.theater.id}
