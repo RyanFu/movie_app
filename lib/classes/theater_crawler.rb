@@ -27,7 +27,9 @@ class TheaterCrawler
       theaters_node.each do |theater_node|
         tds = theater_node.css("td")
         name = tds[0].text.strip
-        theater = Theater.find_by_name(name) 
+        # theater = Theater.find_by_name(name)
+        phone = tds[1].children[1].text.strip
+        theater = Theater.find_by_phone(phone)
         theater = Theater.new unless theater
         theater.name = tds[0].text.strip
         theater.location = tds[1].children[0].text.strip

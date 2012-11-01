@@ -20,6 +20,15 @@ class MovieTheaterShipCrawl
   end
 
   def parse_movie theater
+    
+    theater_nodes = @page_html.css(".bd-container .text h4")
+    puts theater_nodes[0].text
+    phone = theater_nodes[0].text
+    phone = phone[3..phone.size]
+    theater_finded_by_phone = Theater.find_by_phone phone
+    puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$yes yes yes finded by phone number " if theater_finded_by_phone
+    theater = theater_finded_by_phone if theater_finded_by_phone
+
     nodes = @page_html.css(".row-container .item .text")
     is_second_round = theater.is_second_round
     nodes.each do |node|
