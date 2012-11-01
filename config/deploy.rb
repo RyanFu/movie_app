@@ -45,11 +45,6 @@ namespace :deploy do
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
   end
 
-  desc "Update the crontab file"
-  task :update_crontab, :roles => :db do
-    run "cd #{release_path} && bundle exec whenever --update-crontab #{application}"
-  end
-
   namespace :assets do
 
     desc <<-DESC
@@ -83,6 +78,9 @@ namespace :deploy do
   #       run_locally "rsync -vr --exclude='.DS_Store' public/assets #{user}@#{server.host}:#{shared_path}/"
   #     end
   #   end
+  # desc "Update the crontab file"
+  # task :update_crontab, :roles => :db do
+  #   run "cd #{release_path} && bundle exec whenever --update-crontab #{application}"
   # end
 end
 

@@ -41,7 +41,11 @@ MovieApp::Application.routes.draw do
           delete 'unlove'
         end
       end
-      resources :theaters, :only => [:show, :index]
+      resources :theaters, :only => [:show, :index] do
+        member do
+          get 'get_movies_id'
+        end
+      end
       resources :areas, :only => [:index]
       resources :movies do
         collection do
@@ -57,6 +61,7 @@ MovieApp::Application.routes.draw do
         end 
         member do
           get 'timetable'
+          get 'update_release_date_running_time_youtube'
         end
       end
       resources :channels, :only => [:index] do

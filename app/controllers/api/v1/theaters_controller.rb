@@ -6,4 +6,9 @@ class Api::V1::TheatersController < Api::ApiController
       @theaters = Theater.all
     end
   end
+
+  def get_movies_id
+    movies_id = MovieTheaterShip.where(:theater_id => params[:id]).map{|m| m.movie_id}
+    render :json => movies_id.to_json
+  end
 end

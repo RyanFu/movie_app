@@ -33,13 +33,13 @@ namespace :crawl do
 
   task :fetch_theater => :environment do
 
-    Area.all.each do |a|
-      a.delete
-    end
+    # Area.all.each do |a|
+    #   a.delete
+    # end
     
-    Theater.all.each do |t|
-      t.delete
-    end
+    # Theater.all.each do |t|
+    #   t.delete
+    # end
 
      url = "http://tw.movies.yahoo.com/theater_list.html"
      area_values = [0,3,18,16,1,20,15,2,22,19,13,21,10,17,11,12,9,14,23]
@@ -51,17 +51,19 @@ namespace :crawl do
       t.parse_theater
      end
   end
+  
+  ######## orginl form open eye but now not use
 
-  task :set_first_second_round_movie => :environment do
-    Movie.all.each do |m|
-      m.is_first_round = false
-      m.is_second_round = false
-      m.save
-    end 
-    d = DataCrawler.new
-    d.get_first_round_movie
-    d.get_second_round_movie
-  end
+  # task :set_first_second_round_movie => :environment do
+  #   Movie.all.each do |m|
+  #     m.is_first_round = false
+  #     m.is_second_round = false
+  #     m.save
+  #   end 
+  #   d = DataCrawler.new
+  #   d.get_first_round_movie
+  #   d.get_second_round_movie
+  # end
 
   task :build_movie_box_office_relation => :environment do
 
@@ -85,6 +87,9 @@ namespace :crawl do
   end
 
   task :parse_movie_time_and_theater_ship => :environment do
+    Movie.update_all(:is_first_round => false)
+    Movie.update_all(:is_second_round => false)
+
     MovieTheaterShip.all.each do |m|
       m.delete
     end
@@ -98,6 +103,61 @@ namespace :crawl do
       t.post_fetch(url,option)
       t.parse_theater_movie
     end
+    
+    # 日新戲院統一廳 宜蘭　之後不會再出現？
+    # url = "http://www.atmovies.com.tw/showtime/theater_t03904_a39.html"
+    theater = Theater.find(532)
+    ships  = theater.movie_theater_ships
+    ship = ships[0]
+    ship.movie_id = 4323
+    ship.save
+    #南台　台南
+    url = "http://www.atmovies.com.tw/showtime/theater_t06602_a06.html"
+    crawl = MovieTheaterShipCrawl.new
+    crawl.fetch url
+    nodes = crawl.page_html.css("#theater_showtime .showtime_block .showtime_box")
+    theater = Theater.find(540)
+    nodes.each do |node|
+      name = node.css(".film_title a").text.strip
+      movie = Movie.find_by_name(name)
+      
+      lis = node.css(".showtime_area li")
+      timetable = lis.map{|li| li.text}
+      timetable = timetable.join("|")
+      ship = MovieTheaterShip.new
+      ship.movie= movie
+      ship.theater = theater
+      ship.timetable = timetable
+      ship.area = theater.area
+      ship.save
+    end
+
+    #麻豆　台南
+    url = "http://www.atmovies.com.tw/showtime/theater_t06625_a06.html"
+    crawl = MovieTheaterShipCrawl.new
+    crawl.fetch url
+    nodes = crawl.page_html.css("#theater_showtime .showtime_block .showtime_box")
+    theater = Theater.find(512)
+    ships  = theater.movie_theater_ships
+    ships.each do |ship|
+      ship.delete
+    end
+
+    nodes.each do |node|
+      name = node.css(".film_title a").text.strip
+      movie = Movie.find_by_name(name)
+      
+      lis = node.css(".showtime_area li")
+      timetable = lis.map{|li| li.text}
+      timetable = timetable.join("|")
+      ship = MovieTheaterShip.new
+      ship.movie= movie
+      ship.theater = theater
+      ship.timetable = timetable
+      ship.area = theater.area
+      ship.save
+    end
+
 
     # urls ={
     #     "基隆"=>"http://www.atmovies.com.tw/showtime/area_a01.html",
