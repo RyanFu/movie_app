@@ -46,7 +46,6 @@ class MovieTheaterShipCrawl
       timetable = times.join("|")
       puts timetable
       
-      hall_type = ""
       hall_type_nodes = node.css(".mvtype img")
       if hall_type_nodes.size > 0
         hall_types = hall_type_nodes.map{|node| node[:src]}
