@@ -35,6 +35,7 @@ class MovieTheaterShipCrawl
       movie_name = node.css("h4")
       movie = Movie.find_by_name(movie_name.text.strip)
       
+      next unless movie
       puts "movie name :" + movie.name
 
       movie.is_second_round = is_second_round if is_second_round
