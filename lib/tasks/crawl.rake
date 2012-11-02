@@ -106,11 +106,11 @@ namespace :crawl do
     
     # 日新戲院統一廳 宜蘭　之後不會再出現？
     # url = "http://www.atmovies.com.tw/showtime/theater_t03904_a39.html"
-    theater = Theater.find(532)
-    ships  = theater.movie_theater_ships
-    ship = ships[0]
-    ship.movie_id = 4323
-    ship.save
+    # theater = Theater.find(532)
+    # ships  = theater.movie_theater_ships
+    # ship = ships[0]
+    # ship.movie_id = 4323
+    # ship.save
     #南台　台南
     url = "http://www.atmovies.com.tw/showtime/theater_t06602_a06.html"
     crawl = MovieTheaterShipCrawl.new
