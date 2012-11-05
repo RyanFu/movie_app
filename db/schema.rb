@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121101034826) do
+ActiveRecord::Schema.define(:version => 20121104024339) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -105,7 +105,7 @@ ActiveRecord::Schema.define(:version => 20121101034826) do
     t.integer  "theater_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.string   "timetable"
+    t.text     "timetable"
     t.integer  "area_id"
     t.string   "hall_type"
   end
