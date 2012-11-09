@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121104024339) do
+ActiveRecord::Schema.define(:version => 20121109050556) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -139,6 +139,7 @@ ActiveRecord::Schema.define(:version => 20121104024339) do
     t.string   "picture_url"
     t.integer  "news_type"
     t.string   "thumbnail_url"
+    t.string   "source"
   end
 
   create_table "ptt_data", :force => true do |t|
