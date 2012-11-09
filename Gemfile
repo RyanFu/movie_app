@@ -55,3 +55,6 @@ gem 'whenever', :require => false
 
 gem 'delayed_job_active_record'
 gem "daemons"
+
+#分頁
+gem 'will_paginate'
