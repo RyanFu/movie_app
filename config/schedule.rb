@@ -48,8 +48,3 @@ end
 every :monday, :at => '04:30pm' do
   rake 'crawl:build_movie_box_office_relation',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
 end
-
-every :wednesday, :at => '08:00am' do
-  rake 'crawl:build_movie_box_office_relation',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
-  rake 'crawl:crawl_yahoo_on_view',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
-end
