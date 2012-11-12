@@ -58,7 +58,7 @@ class Api::V1::RecordsController < Api::ApiController
     @user = User.find_by_fb_id(params[:fb_id]) if params[:fb_id]
   end
 
-  def get_movie_records_mobile
+  def get_movie_records_limit
     @movie = Movie.find(params[:movie_id])
     @records = Record.includes(:user).movie_record_comment(@movie).by_love_count.limit(5)
     @user = User.find_by_fb_id(params[:fb_id]) if params[:fb_id]
