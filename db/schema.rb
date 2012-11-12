@@ -11,7 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20121101052950) do
+=======
+ActiveRecord::Schema.define(:version => 20121109050556) do
+>>>>>>> master
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -97,7 +101,7 @@ ActiveRecord::Schema.define(:version => 20121101052950) do
     t.integer  "theater_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.string   "timetable"
+    t.text     "timetable"
     t.integer  "area_id"
     t.string   "hall_type"
   end
@@ -141,6 +145,7 @@ ActiveRecord::Schema.define(:version => 20121101052950) do
     t.string   "picture_url"
     t.integer  "news_type"
     t.string   "thumbnail_url"
+    t.string   "source"
   end
 
   create_table "ptt_data", :force => true do |t|
