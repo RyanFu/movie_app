@@ -147,8 +147,8 @@ class MovieCrawlerYahoo
       movie.release_date = @movie_release_date
       movie.running_time = @movie_running_time
       movie.level_url = @movie_level_url
-      movie.actors = @movie_actors
-      movie.directors = @movie_directors
+      # movie.actors = @movie_actors
+      # movie.directors = @movie_directors
     end
     option.each do |key, value|
       movie[key] = value
