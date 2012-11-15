@@ -22,10 +22,10 @@ class Api::ApiController  < ActionController::Base
   end
 
   def movieinfo_promotion
-    promotion = {:picture_link => "https://lh5.ggpht.com/siMxWIvJbX_K-y3DCqpmKh87JzqvZVK2-QDSOQGA2tzJmkiXsEQnogDH9AfS8cWB6SY=w124", 
+    promotion = {:picture_link => "http://ext.pimg.tw/jumplives/1352973893-4060856514.png?v=1352973903", 
                  :link => "http://goo.gl/zsybo",
-                 :tilte => "測試",
-                 :description => "test test test",
+                 :tilte => "幫電影時刻表評分",
+                 :description => "歡迎到 Google Play 給電影時刻表優良的評價！",
                  :version => 1
     }
 
