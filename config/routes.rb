@@ -5,6 +5,7 @@ MovieApp::Application.routes.draw do
   namespace :api do
 
     get 'promotion' => 'api#promotion'
+    get 'movieinfo_promotion' => 'api#movieinfo_promotion'
     namespace :v1 do
       resources :users,:only => [:create, :update] do
         collection do
