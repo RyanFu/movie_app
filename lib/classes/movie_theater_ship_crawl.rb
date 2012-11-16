@@ -78,14 +78,14 @@ class MovieTheaterShipCrawl
         (movie) ? (puts name) : (puts "errors happen movie name:#{name} url:#{page_url}")
       end
 
-      unless movie
-        crawler = MovieCrawler.new
-        node_a = node.css(".film_title a")
-        url = "http://www.atmovies.com.tw/movie/" + node_a[0][:href]
-        crawler.fetch url
-        crawler.parse_all
-        movie = crawler.save_to_movie({:is_second_round=>true})
-      end
+      # unless movie
+      #   crawler = MovieCrawler.new
+      #   node_a = node.css(".film_title a")
+      #   url = "http://www.atmovies.com.tw/movie/" + node_a[0][:href]
+      #   crawler.fetch url
+      #   crawler.parse_all
+      #   movie = crawler.save_to_movie({:is_second_round=>true})
+      # end
 
       unless movie
         puts "&&&&&&&&& errors &&&&&&&&&&&&"
