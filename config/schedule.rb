@@ -32,7 +32,7 @@ every :wednesday, :at => '08:30pm' do
   rake 'crawl:crawl_yahoo_comming_movies',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
 end
 
-every :friday, :at => '08:00am' do
+every :friday, :at => '08:30am' do
   rake 'crawl:parse_movie_time_and_theater_ship',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
   rake 'crawl:crawl_yahoo_on_view',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
 end

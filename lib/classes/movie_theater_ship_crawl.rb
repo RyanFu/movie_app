@@ -75,10 +75,22 @@ class MovieTheaterShipCrawl
       unless movie
         movies = Movie.where(["name like ?", "%#{name[name.length-5..name.length-1]}%"])
         movie = movies[0] if movies
-        (movie) ? (puts name) : (puts "errors happen")
+        (movie) ? (puts name) : (puts "errors happen movie name:#{name} url:#{page_url}")
       end
 
-      next unless movie
+      unless movie
+        crawler = MovieCrawler.new
+        node_a = node.css(".film_title a")
+        url = "http://www.atmovies.com.tw/movie/" + node_a[0][:href]
+        crawler.fetch url
+        crawler.parse_all
+        movie = crawler.save_to_movie({:is_second_round=>true})
+      end
+
+      unless movie
+        puts "&&&&&&&&& errors &&&&&&&&&&&&"
+        next
+      end
 
       movie.is_second_round = true
       movie.save
