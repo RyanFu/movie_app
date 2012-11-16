@@ -78,6 +78,8 @@ class MovieTheaterShipCrawl
         (movie) ? (puts name) : (puts "errors happen")
       end
 
+      next unless movie
+
       movie.is_second_round = true
       movie.save
       
