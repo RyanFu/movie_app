@@ -265,5 +265,9 @@ DEPENDENCIES
   therubyracer
   uglifier (>= 1.0.3)
   whenever
+<<<<<<< HEAD
   will_paginate (~> 3.0)
+=======
+  will_paginate
+>>>>>>> master
   yaml_db

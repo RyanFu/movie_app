@@ -66,6 +66,48 @@ class MovieTheaterShipCrawl
     end
   end
 
+  def second_round_movie theater
+    nodes = @page_html.css("#theater_showtime .showtime_block .showtime_box")
+    nodes.each do |node|
+      name = node.css(".film_title a").text.strip
+      movie = Movie.find_by_name(name)
+      
+      unless movie
+        movies = Movie.where(["name like ?", "%#{name[name.length-5..name.length-1]}%"])
+        movie = movies[0] if movies
+        (movie) ? (puts name) : (puts "errors happen movie name:#{name} url:#{page_url}")
+      end
+
+      # unless movie
+      #   crawler = MovieCrawler.new
+      #   node_a = node.css(".film_title a")
+      #   url = "http://www.atmovies.com.tw/movie/" + node_a[0][:href]
+      #   crawler.fetch url
+      #   crawler.parse_all
+      #   movie = crawler.save_to_movie({:is_second_round=>true})
+      # end
+
+      unless movie
+        puts "&&&&&&&&& errors &&&&&&&&&&&&"
+        next
+      end
+
+      movie.is_second_round = true
+      movie.save
+      
+      lis = node.css(".showtime_area li")
+      timetable = lis.map{|li| li.text}
+      timetable = timetable.join("|")
+      ship = MovieTheaterShip.new
+      ship.movie= movie
+      ship.theater = theater
+      ship.timetable = timetable
+      ship.area = theater.area
+      ship.save
+    end
+
+  end
+
   # def parse_first_round_movie
   #   crawler = MovieTheaterShipCrawl.new
 

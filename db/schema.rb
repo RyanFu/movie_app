@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121104024339) do
+ActiveRecord::Schema.define(:version => 20121109050556) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -147,8 +147,12 @@ ActiveRecord::Schema.define(:version => 20121104024339) do
     t.string   "picture_url"
     t.integer  "news_type"
     t.string   "thumbnail_url"
+<<<<<<< HEAD
     t.integer  "user_id"
     t.text     "text"
+=======
+    t.string   "source"
+>>>>>>> master
   end
 
   add_index "news", ["user_id"], :name => "index_news_on_user_id"

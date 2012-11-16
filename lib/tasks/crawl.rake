@@ -158,32 +158,41 @@ namespace :crawl do
       ship.save
     end
 
-
-    # urls ={
-    #     "基隆"=>"http://www.atmovies.com.tw/showtime/area_a01.html",
-    #     "台北"=>"http://www.atmovies.com.tw/showtime/area_a02.html",
-    #     "桃園"=>"http://www.atmovies.com.tw/showtime/area_a03.html",
-    #     "新竹"=>"http://www.atmovies.com.tw/showtime/area_a35.html",
-    #     "苗粟"=>"http://www.atmovies.com.tw/showtime/area_a37.html",
-    #     "台中"=>"http://www.atmovies.com.tw/showtime/area_a04.html",
-    #     "彰化"=>"http://www.atmovies.com.tw/showtime/area_a47.html",
-    #     "雲林"=>"http://www.atmovies.com.tw/showtime/area_a45.html",
-    #     "南投"=>"http://www.atmovies.com.tw/showtime/area_a49.html",
-    #     "嘉義"=>"http://www.atmovies.com.tw/showtime/area_a05.html",
-    #     "台南"=>"http://www.atmovies.com.tw/showtime/area_a06.html",
-    #     "高雄"=>"http://www.atmovies.com.tw/showtime/area_a07.html",
-    #     "宜蘭"=>"http://www.atmovies.com.tw/showtime/area_a39.html",
-    #     "花蓮"=>"http://www.atmovies.com.tw/showtime/area_a38.html",
-    #     "台東"=>"http://www.atmovies.com.tw/showtime/area_a89.html",
-    #     "屏東"=>"http://www.atmovies.com.tw/showtime/area_a87.html",
-    #     "澎湖"=>"http://www.atmovies.com.tw/showtime/area_a69.html"
-    #  }
-    #  t = MovieTheaterShipCrawl.new
-    #  urls.each do |local, url|
-    #    t.fetch url
-    #    t.parse_first_round_movie
-    #    t.parse_second_round_movie
-    #  end
+    # second round movie from atmovies
+    Movie.update_all(:is_second_round => false)
+    urls = {
+      "景美佳佳戲院" => "http://www.atmovies.com.tw/showtime/theater_t02f05_a02.html",
+      "木柵光明戲院" => "http://www.atmovies.com.tw/showtime/theater_t02f06_a02.html",
+      "朝代戲院" => "http://www.atmovies.com.tw/showtime/theater_t02f07_a02.html",
+      "湳山戲院" => "http://www.atmovies.com.tw/showtime/theater_t02f08_a02.html",
+      "林園電影城" => "http://www.atmovies.com.tw/showtime/theater_t02e02_a02.html",
+      "三重幸福戲院" => "http://www.atmovies.com.tw/showtime/theater_t02f23_a02.html",
+      "全美戲院" => "http://www.atmovies.com.tw/showtime/theater_t06623_a06.html",
+      "今日戲院" => "http://www.atmovies.com.tw/showtime/theater_t06624_a06.html",
+      "十全電影城" => "http://www.atmovies.com.tw/showtime/theater_t07722_a07.html",
+      "和春影城" => "http://www.atmovies.com.tw/showtime/theater_t07721_a07.html",
+      "國寶戲院" => "http://www.atmovies.com.tw/showtime/theater_t08702_a87.html",
+      "民和戲院" => "http://www.atmovies.com.tw/showtime/theater_t03323_a03.html",
+      "中源戲院" => "http://www.atmovies.com.tw/showtime/theater_t03322_a03.html",
+      "竹北金寶戲院" => "http://www.atmovies.com.tw/showtime/theater_t03522_a35.html",
+      "新復珍戲院" => "http://www.atmovies.com.tw/showtime/theater_t03521_a35.html",
+      "國興戲院" => "http://www.atmovies.com.tw/showtime/theater_t03703_a37.html",
+      "東聲戲院" => "http://www.atmovies.com.tw/showtime/theater_t03721_a37.html",
+      "萬代福戲院" => "http://www.atmovies.com.tw/showtime/theater_t04422_a04.html",
+      "全球影城" => "http://www.atmovies.com.tw/showtime/theater_t04424_a04.html",
+      "新榮戲院" => "http://www.atmovies.com.tw/showtime/theater_t05521_a05.html"
+    }
+    
+    urls.each do |theater_name, url|
+      theater = Theater.find_by_name(theater_name)
+      ships  = theater.movie_theater_ships
+      ships.each do |ship|
+        ship.delete
+      end
+      crawl = MovieTheaterShipCrawl.new
+      crawl.fetch url
+      crawl.second_round_movie theater
+    end
   end
 
   task :reset_running_time => :environment do

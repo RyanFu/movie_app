@@ -24,6 +24,7 @@ MovieApp::Application.routes.draw do
   namespace :api do
 
     get 'promotion' => 'api#promotion'
+    get 'movieinfo_promotion' => 'api#movieinfo_promotion'
     namespace :v1 do
       resources :users,:only => [:create, :update] do
         collection do
@@ -35,6 +36,7 @@ MovieApp::Application.routes.draw do
         collection do
           get 'friend_stream'
           get 'get_movie_records'
+          get 'get_movie_records_limit'
         end
         member do
           post 'love'
