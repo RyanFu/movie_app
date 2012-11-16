@@ -158,6 +158,7 @@ namespace :crawl do
       ship.save
     end
 
+    # second round movie from atmovies
     Movie.update_all(:is_second_round => false)
     urls = {
       "景美佳佳戲院" => "http://www.atmovies.com.tw/showtime/theater_t02f05_a02.html",

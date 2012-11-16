@@ -21,4 +21,15 @@ class Api::ApiController  < ActionController::Base
     render :json => promotion.to_json
   end
 
+  def movieinfo_promotion
+    promotion = {:picture_link => "http://ext.pimg.tw/jumplives/1352973893-4060856514.png?v=1352973903", 
+                 :link => "http://goo.gl/zsybo",
+                 :tilte => "幫電影時刻表評分",
+                 :description => "歡迎到 Google Play 給電影時刻表優良的評價, 謝謝！",
+                 :version => 1
+    }
+
+    render :json => promotion.to_json
+  end
+
 end
