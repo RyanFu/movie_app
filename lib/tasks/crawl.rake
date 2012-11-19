@@ -68,7 +68,7 @@ namespace :crawl do
   task :build_movie_box_office_relation => :environment do
 
     Movie.hot.each do |m|
-      m.is_hot = true
+      m.is_hot = false
       m.save
     end
 

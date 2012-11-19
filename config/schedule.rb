@@ -49,6 +49,6 @@ every :monday, :at => '08:00am' do
   rake 'crawl:crawl_yahoo_comming_movies',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
 end
 
-every :monday, :at => '04:30pm' do
+every :monday, :at => '05:00pm' do
   rake 'crawl:build_movie_box_office_relation',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
 end
