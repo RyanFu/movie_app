@@ -39,8 +39,8 @@ class MovieTheaterShipCrawl
         movie_name = movie_name.text.strip
         movies = Movie.where(["name like ?", "%#{movie_name[movie_name.length-5..movie_name.length-1]}%"])
         movie = movies[0] if movies
-        puts "Theater : #{theater.name}"
-        (movie) ? (puts movie_name) : (puts "errors happen")
+        puts "Theater : #{theater.name} #{theater.id}"
+        (movie) ? (puts "Movie name :#{movie_name}, finded movie_name : #{movie.name} #{movie.id}") : (puts "Movie name :#{name} errors happen")
       end
       puts "XXXXXXXXXXXXXX    Theater : #{theater.name}   Movie name : #{movie_name}　XXXXXXXXXXXXXXXXXXXXX" unless movie
       next unless movie
@@ -82,9 +82,10 @@ class MovieTheaterShipCrawl
       movie = Movie.find_by_name(name)
       
       unless movie
-        movies = Movie.where(["name like ?", "%#{name[name.length-5..name.length-1]}%"])
+        movies = Movie.where(["name like ?", "%#{name[name.length-4..name.length-1]}%"])
         movie = movies[0] if movies
-        (movie) ? (puts name) : (puts "errors happen movie name:#{name} url:#{page_url}")
+        puts "Theater : #{theater.name} #{theater.id}"
+        (movie) ? (puts "Movie name :#{name}, finded movie_name : #{movie.name} #{movie.id}") : (puts "Movie name :#{name} errors happen")
       end
 
       # unless movie
@@ -97,7 +98,6 @@ class MovieTheaterShipCrawl
       # end
 
       unless movie
-        puts "&&&&&&&&& errors &&&&&&&&&&&&"
         next
       end
 
