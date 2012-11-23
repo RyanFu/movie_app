@@ -28,7 +28,7 @@ every :day, :at => '05:01am' do
   rake 'user:update_user_friends_ship',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
 end
 
-every :wednesday, :at => '08:30pm' do
+every :thursday, :at => '02:00am' do
   rake 'crawl:crawl_yahoo_comming_movies',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
 end
 
