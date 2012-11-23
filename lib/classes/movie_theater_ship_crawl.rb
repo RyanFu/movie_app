@@ -6,15 +6,15 @@ class MovieTheaterShipCrawl
     nodes = @page_html.css(".group tbody tr td a")
 
     nodes.each do |node|
-      puts "theater name: " + node.text.strip
+      # puts "theater name: " + node.text.strip
       theater = Theater.find_by_name(node.text.strip)
-      puts "do not find the theater ggggggggggggggggxXXXXXXXXXXXDDDDDDDDDDD" unless theater
+      puts "do not find the theater #{theater}XXXXXXXXXXXDDDDDDDDDDD" unless theater
       next unless theater
       next if [469,534,464,528].include? theater.id
       url = node[:href]
       crawl = MovieTheaterShipCrawl.new
       crawl.fetch url
-      puts url
+      # puts url
       crawl.parse_movie(theater)
     end
   end
@@ -22,11 +22,11 @@ class MovieTheaterShipCrawl
   def parse_movie theater
     
     theater_nodes = @page_html.css(".bd-container .text h4")
-    puts theater_nodes[0].text
+    # puts theater_nodes[0].text
     phone = theater_nodes[0].text
     phone = phone[3..phone.size]
     theater_finded_by_phone = Theater.find_by_phone phone
-    puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$yes yes yes finded by phone number " if theater_finded_by_phone
+    # puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$yes yes yes finded by phone number " if theater_finded_by_phone
     theater = theater_finded_by_phone if theater_finded_by_phone
 
     nodes = @page_html.css(".row-container .item .text")
@@ -34,10 +34,19 @@ class MovieTheaterShipCrawl
     nodes.each do |node|
       movie_name = node.css("h4")
       movie = Movie.find_by_name(movie_name.text.strip)
-      
+
+      unless movie
+        movie_name = movie_name.text.strip
+        movies = Movie.where(["name like ?", "%#{movie_name[movie_name.length-5..movie_name.length-1]}%"])
+        movie = movies[0] if movies
+        puts "Theater : #{theater.name}"
+        (movie) ? (puts movie_name) : (puts "errors happen")
+      end
       puts "XXXXXXXXXXXXXX    Theater : #{theater.name}   Movie name : #{movie_name}　XXXXXXXXXXXXXXXXXXXXX" unless movie
       next unless movie
-      puts "movie name :" + movie.name
+
+
+      # puts "movie name :" + movie.name
 
       movie.is_second_round = is_second_round if is_second_round
       movie.is_first_round = true unless is_second_round
@@ -46,13 +55,13 @@ class MovieTheaterShipCrawl
       timetable_nodes = node.css(".mtcontainer span.tmt")
       times = timetable_nodes.map{|node| node.text.strip}
       timetable = times.join("|")
-      puts timetable
+      # puts timetable
       
       hall_type_nodes = node.css(".mvtype img")
       if hall_type_nodes.size > 0
         hall_types = hall_type_nodes.map{|node| node[:src]}
         hall_type = hall_types.join("***")
-        puts hall_type
+        # puts hall_type
       end
 
       ship = MovieTheaterShip.new

@@ -121,6 +121,13 @@ namespace :crawl do
       name = node.css(".film_title a").text.strip
       movie = Movie.find_by_name(name)
       
+      unless movie
+        movies = Movie.where(["name like ?", "%#{name[name.length-4..name.length-1]}%"])
+        movie = movies[0] if movies
+        puts "Theater : #{theater.name}"
+        (movie) ? (puts name) : (puts "errors happen")
+      end
+
       lis = node.css(".showtime_area li")
       timetable = lis.map{|li| li.text}
       timetable = timetable.join("|")
@@ -146,6 +153,13 @@ namespace :crawl do
     nodes.each do |node|
       name = node.css(".film_title a").text.strip
       movie = Movie.find_by_name(name)
+
+      unless movie
+        movies = Movie.where(["name like ?", "%#{name[name.length-4..name.length-1]}%"])
+        movie = movies[0] if movies
+        puts "Theater : #{theater.name}"
+        (movie) ? (puts name) : (puts "errors happen")
+      end
       
       lis = node.css(".showtime_area li")
       timetable = lis.map{|li| li.text}
