@@ -78,7 +78,7 @@ class DataCrawler
   end
 
   def get_yahoo_all_movies 
-    (4440..4509).each do |i|
+    (4509..4543).each do |i|
       url = "http://tw.movie.yahoo.com/movieinfo_main.html/id=" + i.to_s
       begin
         m = MovieCrawlerYahoo.new
