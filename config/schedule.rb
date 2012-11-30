@@ -33,8 +33,11 @@ every :thursday, :at => '02:00am' do
 end
 
 every :friday, :at => '08:30am' do
-  rake 'crawl:parse_movie_time_and_theater_ship',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
   rake 'crawl:crawl_yahoo_on_view',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
+end
+
+every :friday, :at => '08:45am' do
+  rake 'crawl:parse_movie_time_and_theater_ship',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
 end
 
 every :saturday, :at => '07:30am' do
