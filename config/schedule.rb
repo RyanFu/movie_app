@@ -36,7 +36,7 @@ every :friday, :at => '08:30am' do
   rake 'crawl:crawl_yahoo_on_view',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
 end
 
-every :friday, :at => '08:45am' do
+every :friday, :at => '09:00am' do
   rake 'crawl:parse_movie_time_and_theater_ship',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
 end
 
@@ -45,7 +45,11 @@ every :saturday, :at => '07:30am' do
   rake 'crawl:crawl_yahoo_on_view',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
 end
 
-every :monday, :at => '08:00am' do
+every :saturday, :at => '09:00am' do
+  rake 'crawl:parse_movie_time_and_theater_ship',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
+end
+
+every :monday, :at => '09:00am' do
   rake 'crawl:crawl_yahoo_this_week_movies',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
   rake 'crawl:parse_movie_time_and_theater_ship',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
   rake 'crawl:crawl_yahoo_on_view',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
@@ -55,3 +59,4 @@ end
 every :monday, :at => '05:00pm' do
   rake 'crawl:build_movie_box_office_relation',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
 end
+
