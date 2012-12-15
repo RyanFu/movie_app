@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121126041150) do
+ActiveRecord::Schema.define(:version => 20121215020008) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -201,6 +201,7 @@ ActiveRecord::Schema.define(:version => 20121126041150) do
     t.integer  "area_id"
     t.string   "buy_link"
     t.string   "phone"
+    t.string   "link"
   end
 
   add_index "theaters", ["area_id"], :name => "index_theaters_on_area_id"
