@@ -45,7 +45,7 @@ every :saturday, :at => '07:30am' do
   rake 'crawl:crawl_yahoo_on_view',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
 end
 
-every :saturday, :at => '09:00am' do
+every :saturday, :at => '09:30am' do
   rake 'crawl:parse_movie_time_and_theater_ship',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
 end
 
