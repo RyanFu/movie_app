@@ -2,6 +2,85 @@
 class MovieTheaterShipCrawl
   include Crawler
 
+
+  def parse_theater_from_atmovies theater
+    nodes = @page_html.css("#theater_showtime .showtime_block .showtime_box")
+    nodes.each do |node|
+      name = node.css(".film_title a").text.strip
+      movie = Movie.find_by_name(name)
+
+      if name == ("暮光之城：破曉Ⅱ")
+        movie = Movie.find(2458)
+        puts ("xxxxx   movie 暮光之城：破曉Ⅱ")
+      end
+      
+      unless movie
+        movies = Movie.where(["name like ?", "%#{name[name.length-4..name.length-1]}%"])
+        movie = movies[0] if movies
+        puts "Theater : #{theater.name} #{theater.id}"
+        (movie) ? (puts "Movie name :#{name}, finded movie_name : #{movie.name} #{movie.id}") : (puts "Movie name :#{name} errors happen")
+      end
+
+      unless movie
+        movies = Movie.where(["name like ?", "%#{name[0..4]}%"])
+        movie = movies[0] if movies
+        puts "Theater : #{theater.name} #{theater.id}"
+        (movie) ? (puts "Movie name :#{name}, finded movie_name : #{movie.name} #{movie.id}") : (puts "Movie name :#{name} errors happen")
+      end
+
+      # unless movie
+      #   crawler = MovieCrawler.new
+      #   node_a = node.css(".film_title a")
+      #   url = "http://www.atmovies.com.tw/movie/" + node_a[0][:href]
+      #   crawler.fetch url
+      #   crawler.parse_all
+      #   movie = crawler.save_to_movie({:is_second_round=>true})
+      # end
+
+      unless movie
+        next
+      end
+
+      (theater.is_second_round) ? (movie.is_second_round = true) : (movie.is_first_round = true)
+      movie.save
+      
+      type = node.css(".showtime_area .version").text.strip
+
+      lis = node.css(".showtime_area li")
+      timetable = lis.map{|li| li.text.strip}
+      timetable = timetable.map{|time| time = time[0..4]}
+      timetable = timetable.join("|")
+      ship = MovieTheaterShip.new
+      ship.hall_type = parse_type(type)
+      ship.movie= movie
+      ship.theater_id = theater.id + parse_special_theater(type)
+      ship.timetable = timetable
+      ship.area = theater.area
+      ship.save
+    end
+  end
+
+  def parse_special_theater type
+    i = 0
+    i = 1 if type.index("M CLUB")
+    i = 1 if type.index("VIP")
+    i = 1 if type.index("Gold Class")
+    i
+  end
+
+  def parse_type(type)
+    urls = [ "http://l.yimg.com/f/i/tw/movie/movietime_icon/icon_imax.gif",
+             "http://l.yimg.com/f/i/tw/movie/movietime_icon/icon_3d.gif",
+             "http://l.yimg.com/f/i/tw/movie/movietime_icon/icon_digital.gif",
+             "http://l.yimg.com/f/i/tw/movie/movietime_icon/icon_chi.gif"]
+    type_arr = []
+    type_arr << urls[0] if type.index("IMAX")
+    type_arr << urls[1] if type.index("3D")
+    type_arr << urls[2] if type.index("數位")
+    type_arr << urls[3] if type.index("國語")
+    type_str = type_arr.join("***")
+  end
+
   def parse_theater_movie
     nodes = @page_html.css(".group tbody tr td a")
 
@@ -105,7 +184,7 @@ class MovieTheaterShipCrawl
       movie.save
       
       lis = node.css(".showtime_area li")
-      timetable = lis.map{|li| li.text}
+      timetable = lis.map{|li| li.text.strip}
       timetable = timetable.join("|")
       ship = MovieTheaterShip.new
       ship.movie= movie
