@@ -78,7 +78,7 @@ class MovieTheaterShipCrawl
     type_arr << urls[1] if type.index("3D")
     type_arr << urls[2] if type.index("數位")
     type_arr << urls[3] if type.index("國語")
-    type_str = type_arr.join("***")
+    (type_arr.present?) ? ( type_str = type_arr.join("***") ) : nil 
   end
 
   def parse_theater_movie
