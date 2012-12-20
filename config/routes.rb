@@ -53,7 +53,11 @@ MovieApp::Application.routes.draw do
         end
       end
       resources :comments,:only => [:create, :destroy]
-      resources :streams,:only => [:index]
+      resources :streams,:only => [:index] do
+        collection do
+          get 'streams_with_page'
+        end
+      end
       resources :news, :only => [:index]
     end
   end
