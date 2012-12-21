@@ -18,6 +18,7 @@ MovieApp::Application.routes.draw do
           get 'friend_stream'
           get 'get_movie_records'
           get 'get_movie_records_limit'
+          get 'records_with_page'
         end
         member do
           post 'love'
