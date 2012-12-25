@@ -4,7 +4,7 @@ gem 'rails', '3.2.6'
 
 
 #資料庫相關
-gem 'sqlite3'
+gem 'mysql2', '~> 0.3.6'
 gem 'yaml_db'
 
 
@@ -59,3 +59,4 @@ gem "daemons"
 #分頁
 gem 'will_paginate'
 
+gem 'dropbox-sdk'
