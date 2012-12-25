@@ -32,6 +32,7 @@ class MovieTvCrawler
     puts "save start"
     channel_time = ChannelTime.new
     channel_time.channel = channel
+    (@time = "00:00:::向未提供") if (@time == "")
     channel_time.time = @time
     channel_time.date = @date
     channel_time.save

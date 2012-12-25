@@ -19,6 +19,7 @@ class Record < ActiveRecord::Base
   scope :movie_record, lambda { |movies| where('movie_id in (?)', movies) }
   scope :movie_record_comment, lambda { |movies| where('movie_id in (?) and LENGTH(comment) > 0', movies) }
   scope :by_love_count, order('love_count DESC')
+  scope :records_by_user, lambda { |user| where('user_id = (?)', user) }
 
   def create_stream_gcm(record)
     logger.info("............delayjob record start............")

@@ -18,6 +18,7 @@ MovieApp::Application.routes.draw do
           get 'friend_stream'
           get 'get_movie_records'
           get 'get_movie_records_limit'
+          get 'records_with_page'
         end
         member do
           post 'love'
@@ -53,7 +54,11 @@ MovieApp::Application.routes.draw do
         end
       end
       resources :comments,:only => [:create, :destroy]
-      resources :streams,:only => [:index]
+      resources :streams,:only => [:index] do
+        collection do
+          get 'streams_with_page'
+        end
+      end
       resources :news, :only => [:index]
     end
   end

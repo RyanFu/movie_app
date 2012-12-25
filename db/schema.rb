@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121109050556) do
+ActiveRecord::Schema.define(:version => 20121215020008) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(:version => 20121109050556) do
   create_table "comments", :force => true do |t|
     t.integer  "record_id"
     t.integer  "user_id"
-    t.string   "text"
+    t.text     "text"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -164,7 +164,7 @@ ActiveRecord::Schema.define(:version => 20121109050556) do
   end
 
   create_table "records", :force => true do |t|
-    t.string   "comment"
+    t.text     "comment"
     t.integer  "score"
     t.integer  "movie_id"
     t.integer  "user_id"
@@ -203,6 +203,7 @@ ActiveRecord::Schema.define(:version => 20121109050556) do
     t.integer  "area_id"
     t.string   "buy_link"
     t.string   "phone"
+    t.string   "link"
   end
 
   add_index "theaters", ["area_id"], :name => "index_theaters_on_area_id"

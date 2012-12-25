@@ -58,3 +58,4 @@ gem "daemons"
 
 #分頁
 gem 'will_paginate'
+
