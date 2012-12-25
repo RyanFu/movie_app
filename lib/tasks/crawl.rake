@@ -99,6 +99,10 @@ namespace :crawl do
       crawler.fetch theater.link
       crawler.parse_theater_from_atmovies theater
     end
+
+    theater = Theater.find(541)
+    crawler.fetch "http://tw.movies.yahoo.com/theater_result.html/id=152"
+    crawler.parse_movie theater
   end
 
   # task :parse_movie_time_and_theater_ship => :environment do
