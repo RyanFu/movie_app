@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121215020008) do
+ActiveRecord::Schema.define(:version => 20121227014830) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -95,11 +95,12 @@ ActiveRecord::Schema.define(:version => 20121215020008) do
   create_table "movie_theater_ships", :force => true do |t|
     t.integer  "movie_id"
     t.integer  "theater_id"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
-    t.text     "timetable",  :limit => 255
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.text     "timetable"
     t.integer  "area_id"
     t.string   "hall_type"
+    t.string   "hall_str"
   end
 
   add_index "movie_theater_ships", ["area_id"], :name => "index_movie_theater_ships_on_area_id"
@@ -111,23 +112,21 @@ ActiveRecord::Schema.define(:version => 20121215020008) do
     t.string   "name_en"
     t.text     "intro"
     t.string   "poster_url"
-    t.date     "release_date",     :limit => 255
+    t.date     "release_date"
     t.string   "running_time"
     t.string   "level_url"
-    t.text     "actors",           :limit => 255
-    t.text     "directors",        :limit => 255
-    t.boolean  "is_first_round",                  :default => false
-    t.boolean  "is_second_round",                 :default => false
-    t.datetime "created_at",                                         :null => false
-    t.datetime "updated_at",                                         :null => false
-    t.boolean  "is_hot",                          :default => false
+    t.text     "actors"
+    t.text     "directors"
+    t.boolean  "is_first_round",   :default => false
+    t.boolean  "is_second_round",  :default => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.boolean  "is_hot",           :default => false
     t.string   "youtube_video_id"
-    t.boolean  "is_comming",                      :default => false
-    t.boolean  "is_this_week",                    :default => false
-    t.integer  "records_count",                   :default => 0
-    t.integer  "good_count",                      :default => 0
-    t.string   "actors_str"
-    t.string   "directors_str"
+    t.boolean  "is_comming",       :default => false
+    t.boolean  "is_this_week",     :default => false
+    t.integer  "records_count",    :default => 0
+    t.integer  "good_count",       :default => 0
   end
 
   add_index "movies", ["youtube_video_id"], :name => "index_movies_on_youtube_video_id"

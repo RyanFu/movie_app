@@ -28,6 +28,7 @@ MovieApp::Application.routes.draw do
       resources :theaters, :only => [:show, :index] do
         member do
           get 'get_movies_id'
+          get 'get_movies_id_and_hall_str'
         end
       end
       resources :areas, :only => [:index]

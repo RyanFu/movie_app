@@ -52,6 +52,7 @@ class MovieTheaterShipCrawl
       timetable = timetable.join("|")
       ship = MovieTheaterShip.new
       ship.hall_type = parse_type(type)
+      ship.hall_str = parse_hall_str(type)
       ship.movie= movie
       ship.theater_id = theater.id + parse_special_theater(type)
       ship.timetable = timetable
@@ -68,7 +69,13 @@ class MovieTheaterShipCrawl
     i
   end
 
-  def parse_type(type)
+  def parse_hall_str type
+    type_arr = type.split(" ")
+    type_arr.map!{|item| item if item.index("廳")}
+    type_arr.join(" ")
+  end
+
+  def parse_type type
     urls = [ "http://l.yimg.com/f/i/tw/movie/movietime_icon/icon_imax.gif",
              "http://l.yimg.com/f/i/tw/movie/movietime_icon/icon_3d.gif",
              "http://l.yimg.com/f/i/tw/movie/movietime_icon/icon_digital.gif",
