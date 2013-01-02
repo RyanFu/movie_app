@@ -24,6 +24,10 @@ every :day, :at => '00:01am' do
   rake 'crawl:fetch_channel',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
 end
 
+every :day, :at => '08:00am' do  
+  rake 'crawl:parse_movie_time_and_theater_ship_atmovies',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
+end
+
 every :day, :at => '05:01am' do
   rake 'user:update_user_friends_ship',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
 end
@@ -34,17 +38,12 @@ end
 
 every :friday, :at => '08:00am' do
   rake 'crawl:crawl_yahoo_on_view',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
-  rake 'crawl:parse_movie_time_and_theater_ship_atmovies',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
 end
 
 every :saturday, :at => '08:00am' do
-  rake 'crawl:parse_movie_time_and_theater_ship_atmovies',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
   rake 'crawl:crawl_yahoo_on_view',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
 end
 
-every :monday, :at => '08:00am' do
-  rake 'crawl:parse_movie_time_and_theater_ship_atmovies',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
-end
 
 every :monday, :at => '09:00am' do
   rake 'crawl:crawl_yahoo_this_week_movies',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
