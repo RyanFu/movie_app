@@ -17,6 +17,9 @@ class Record < ActiveRecord::Base
   scope :by_created, order('created_at DESC')
   scope :by_id_asc, order('id ASC')
   scope :movie_record, lambda { |movies| where('movie_id in (?)', movies) }
+  scope :movie_record_comment, lambda { |movies| where('movie_id in (?) and LENGTH(comment) > 0', movies) }
+  scope :by_love_count, order('love_count DESC')
+  scope :records_by_user, lambda { |user| where('user_id = (?)', user) }
 
   def self.is_exist movie_id,fb_id
 
@@ -27,7 +30,6 @@ class Record < ActiveRecord::Base
 
 
   end
-
 
   def create_stream_gcm(record)
     logger.info("............delayjob record start............")

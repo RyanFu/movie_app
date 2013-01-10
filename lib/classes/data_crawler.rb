@@ -2,55 +2,55 @@
 class DataCrawler
   include Crawler
   
-  def get_first_round_movie
-    fetch "http://www.atmovies.com.tw/movie/movie_now-0.html"
-    nodes = @page_html.css(".listall a")
-    nodes.each do |item|
-      href = item[:href]
-      url = "http://www.atmovies.com.tw/movie/" + href
-      puts url
+  # def get_first_round_movie
+  #   fetch "http://www.atmovies.com.tw/movie/movie_now-0.html"
+  #   nodes = @page_html.css(".listall a")
+  #   nodes.each do |item|
+  #     href = item[:href]
+  #     url = "http://www.atmovies.com.tw/movie/" + href
+  #     puts url
         
-      begin
-        m = MovieCrawler.new
-        m.fetch url
-        m.parse_all
-        m.save_to_movie ({:is_first_round=>true})
-      rescue
-        puts ".........................crawl fail....................................."
-        puts ".........................crawl fail....................................."
-        puts ".........................crawl fail....................................."
-        puts url
-        puts ".........................crawl fail....................................."
-        puts ".........................crawl fail....................................."
-        puts ".........................crawl fail....................................."
-      end
-    end
-  end
+  #     begin
+  #       m = MovieCrawler.new
+  #       m.fetch url
+  #       m.parse_all
+  #       m.save_to_movie ({:is_first_round=>true})
+  #     rescue
+  #       puts ".........................crawl fail....................................."
+  #       puts ".........................crawl fail....................................."
+  #       puts ".........................crawl fail....................................."
+  #       puts url
+  #       puts ".........................crawl fail....................................."
+  #       puts ".........................crawl fail....................................."
+  #       puts ".........................crawl fail....................................."
+  #     end
+  #   end
+  # end
 
-  def get_second_round_movie
-    fetch "http://www.atmovies.com.tw/movie/movie_now2-0.html"
-    nodes = @page_html.css(".listall a")
-    nodes.each do |item|
-      href = item[:href]
-      url = "http://www.atmovies.com.tw/movie/" + href
-      puts url
+  # def get_second_round_movie
+  #   fetch "http://www.atmovies.com.tw/movie/movie_now2-0.html"
+  #   nodes = @page_html.css(".listall a")
+  #   nodes.each do |item|
+  #     href = item[:href]
+  #     url = "http://www.atmovies.com.tw/movie/" + href
+  #     puts url
         
-      begin
-        m = MovieCrawler.new
-        m.fetch url
-        m.parse_all
-        m.save_to_movie ({:is_second_round=>true})
-      rescue
-        puts ".........................crawl fail....................................."
-        puts ".........................crawl fail....................................."
-        puts ".........................crawl fail....................................."
-        puts url
-        puts ".........................crawl fail....................................."
-        puts ".........................crawl fail....................................."
-        puts ".........................crawl fail....................................."
-      end
-    end
-  end
+  #     begin
+  #       m = MovieCrawler.new
+  #       m.fetch url
+  #       m.parse_all
+  #       m.save_to_movie ({:is_second_round=>true})
+  #     rescue
+  #       puts ".........................crawl fail....................................."
+  #       puts ".........................crawl fail....................................."
+  #       puts ".........................crawl fail....................................."
+  #       puts url
+  #       puts ".........................crawl fail....................................."
+  #       puts ".........................crawl fail....................................."
+  #       puts ".........................crawl fail....................................."
+  #     end
+  #   end
+  # end
   
   # yahoo 上映中電影
   def get_yahoo_on_view_movies url="http://tw.movie.yahoo.com/movie_intheaters.html"
@@ -78,7 +78,7 @@ class DataCrawler
   end
 
   def get_yahoo_all_movies 
-    (1..4440).each do |i|
+    (4543..4551).each do |i|
       url = "http://tw.movie.yahoo.com/movieinfo_main.html/id=" + i.to_s
       begin
         m = MovieCrawlerYahoo.new

@@ -5,6 +5,7 @@ MovieApp::Application.routes.draw do
   namespace :api do
 
     get 'promotion' => 'api#promotion'
+    get 'movieinfo_promotion' => 'api#movieinfo_promotion'
     namespace :v1 do
       resources :users,:only => [:create, :update] do
         collection do
@@ -16,13 +17,20 @@ MovieApp::Application.routes.draw do
         collection do
           get 'friend_stream'
           get 'get_movie_records'
+          get 'get_movie_records_limit'
+          get 'records_with_page'
         end
         member do
           post 'love'
           delete 'unlove'
         end
       end
-      resources :theaters, :only => [:show, :index]
+      resources :theaters, :only => [:show, :index] do
+        member do
+          get 'get_movies_id'
+          get 'get_movies_id_and_hall_str'
+        end
+      end
       resources :areas, :only => [:index]
       resources :movies do
         collection do
@@ -38,6 +46,7 @@ MovieApp::Application.routes.draw do
         end 
         member do
           get 'timetable'
+          get 'update_release_date_running_time_youtube'
         end
       end
       resources :channels, :only => [:index] do
@@ -46,7 +55,11 @@ MovieApp::Application.routes.draw do
         end
       end
       resources :comments,:only => [:create, :destroy]
-      resources :streams,:only => [:index]
+      resources :streams,:only => [:index] do
+        collection do
+          get 'streams_with_page'
+        end
+      end
       resources :news, :only => [:index]
     end
   end

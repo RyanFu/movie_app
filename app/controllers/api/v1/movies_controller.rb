@@ -64,7 +64,15 @@ class Api::V1::MoviesController < Api::ApiController
     return_object["first_round"] = @movies_first
     return_object["movies_second"] = @movies_second
     return_object["movies_commig"] = @movies_commig
-    return_object["movies_hot"] = @movies_hot
+    
+    ids = MovieBoxOfficeShip.all.map{|m| m.movie_id}
+    object = Array.new(ids.size)
+    (0..ids.size-1).each do |i|
+      object[i-1] = {:id => ids[i-1]}
+    end
+
+    return_object["movies_hot"] = object
+
     return_object["movies_this_week"] = @movies_this_week
     # return_object["new_movie"] = Movie.where(["created_at > ?",Time.parse("2012/10/13")])
     render :json => return_object.to_json
@@ -75,5 +83,10 @@ class Api::V1::MoviesController < Api::ApiController
     movies_id_array = movies_id.split(",")
     @movies = Movie.select('id,name,name_en,intro,poster_url,release_date,running_time,level_url,actors,actors,is_first_round,is_second_round,is_hot,youtube_video_id,is_comming,is_this_week').where(['id in (?)', movies_id_array])
     render :json => @movies.to_json
+  end
+
+  def update_release_date_running_time_youtube
+    movie = Movie.select('release_date,running_time,youtube_video_id,level_url').find(params[:id])
+    render :json => movie.to_json
   end
 end

@@ -55,13 +55,25 @@ class Api::V1::RecordsController < Api::ApiController
       @records = movie.find_friends_origin_records(@user.friends)
     else
       @user = User.find_by_fb_id(params[:fb_id])
-      @records = @user.records.by_created
+      @records = Record.includes(:movie).records_by_user(@user).by_created
     end
+  end
+
+  def records_with_page
+    @user = User.find_by_fb_id(params[:fb_id])
+    @records = Record.includes(:movie).records_by_user(@user).by_created.paginate(:page => params[:page], :per_page => 6)
+    render :action => :index
   end
 
   def get_movie_records
     @movie = Movie.find(params[:movie_id])
     @records = Record.includes(:user).movie_record(@movie)
+    @user = User.find_by_fb_id(params[:fb_id]) if params[:fb_id]
+  end
+
+  def get_movie_records_limit
+    @movie = Movie.find(params[:movie_id])
+    @records = Record.includes(:user).movie_record_comment(@movie).by_love_count.limit(5)
     @user = User.find_by_fb_id(params[:fb_id]) if params[:fb_id]
   end
 

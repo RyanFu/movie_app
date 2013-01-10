@@ -17,14 +17,20 @@ class TheaterCrawler
 
     nodes.each do |node|
       area_node = node.css(".hd")
-      area = Area.new
+      name = area_node.text.strip
+      area = Area.find_by_name(name)
+      area = Area.new unless area
       area.name = area_node.text.strip
       area.save
       
       theaters_node = node.css("tbody tr")
       theaters_node.each do |theater_node|
         tds = theater_node.css("td")
-        theater = Theater.new
+        name = tds[0].text.strip
+        # theater = Theater.find_by_name(name)
+        phone = tds[1].children[1].text.strip
+        theater = Theater.find_by_phone(phone)
+        theater = Theater.new unless theater
         theater.name = tds[0].text.strip
         theater.location = tds[1].children[0].text.strip
         theater.phone = tds[1].children[1].text.strip
