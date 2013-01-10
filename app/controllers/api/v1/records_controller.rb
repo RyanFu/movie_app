@@ -3,21 +3,28 @@ class Api::V1::RecordsController < Api::ApiController
   protect_from_forgery :except => [:create, :love]
 
   def create
-    record = Record.new
-    record.score = params[:score]
-    record.comment = params[:comment]
-    record.movie_id = params[:movie_id]
-    record.user = User.find_by_fb_id(params[:fb_id])
+    if Record.is_exist params[:movie_id],params[:fb_id]
+      logger.info("params message: #{params.to_json}")
+      render :status=>200, :json=>{:message => "already_exist"}
+    else  
+      record =  Record.new
 
-    if record.save
-      logger.info("params message: #{params.to_json}")
-      render :status=>200, :json=>{:message => "success"}
-    else
-      logger.info("params message: #{params.to_json}")
-      logger.info("error message: #{record.errors.messages}")
-      render :status=>401, :json=>{:message=> "record create fail" }
+      record.score = params[:score]
+      record.comment = params[:comment]
+      record.movie_id = params[:movie_id]
+      record.user = User.find_by_fb_id(params[:fb_id])
+
+      if record.save
+        logger.info("params message: #{params.to_json}")
+        render :status=>200, :json=>{:message => "success"}
+      else
+        logger.info("params message: #{params.to_json}")
+        logger.info("error message: #{record.errors.messages}")
+        render :status=>401, :json=>{:message=> "record create fail" }
+      end
     end
   end
+
 
   def update
     @record = Record.find(params[:id])

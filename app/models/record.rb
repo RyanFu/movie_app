@@ -18,6 +18,16 @@ class Record < ActiveRecord::Base
   scope :by_id_asc, order('id ASC')
   scope :movie_record, lambda { |movies| where('movie_id in (?)', movies) }
 
+  def self.is_exist movie_id,fb_id
+
+    user = User.find_by_fb_id(fb_id)
+    records = Record.where("user_id = #{user.id} AND movie_id = #{movie_id}")
+    (records.present?) ? records[0] : nil
+
+
+
+  end
+
 
   def create_stream_gcm(record)
     logger.info("............delayjob record start............")
