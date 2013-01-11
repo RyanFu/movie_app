@@ -24,10 +24,9 @@ class Record < ActiveRecord::Base
   def self.is_exist movie_id,fb_id
 
     user = User.find_by_fb_id(fb_id)
-    records = Record.where("user_id = #{user.id} AND movie_id = #{movie_id}")
-    (records.present?) ? records[0] : nil
-
-
+    find_by_movie_id_and_user_id(movie_id,user.id)
+    # records = Record.where("user_id = #{user.id} AND movie_id = #{movie_id}")
+    # (records.present?) ? records[0] : nil
 
   end
 
