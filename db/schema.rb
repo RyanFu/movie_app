@@ -25,15 +25,17 @@ ActiveRecord::Schema.define(:version => 20130111092327) do
     t.string   "title"
     t.text     "description"
     t.datetime "time_active"
-    t.string   "measure"
+    t.text     "measure"
     t.string   "teach_pic"
-    t.string   "condition"
+    t.string   "award_condition"
     t.string   "award"
     t.string   "award_pic"
     t.text     "precaution"
     t.integer  "movie_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.string   "award_list"
+    t.integer  "is_show"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "channel_times", :force => true do |t|

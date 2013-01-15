@@ -7,7 +7,14 @@ MovieApp::Application.routes.draw do
     get 'promotion' => 'api#promotion'
     get 'movieinfo_promotion' => 'api#movieinfo_promotion'
     namespace :v1 do
-      resources :campaigns, :only => [:index, :show]
+      resources :campaigns, :only => [:index, :show] do
+        collection do
+          get 'announce_list'
+        end
+        member do
+          get 'announce'
+        end
+      end  
       resources :users,:only => [:create, :update] do
         collection do
           get 'friends_list'
