@@ -11,7 +11,7 @@ class Movie < ActiveRecord::Base
   serialize :actors
   serialize :directors
    
-  attr_accessible :name, :name_en,:intro,:poster_url,:release_date, :running_time, :level_url,:actors,:directors
+  attr_accessible :name, :name_en,:intro,:poster_url,:release_date, :running_time, :level_url,:actors,:directors, :youtube_video_id
 
   scope :first_round, where(["is_first_round = ? ", true ])
   scope :second_round, where(["is_second_round = ? ", true ])

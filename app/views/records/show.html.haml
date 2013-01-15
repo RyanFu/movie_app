@@ -1,7 +1,19 @@
+%a.btn{"data-toggle" => "modal", :href => "#myModal"} Launch Modal
+#myModal.modal
+  .modal-header
+    %a.close{"data-dismiss" => "modal"} ×
+    %h3 Modal header
+  .modal-body
+    %p One fine body…
+  .modal-footer
+    %a.btn.btn-primary{:href => "#"} Save changes
+    %a.btn{:href => "#"} Close
 .span3
   = image_tag @record.movie.poster_url
   %br
   = @record.movie.name
+  %br
+  = link_to "Youtube", "http://www.youtube.com/watch?v=" + @record.movie.youtube_video_id if @record.movie.youtube_video_id != nil
   = button_to "預告片","#", :class => "btn btn-danger"
   = button_to "所有評論","#", :class => "btn btn-danger"
 .span9
