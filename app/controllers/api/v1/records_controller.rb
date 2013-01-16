@@ -61,7 +61,7 @@ class Api::V1::RecordsController < Api::ApiController
 
   def records_with_page
     @user = User.find_by_fb_id(params[:fb_id])
-    @records = Record.includes(:movie).records_by_user(@user).by_created.paginate(:page => params[:page], :per_page => 6)
+    @records = Record.includes(:movie).records_by_user(@user).by_created.paginate(:page => params[:page], :per_page => 9)
     render :action => :index
   end
 
