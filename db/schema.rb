@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121023135647) do
+ActiveRecord::Schema.define(:version => 20121109050556) do
 
   create_table "areas", :force => true do |t|
     t.string   "name"
@@ -25,6 +25,22 @@ ActiveRecord::Schema.define(:version => 20121023135647) do
     t.string   "uid"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "channel_times", :force => true do |t|
+    t.integer  "channel_id"
+    t.text     "time"
+    t.string   "date"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "channels", :force => true do |t|
+    t.string   "name"
+    t.string   "crawl_link"
+    t.integer  "channel_num"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "comments", :force => true do |t|
@@ -89,8 +105,9 @@ ActiveRecord::Schema.define(:version => 20121023135647) do
     t.integer  "theater_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.string   "timetable"
+    t.text     "timetable"
     t.integer  "area_id"
+    t.string   "hall_type"
   end
 
   add_index "movie_theater_ships", ["area_id"], :name => "index_movie_theater_ships_on_area_id"
@@ -130,8 +147,12 @@ ActiveRecord::Schema.define(:version => 20121023135647) do
     t.string   "picture_url"
     t.integer  "news_type"
     t.string   "thumbnail_url"
+<<<<<<< HEAD
     t.integer  "user_id"
     t.text     "text"
+=======
+    t.string   "source"
+>>>>>>> master
   end
 
   add_index "news", ["user_id"], :name => "index_news_on_user_id"
@@ -194,6 +215,7 @@ ActiveRecord::Schema.define(:version => 20121023135647) do
     t.datetime "updated_at",                         :null => false
     t.integer  "area_id"
     t.string   "buy_link"
+    t.string   "phone"
   end
 
   add_index "theaters", ["area_id"], :name => "index_theaters_on_area_id"

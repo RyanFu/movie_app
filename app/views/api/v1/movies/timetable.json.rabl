@@ -1,6 +1,8 @@
 collection @ships
-attributes :id, :timetable
+attributes :id, :timetable,:hall_type
 
 node(:theater){ |ship| ship.theater.name }
-node(:area) { |ship| ship.area.name if ship.area} 
+node(:theater_id){|ship| ship.theater.id}
+node(:area) { |ship| ship.area.name if ship.area}
+node(:area_id) { |ship| ship.area.id if ship.area} 
 node(:buy_link){ |ship| ship.theater.buy_link }

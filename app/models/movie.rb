@@ -18,6 +18,7 @@ class Movie < ActiveRecord::Base
   scope :hot, where(["is_hot = ? ", true ])
   scope :comming, where(["is_comming = ? ", true ])
   scope :this_week, where(["is_this_week = ? ", true ])
+  scope :first_round_second_round_hot_comming_this_week, where(["is_first_round = ? or is_second_round = ? or is_hot = ? or is_comming = ? or is_this_week = ?",true,true,true,true,true]).select('id,name,name_en,intro,poster_url,release_date,running_time,level_url,actors,actors,is_first_round,is_second_round,is_hot,youtube_video_id,is_comming,is_this_week')
 
   def find_friends_records friends
     r = []

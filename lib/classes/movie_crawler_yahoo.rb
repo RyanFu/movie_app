@@ -142,13 +142,13 @@ class MovieCrawlerYahoo
       movie = Movie.find_by_name(@movie_name)
       movie.name = @movie_name
       movie.name_en = @movie_name_en
-      movie.intro = @movie_intro
+      # movie.intro = @movie_intro
       movie.poster_url = @movie_poster_url
       movie.release_date = @movie_release_date
       movie.running_time = @movie_running_time
       movie.level_url = @movie_level_url
-      movie.actors = @movie_actors
-      movie.directors = @movie_directors
+      # movie.actors = @movie_actors
+      # movie.directors = @movie_directors
     end
     option.each do |key, value|
       movie[key] = value
