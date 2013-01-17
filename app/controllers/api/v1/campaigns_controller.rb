@@ -22,7 +22,7 @@ class Api::V1::CampaignsController < Api::ApiController
           render :json => announces
         # else
 		  # render :status=>200, :json=>{:message => "empty"}
-		end
+		# end
 
     end
     def announce
