@@ -57,7 +57,7 @@ class Api::V1::UsersController < Api::ApiController
   # end
 
   def destroy
-    @user = User.find(params[:id])
+    @user = User.find_by_fb_id(params[:id])
     @user.registration_id = nil
     if @user.save
       render :status=>200, :json=>{:message => "success"}
