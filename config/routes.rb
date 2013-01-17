@@ -17,10 +17,13 @@ MovieApp::Application.routes.draw do
           get 'announce'
         end
       end  
-      resources :users,:only => [:create, :update] do
+      resources :users,:only => [:create, :update, :destroy] do
         collection do
           get 'friends_list'
           get 'user_info'
+          #put : update
+          #post : create
+
         end
       end
       resources :records,:only => [:create, :update, :destroy, :index, :show] do

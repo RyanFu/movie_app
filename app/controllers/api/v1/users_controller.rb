@@ -55,4 +55,14 @@ class Api::V1::UsersController < Api::ApiController
   #   end
 
   # end
+
+  def destroy
+    @user = User.find(params[:id])
+    @user.registration_id = nil
+    if @user.save
+      render :status=>200, :json=>{:message => "success"}
+    else 
+      render :status=>401, :json=>{:message => "destroy fail"}
+    end
+  end
 end
