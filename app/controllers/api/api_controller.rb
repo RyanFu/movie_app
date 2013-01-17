@@ -21,10 +21,6 @@ class Api::ApiController  < ActionController::Base
     render :json => promotion.to_json
   end
 
-  def redirect
-    redirect_to "http://movietalked.blogspot.tw/2013/01/app.html"
-  end
-
   def movieinfo_promotion
     promotion = {:picture_link => "http://ext.pimg.tw/jumplives/1352973893-4060856514.png?v=1352973903", 
                  :link => "http://goo.gl/zsybo",
