@@ -1,12 +1,12 @@
 class Api::V1::CampaignsController < Api::ApiController
 	def index
 		campaigns = Campaign.where("time_active > ? AND is_show = ?",Time.now.to_datetime,1).order("time_active desc").select("id, picture_out")
-		if campaigns.size > 1
-		  puts "not empty"
+		# if campaigns.size > 1
+		  # puts "not empty"
 		  render :json => campaigns
-		else
-		  puts "empty"
-		  render :status=>200, :json=>{:message => "empty"}
+		# else
+		  # puts "empty"
+		  # render :status=>200, :json=>{:message => "empty"}
 		end	
 		
 		
@@ -18,10 +18,10 @@ class Api::V1::CampaignsController < Api::ApiController
 	end
 	def announce_list
 		announces = Campaign.where("time_active < ? AND is_show = ?",Time.now.to_datetime,1).order("time_active desc").select("id, picture_out")
-        if announces .size > 1
+        # if announces .size > 1
           render :json => announces
-        else
-		  render :status=>200, :json=>{:message => "empty"}
+        # else
+		  # render :status=>200, :json=>{:message => "empty"}
 		end
 
     end
