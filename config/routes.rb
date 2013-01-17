@@ -2,10 +2,13 @@ MovieApp::Application.routes.draw do
   
   devise_for :users
 
+  
+
   namespace :api do
 
     get 'promotion' => 'api#promotion'
     get 'movieinfo_promotion' => 'api#movieinfo_promotion'
+    get 'redirect' => 'api#redirect'
     namespace :v1 do
       resources :campaigns, :only => [:index, :show] do
         collection do
