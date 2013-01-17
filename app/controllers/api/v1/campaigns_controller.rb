@@ -7,7 +7,7 @@ class Api::V1::CampaignsController < Api::ApiController
 		# else
 		  # puts "empty"
 		  # render :status=>200, :json=>{:message => "empty"}
-		end	
+		# end	
 		
 		
 	end
