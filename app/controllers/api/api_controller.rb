@@ -23,7 +23,7 @@ class Api::ApiController  < ActionController::Base
 
   def movieinfo_promotion
     promotion = {:picture_link => "http://ext.pimg.tw/jumplives/1352973893-4060856514.png?v=1352973903", 
-                 :link => "http://goo.gl/zsybo",
+                 :link => "market://details?id=com.jumplife.movieinfo",
                  :tilte => "幫電影時刻表評分",
                  :description => "歡迎到 Google Play 給電影時刻表中肯的建議與評價, 謝謝！",
                  :version => 1
