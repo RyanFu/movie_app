@@ -30,7 +30,9 @@ class MovieCrawlerYahoo
     else
       nodes = @page_html.css(".bd-container .text.show")
       nodes.search('br').each { |br| br.replace("\n") }
-      @movie_intro = nodes.first.text.strip
+      if nodes.first.present?
+        @movie_intro = nodes.first.text.strip
+      end
     end
     puts @movie_intro
   end
@@ -145,7 +147,7 @@ class MovieCrawlerYahoo
       # movie.intro = @movie_intro
       movie.poster_url = @movie_poster_url
       movie.release_date = @movie_release_date
-      movie.running_time = @movie_running_time
+      movie.running_time = @movie_running_time if @movie_running_time.present?
       movie.level_url = @movie_level_url
       # movie.actors = @movie_actors
       # movie.directors = @movie_directors
