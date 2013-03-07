@@ -86,9 +86,11 @@ namespace :crawl do
     end
   end
 
-  task :parse_movie_time_and_theater_ship_atmovies => :environment do
+  task :parse_movie_time_and_theater_ship_atmovies => :environment do    
     Movie.update_all(:is_first_round => false)
     Movie.update_all(:is_second_round => false)
+    Movie.update_all(:is_ezding => false)
+
     MovieTheaterShip.all.each do |m|
       m.delete
     end

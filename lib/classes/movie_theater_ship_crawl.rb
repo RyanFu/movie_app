@@ -42,6 +42,11 @@ class MovieTheaterShipCrawl
       end
 
       (theater.is_second_round) ? (movie.is_second_round = true) : (movie.is_first_round = true)
+
+      ezding_theaters = [445, 441, 450, 448, 465, 454, 455, 456, 477, 486, 487, 494, 495, 500, 497, 514, 519, 520]
+
+      movie.is_ezding = true if ezding_theaters.include? theater.id
+
       movie.save
       
       type = node.css(".showtime_area .version").text.strip

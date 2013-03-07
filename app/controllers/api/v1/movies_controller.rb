@@ -85,6 +85,12 @@ class Api::V1::MoviesController < Api::ApiController
     render :json => @movies.to_json
   end
 
+  def movie_info
+    movie_id = params[:id]
+    @movie = Movie.select('release_date,running_time,youtube_video_id,level_url,is_ezding').find(movie_id)
+    render :json => @movie.to_json
+  end
+
   def update_release_date_running_time_youtube
     movie = Movie.select('release_date,running_time,youtube_video_id,level_url').find(params[:id])
     render :json => movie.to_json
