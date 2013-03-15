@@ -148,7 +148,7 @@ class MovieCrawlerYahoo
       movie.poster_url = @movie_poster_url
       movie.release_date = @movie_release_date
       movie.running_time = @movie_running_time if @movie_running_time.present?
-      movie.level_url = @movie_level_url
+      movie.level_url = @movie_level_url if ((@movie_level_url != "http://l.yimg.com/f/i/tw/movie/i6/icon_gate_0.gif") && (@movie_level_url != "http://l.yimg.com/f/i/tw/movie/i6/icon_gate_5.gif"))
       # movie.actors = @movie_actors
       # movie.directors = @movie_directors
     end
