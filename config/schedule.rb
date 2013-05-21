@@ -28,6 +28,14 @@ every :day, :at => '08:00am' do
   rake 'crawl:parse_movie_time_and_theater_ship_atmovies',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
 end
 
+every :day, :at => '11:00am' do  
+  rake 'crawl:parse_movie_time_and_theater_ship_atmovies',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
+end
+
+every :day, :at => '05:00pm' do  
+  rake 'crawl:parse_movie_time_and_theater_ship_atmovies',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
+end
+
 every :day, :at => '05:01am' do
   rake 'user:update_user_friends_ship',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
 end
