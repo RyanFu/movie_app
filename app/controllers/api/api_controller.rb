@@ -11,11 +11,11 @@ class Api::ApiController  < ActionController::Base
   end
 
   def promotion
-    promotion = {:picture_link => nil, 
-                 :link => nil,
-                 :tilte => nil,
-                 :description => nil,
-                 :version => 1
+    promotion = {:picture_link => "ttp://pic.pimg.tw/jumplives/1367922942-4188405356.jpg?v=1367922978", 
+                 :link => "https://play.google.com/store/apps/details?id=com.jumplife.movienews&referrer=utm_source%3Dmovie_diary_inapp%26utm_campaign%3Dmovie_diary_inapp",
+                 :tilte => "電影窩",
+                 :description => "電影經典名句, 深度影評, 明星趣聞 - 趕快加入窩在電影窩App的行列吧!",
+                 :version => 2
     }
 
     render :json => promotion.to_json
@@ -33,10 +33,10 @@ class Api::ApiController  < ActionController::Base
 
   def movieinfo_promotion
     promotion = {:picture_link => "http://pic.pimg.tw/jumplives/1367922942-4188405356.jpg?v=1367922978", 
-                 :link => "https://play.google.com/store/apps/details?id=com.jumplife.movienews",
-                 :tilte => "電影窩 App",
-                 :description => "新奇有趣的新聞，令人難忘的名言，電影的大小事都在電影窩！",
-                 :version => 2
+                 :link => "https://play.google.com/store/apps/details?id=com.jumplife.movienews&referrer=utm_source%3Dmovie_times_inapp%26utm_campaign%3Dmovie_times_inapp",
+                 :tilte => "電影窩",
+                 :description => "電影經典名句, 深度影評, 明星趣聞 - 趕快加入窩在電影窩App的行列吧!",
+                 :version => 3
     }
     render :json => promotion.to_json
   end
