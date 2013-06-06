@@ -24,15 +24,15 @@ every :day, :at => '00:01am' do
   rake 'crawl:fetch_channel',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
 end
 
-every :day, :at => '08:00am' do  
+every :day, :at => '04:00am' do  
   rake 'crawl:parse_movie_time_and_theater_ship_atmovies',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
 end
 
-every :day, :at => '11:00am' do  
+every :day, :at => '8:00am' do  
   rake 'crawl:parse_movie_time_and_theater_ship_atmovies',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
 end
 
-every :day, :at => '05:00pm' do  
+every :day, :at => '03:00pm' do  
   rake 'crawl:parse_movie_time_and_theater_ship_atmovies',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
 end
 
