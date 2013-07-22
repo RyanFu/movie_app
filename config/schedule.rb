@@ -1,3 +1,4 @@
+# encoding: utf-8
 # Use this file to easily define all of your cron jobs.
 #
 # It's helpful, but not entirely necessary to understand cron before proceeding.
@@ -24,7 +25,15 @@ every :day, :at => '00:01am' do
   rake 'crawl:fetch_channel',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
 end
 
-every :day, :at => '08:00am' do  
+every :day, :at => '04:00am' do  
+  rake 'crawl:parse_movie_time_and_theater_ship_atmovies',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
+end
+
+every :day, :at => '8:00am' do  
+  rake 'crawl:parse_movie_time_and_theater_ship_atmovies',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
+end
+
+every :day, :at => '03:00pm' do  
   rake 'crawl:parse_movie_time_and_theater_ship_atmovies',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
 end
 
