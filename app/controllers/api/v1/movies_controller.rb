@@ -43,11 +43,26 @@ class Api::V1::MoviesController < Api::ApiController
   def timetable
     movie = Movie.find(params[:id])
     if (params[:theater_id])
+      theather = params[:theater_id]
+      if theather.to_i == 552
+        @ships = {}
+      else  
+        @ships = MovieTheaterShip.where(:movie_id => movie.id, :theater_id => params[:theater_id])
+      end  
+    else
+      #@ships = MovieTheaterShip.includes(:theater,:area).find_all_by_movie_id(movie.id)
+      @ships = MovieTheaterShip.includes(:theater,:area).where("movie_id = ? and theater_id != 552",movie.id) 
+    end
+  end
+
+  def timetablev2
+    movie = Movie.find(params[:id])
+    if (params[:theater_id])
       @ships = MovieTheaterShip.where(:movie_id => movie.id, :theater_id => params[:theater_id])
     else
       @ships = MovieTheaterShip.includes(:theater,:area).find_all_by_movie_id(movie.id)
     end
-  end
+  end  
 
   def first_second_comming_hot
     movies = Movie.first_round_second_round_hot_comming_this_week
