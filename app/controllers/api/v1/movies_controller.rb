@@ -96,7 +96,7 @@ class Api::V1::MoviesController < Api::ApiController
   def movies_info
     movies_id = params[:movies_id]
     movies_id_array = movies_id.split(",")
-    @movies = Movie.select('id,name,name_en,intro,poster_url,release_date,running_time,level_url,actors,actors,is_first_round,is_second_round,is_hot,youtube_video_id,is_comming,is_this_week').where(['id in (?)', movies_id_array])
+    @movies = Movie.select('id,name,name_en,intro,poster_url,release_date,running_time,level_url,directors,actors,is_first_round,is_second_round,is_hot,youtube_video_id,is_comming,is_this_week').where(['id in (?)', movies_id_array])
     render :json => @movies.to_json
   end
 
