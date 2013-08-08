@@ -76,6 +76,8 @@ MovieApp::Application.routes.draw do
         end
       end
       resources :news, :only => [:index]
+
+      resources :appprojects, :only => [:index]
     end
   end
 

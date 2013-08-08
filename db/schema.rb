@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130306120249) do
+ActiveRecord::Schema.define(:version => 20130808043836) do
+
+  create_table "appprojects", :force => true do |t|
+    t.string   "name"
+    t.string   "iconurl"
+    t.string   "pack"
+    t.string   "clas"
+    t.string   "promo_title"
+    t.string   "content"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "areas", :force => true do |t|
     t.string   "name"
