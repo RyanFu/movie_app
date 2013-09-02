@@ -31,6 +31,11 @@ namespace :crawl do
     end
   end
 
+  task :print_time => :environment do
+    puts Time.now.to_s
+  end
+
+
   task :fetch_theater => :environment do
 
     # Area.all.each do |a|

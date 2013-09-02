@@ -21,6 +21,10 @@
 # Learn more: http://github.com/javan/whenever
 env :PATH, ENV['PATH']
 
+every 1.minute do
+  rake 'crawl:print_time',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
+end
+
 every :day, :at => '00:01am' do  
   rake 'crawl:fetch_channel',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
 end
