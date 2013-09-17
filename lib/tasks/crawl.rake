@@ -319,4 +319,33 @@ namespace :crawl do
     d = DataCrawler.new
     d.get_yahoo_all_movies
   end
+
+  task :crawl_imdb_rating => :environment do
+    crawler = MovieCrawler.new
+    crawler.parse_rating_from_imdb
+  end
+  task :parse_movie_time_and_theater_ship_ezdingxml => :environment do
+    crawler = MovieTheaterShipCrawl.new
+    ez_xml_doc = Nokogiri::XML(open("http://event.ezding.com.tw/cooperation/moviedata.xml"))
+    crawler.parse_theater_from_ezding ez_xml_doc
+  end
+  
+  task :parse_movie_time_and_theater_ship_atmovies_v2 => :environment do 
+    Movie.update_all(:is_first_round => false)
+    Movie.update_all(:is_second_round => false)
+    Movie.update_all(:is_ezding => false)
+
+    EzMovieTheaterShip.all.each do |m|
+      m.delete
+    end
+    
+    crawler = MovieTheaterShipCrawl.new
+
+    Theater.all.each do |theater|
+      next unless theater.link
+      next if theater.is_ezding == true
+      crawler.fetch theater.link
+      crawler.parse_theater_from_atmovies_v2 theater
+    end
+  end  
 end

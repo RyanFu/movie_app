@@ -7,7 +7,15 @@ MovieApp::Application.routes.draw do
   namespace :api do
     get 'promotion' => 'api#promotion'
     get 'movieinfo_promotion' => 'api#movieinfo_promotion'
-
+    
+    namespace :v2 do
+      resources :movies, :only => [:index, :show] do
+        member do
+          get 'timetable'
+        end
+      end
+      resources :records, :only => [:show]  
+    end
     namespace :v1 do
       resources :campaigns, :only => [:index, :show] do
         collection do

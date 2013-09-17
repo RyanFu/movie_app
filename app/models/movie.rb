@@ -9,6 +9,9 @@ class Movie < ActiveRecord::Base
   has_many :movie_theater_ships
   has_many :in_theaters, :through => :movie_theater_ships, :source => :theater
 
+  has_many :ez_movie_theater_ships
+  has_many :in_theaters, :through => :ez_movie_theater_ships, :source => :theater
+
   serialize :actors
   serialize :directors
    

@@ -108,4 +108,27 @@ class MovieCrawler
     #   puts ".........................crawl fail....................................." 
     # end
   end
+
+  def parse_rating_from_imdb 
+
+    movies = Movie.where("is_first_round = true or is_second_round = true or is_hot = true or is_comming = true or is_this_week = true")
+    movies.each do |m|
+      p m.name
+      if m.name_en.length > 0
+        if m.imdb_id == 0
+          i = Imdb::Search.new(m.name_en)
+          next if i.movies.first == nil
+          m.imdb_rating = i.movies.first.rating
+          m.imdb_id = i.movies.first.id
+          m.save
+        else
+          i = Imdb::Movie.new(m.imdb_id)
+          next if i.rating == nil
+          m.imdb_rating = i.rating
+          m.save
+        end
+      end  
+    end    
+  end
+
 end

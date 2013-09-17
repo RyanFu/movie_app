@@ -11,17 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130808043836) do
+ActiveRecord::Schema.define(:version => 20130917043817) do
 
   create_table "appprojects", :force => true do |t|
     t.string   "name"
     t.string   "iconurl"
     t.string   "pack"
     t.string   "clas"
-    t.string   "promo_title"
-    t.string   "content"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "promo_title"
+    t.string   "content"
   end
 
   create_table "areas", :force => true do |t|
@@ -92,6 +92,24 @@ ActiveRecord::Schema.define(:version => 20130808043836) do
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
+  create_table "ez_movie_theater_ships", :force => true do |t|
+    t.integer  "movie_id"
+    t.integer  "theater_id"
+    t.integer  "area_id"
+    t.string   "movieez_id"
+    t.string   "timetable"
+    t.string   "hall_type"
+    t.string   "hall_str"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.string   "session_id"
+    t.date     "session_showdate"
+  end
+
+  add_index "ez_movie_theater_ships", ["area_id"], :name => "index_ez_movie_theater_ships_on_area_id"
+  add_index "ez_movie_theater_ships", ["movie_id"], :name => "index_ez_movie_theater_ships_on_movie_id"
+  add_index "ez_movie_theater_ships", ["theater_id"], :name => "index_ez_movie_theater_ships_on_theater_id"
+
   create_table "gcm_devices", :force => true do |t|
     t.string   "registration_id",    :null => false
     t.datetime "last_registered_at"
@@ -158,6 +176,8 @@ ActiveRecord::Schema.define(:version => 20130808043836) do
     t.integer  "records_count",    :default => 0
     t.integer  "good_count",       :default => 0
     t.boolean  "is_ezding",        :default => false
+    t.string   "imdb_rating"
+    t.integer  "imdb_id",          :default => 0
   end
 
   add_index "movies", ["youtube_video_id"], :name => "index_movies_on_youtube_video_id"
@@ -234,6 +254,8 @@ ActiveRecord::Schema.define(:version => 20130808043836) do
     t.string   "buy_link"
     t.string   "phone"
     t.string   "link"
+    t.string   "theaterez_id"
+    t.boolean  "is_ezding",       :default => false
   end
 
   add_index "theaters", ["area_id"], :name => "index_theaters_on_area_id"

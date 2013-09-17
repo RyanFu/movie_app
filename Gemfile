@@ -61,3 +61,6 @@ gem "daemons"
 gem 'will_paginate'
 
 gem 'dropbox-sdk'
+
+#imdb
+gem "imdb"

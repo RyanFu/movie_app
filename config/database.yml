@@ -9,7 +9,7 @@ development:
   host: 127.0.0.1
   encoding: utf8
   username: root
-  password: "db"
+  password: "bendb"
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -20,7 +20,7 @@ test:
   host: 127.0.0.1
   encoding: utf8
   username: root
-  password: "db"
+  password: "bendb"
 
 production:
   adapter: mysql2
@@ -28,4 +28,4 @@ production:
   host: 127.0.0.1
   encoding: utf8
   username: root
-  password: "db"
+  password: "bendb"
