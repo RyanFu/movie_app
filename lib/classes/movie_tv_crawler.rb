@@ -13,13 +13,13 @@ class MovieTvCrawler
   def parse_date
     @date = @page_html.css("h2").text.strip
     puts @date
-    /(.*)月(.*)日/ =~ @date
-    month = $1.to_i
-    day = $2.to_i
-    now = DateTime.current
-    ymd = "#{now.year}-#{month}-#{day}"
-    @date = ymd.to_date
-    p @date
+    #/(.*)月(.*)日/ =~ @date
+    #month = $1.to_i
+    #day = $2.to_i
+    #now = DateTime.current
+    #ymd = "#{now.year}-#{month}-#{day}"
+    #@date = ymd.to_date
+    #p @date
 
   end
 
