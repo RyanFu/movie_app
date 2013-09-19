@@ -21,47 +21,47 @@
 # Learn more: http://github.com/javan/whenever
 env :PATH, ENV['PATH']
 
-every 1.minute do
-  rake 'crawl:print_time',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
-end
+#every 1.minute do
+#  rake 'crawl:print_time',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
+#end
 
 every :day, :at => '00:01am' do  
   rake 'crawl:fetch_channel',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
 end
 
-#every :day, :at => '00:11am' do  
-#  rake 'crawl:crawl_imdb_rating',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
-#end
+every :day, :at => '00:11am' do  
+  rake 'crawl:crawl_imdb_rating',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
+end
 
 every :day, :at => '04:00am' do  
   rake 'crawl:parse_movie_time_and_theater_ship_atmovies',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
 end
-#every :day, :at => '04:30am' do  
-#  rake 'crawl:parse_movie_time_and_theater_ship_atmovies_v2',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
-#end
-#every :day, :at => '04:32am' do  
-#  rake 'crawl:parse_movie_time_and_theater_ship_ezdingxml',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
-#end
+every :day, :at => '04:30am' do  
+  rake 'crawl:parse_movie_time_and_theater_ship_atmovies_v2',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
+end
+every :day, :at => '04:32am' do  
+  rake 'crawl:parse_movie_time_and_theater_ship_ezdingxml',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
+end
 
 every :day, :at => '8:00am' do  
   rake 'crawl:parse_movie_time_and_theater_ship_atmovies',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
 end
-#every :day, :at => '8:30am' do  
-#  rake 'crawl:parse_movie_time_and_theater_ship_atmovies_v2',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
-#end
-#every :day, :at => '8:32am' do  
-#  rake 'crawl:parse_movie_time_and_theater_ship_ezdingxml',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
-#end
+every :day, :at => '8:30am' do  
+  rake 'crawl:parse_movie_time_and_theater_ship_atmovies_v2',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
+end
+every :day, :at => '8:32am' do  
+  rake 'crawl:parse_movie_time_and_theater_ship_ezdingxml',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
+end
 
 every :day, :at => '03:00pm' do  
   rake 'crawl:parse_movie_time_and_theater_ship_atmovies',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
 end
-#every :day, :at => '03:30pm' do  
-#  rake 'crawl:parse_movie_time_and_theater_ship_atmovies_v2',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
-#end
-#every :day, :at => '03:32pm' do  
-#  rake 'crawl:parse_movie_time_and_theater_ship_ezdingxml',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
-#end
+every :day, :at => '03:30pm' do  
+  rake 'crawl:parse_movie_time_and_theater_ship_atmovies_v2',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
+end
+every :day, :at => '03:32pm' do  
+  rake 'crawl:parse_movie_time_and_theater_ship_ezdingxml',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
+end
 
 every :day, :at => '05:01am' do
   rake 'user:update_user_friends_ship',:output => {:error => 'log/error.log', :standard => 'log/cron.log'}
